@@ -8,6 +8,14 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
+
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 /**
  *
  * @author Lenovo
@@ -31,16 +39,24 @@ public class UI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        DBButton = new javax.swing.JButton();
+        MailButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("jLabel1");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        DBButton.setText("Connect to DB");
+        DBButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DBButtonActionPerformed(evt);
+            }
+        });
+
+        MailButton.setText("Send Mail");
+        MailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MailButtonActionPerformed(evt);
             }
         });
 
@@ -51,9 +67,10 @@ public class UI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(174, 174, 174)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(MailButton)
+                    .addComponent(DBButton)
                     .addComponent(jLabel1))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,14 +78,16 @@ public class UI extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(105, 105, 105))
+                .addComponent(DBButton)
+                .addGap(18, 18, 18)
+                .addComponent(MailButton)
+                .addGap(64, 64, 64))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void DBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBButtonActionPerformed
         // TODO add your handling code here:
         
         try
@@ -88,7 +107,49 @@ public class UI extends javax.swing.JFrame {
         } catch( Exception e){
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_DBButtonActionPerformed
+
+    private void MailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MailButtonActionPerformed
+        // TODO add your handling code here:
+//        String toEmail = "aedfinal.project2022@gmail.com";
+        String toEmail = "rodrigues.se@northeastern.edu";
+        String fromEmail = "aedfinal.project2022@gmail.com";
+        String emailPassword = "ivyqqxfflqaezbum";
+        String subjectLine = "testing mail from swing application";
+        String body ="testing. Mail feature is working!!";
+        
+        Properties properties = new Properties();
+        
+        properties.setProperty("mail.smtp.protocol", "smtp");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false");
+    
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        
+
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(fromEmail, emailPassword);
+            }
+        });
+        
+        try{
+            MimeMessage msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(fromEmail));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            msg.setSubject(subjectLine);
+            msg.setContent(body, "text/html; charset=UTF-8");  
+            Transport.send(msg);
+            System.out.println("Done");
+        } catch(Exception e){
+            System.out.print(e.getMessage());
+        }
+                
+    }//GEN-LAST:event_MailButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,7 +187,8 @@ public class UI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton DBButton;
+    private javax.swing.JButton MailButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
