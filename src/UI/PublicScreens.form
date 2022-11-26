@@ -49,14 +49,15 @@
                               <Component id="commSearchLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="commSearchLbl1" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="56" max="32767" attributes="0"/>
+                          <EmptySpace pref="86" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="searchTitle" alignment="0" min="-2" pref="283" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="searchTitle" min="-2" pref="283" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="medicineTxtField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="commDropDown" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="commDropDown1" alignment="1" pref="162" max="32767" attributes="0"/>
+                                  <Component id="dosageDropDown" alignment="1" pref="162" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="searchBtn" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
                       </Group>
@@ -82,11 +83,13 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="commSearchLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="commDropDown1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dosageDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="searchBtn" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="157" max="-2" attributes="0"/>
-                  <EmptySpace pref="254" max="32767" attributes="0"/>
+                  <EmptySpace pref="205" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -103,20 +106,15 @@
         <Component class="javax.swing.JLabel" name="commSearchLbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="14" style="1"/>
+              <Font name="PT Sans" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Search By Community:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="commDropDown">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[]{&quot;Select Community&quot;,&quot;Brighton&quot;, &quot;Brookline&quot;, &quot;Allston&quot;, &quot;Chestnut Hill&quot;})" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -129,7 +127,7 @@
         <Component class="javax.swing.JLabel" name="medicineLbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="14" style="1"/>
+              <Font name="PT Sans" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Medicine Name:"/>
           </Properties>
@@ -139,24 +137,19 @@
         <Component class="javax.swing.JLabel" name="commSearchLbl1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Helvetica Neue" size="14" style="1"/>
+              <Font name="PT Sans" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Dosage:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="commDropDown1">
+        <Component class="javax.swing.JComboBox" name="dosageDropDown">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[]{&quot;Select Community&quot;,&quot;250 mg&quot;, &quot;500 mg&quot;, &quot;600 mg&quot;, &quot;650 mg&quot;})" type="code"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="commDropDown1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dosageDropDownActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -171,13 +164,40 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="medicinesTable">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="PT Sans" size="14" style="1"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="S.no" type="java.lang.Object"/>
-                    <Column editable="true" title="Store Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Community" type="java.lang.Object"/>
+                    <Column editable="true" title="S.no" type="java.lang.Integer"/>
+                    <Column editable="true" title="Store Name" type="java.lang.String"/>
+                    <Column editable="true" title="Community" type="java.lang.String"/>
                     <Column editable="true" title="View Store" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer editor="org.netbeans.modules.form.RADConnectionPropertyEditor"/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -186,6 +206,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="searchBtn">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="PT Sans" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="SEARCH"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
