@@ -8,12 +8,12 @@ package UI;
  *
  * @author rodri
  */
-public class LoginInPanel extends javax.swing.JPanel {
+public class LoginPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form LoginInPanel
      */
-    public LoginInPanel() {
+    public LoginPanel() {
         initComponents();
     }
 

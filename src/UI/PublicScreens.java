@@ -254,17 +254,25 @@ public class PublicScreens extends javax.swing.JPanel {
         if (isPushed) {
         String[] buttons = { "Login", "Sign Up"};
 //        JOptionPane.showMessageDialog(button, buttons);
-        result = JOptionPane.showOptionDialog(null, "Oops! Login / Sign up, please", "Confirmation",
+        result = JOptionPane.showOptionDialog(null, "Oops! Login / Sign up, please", "Login / Sign Up",
 JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         System.out.println(result);
         }
         if(result == 0) //Login
         {
-        PatientLoginScreen goToLogin = new PatientLoginScreen();
-        splitPane.setBottomComponent(goToLogin);
+            LoginPanel goToLogin=new LoginPanel();
+            splitPane.setBottomComponent(goToLogin);
+            
+//        PatientLoginScreen goToLogin = new PatientLoginScreen();
+//        splitPane.setBottomComponent(goToLogin);
+
+
+        
         }
         else // Sign up
         {
+            SignupPanel goToSignup=new SignupPanel();
+            splitPane.setBottomComponent(goToSignup);
             
         }
         isPushed = false;
