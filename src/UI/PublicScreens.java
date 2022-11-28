@@ -266,8 +266,6 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
 //        PatientLoginScreen goToLogin = new PatientLoginScreen();
 //        splitPane.setBottomComponent(goToLogin);
 
-
-        
         }
         else // Sign up
         {
