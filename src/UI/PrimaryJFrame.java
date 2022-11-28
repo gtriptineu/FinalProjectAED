@@ -58,6 +58,7 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         jLabel1.setMinimumSize(new java.awt.Dimension(800, 100));
         jSplitPane1.setLeftComponent(jLabel1);
 
+        jPanel2.setBackground(new java.awt.Color(160, 213, 229));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 4));
 
