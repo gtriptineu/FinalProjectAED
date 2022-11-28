@@ -22,10 +22,10 @@ public class PrimaryJFrame extends javax.swing.JFrame {
     ImageIcon image;
     JLabel label;
     public PrimaryJFrame() {
-        initComponents();
+      initComponents();
       JFrame frame = new JFrame("Pharmacy Management System");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jPanel2.setSize(800,600);
+      jPanel2.setSize(800,600);
 //        Image bg_img;
 //        bg_img = jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pharmacy.png")));
 //        bg_img.setImage(bg_img.getImage().getScaledInstance(800,600,Image.SCALE_DEFAULT));
@@ -139,7 +139,7 @@ public class PrimaryJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        PublicScreens goToPublic = new PublicScreens();
+        PublicScreens goToPublic = new PublicScreens(jSplitPane1);
         jSplitPane1.setBottomComponent(goToPublic);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
