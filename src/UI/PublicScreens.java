@@ -77,7 +77,7 @@ public class PublicScreens extends javax.swing.JPanel {
         commSearchLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         commSearchLbl1.setText("Dosage:");
 
-        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","250 mg", "500 mg", "600 mg", "650 mg"}));
+        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dosageDropDownActionPerformed(evt);
@@ -105,9 +105,6 @@ public class PublicScreens extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(medicinesTable);
-        if (medicinesTable.getColumnModel().getColumnCount() > 0) {
-            medicinesTable.getColumnModel().getColumn(3).setCellRenderer(null);
-        }
 
         searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         searchBtn.setText("SEARCH");
