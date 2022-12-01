@@ -43,6 +43,11 @@ public class LoginPanel extends javax.swing.JPanel {
 
         loginBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         loginBtn.setText("LOGIN");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         userNameTxtField.setForeground(new java.awt.Color(204, 204, 204));
         userNameTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +128,12 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         passwordTxtField.setText("Enter Password");
     }//GEN-LAST:event_passwordTxtFieldActionPerformed
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        // TODO add your handling code here:
+       //PharmacistPanel pharma=new PharmacistPanel();
+        //pharma.setVisible(true);
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     
     
