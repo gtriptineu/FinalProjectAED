@@ -10,8 +10,10 @@ import com.mysql.jdbc.Connection;
 import java.sql.Statement;
 import SQLConnection.DBConnection;
 import static constants.EmailConnection.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
+import javax.swing.JOptionPane;
 /**
  *
  * @author rodri
@@ -230,11 +232,21 @@ public class SignupPanel extends javax.swing.JPanel {
         System.out.print("activationCode:"+ activationCode +"-------"+ body);
         try
         {
-            Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-            stm.executeUpdate(insertPatientDetails);
+            String checkPatient = "select email from patientdetails where email='"+email+"';";
+            
+            ResultSet rst= stm.executeQuery(checkPatient);
+            if(rst.next()){
+                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
+            } else {
+                System.out.println("in if");
+                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
+                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
+                stm.executeUpdate(insertPatientDetails);
+                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
+            }
+            
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
