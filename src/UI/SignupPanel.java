@@ -5,10 +5,13 @@
 package UI;
 
 
+import SMTPEmail.Email;
 import com.mysql.jdbc.Connection;
 import java.sql.Statement;
 import SQLConnection.DBConnection;
+import static constants.EmailConnection.*;
 import java.sql.SQLException;
+import java.util.Random;
 /**
  *
  * @author rodri
@@ -219,8 +222,15 @@ public class SignupPanel extends javax.swing.JPanel {
         String contact = contactTextField.getText();
         String address = addressTxtField.getText();
         String password = passwordTxtField.getText();
+        
+//        Generating Random 6 digit number as activation code
+        Random rnd = new Random();
+        int activationCode = rnd.nextInt(999999);
+        String body = ACTIVATION_BODY + Integer.toString(activationCode);
+        System.out.print("activationCode:"+ activationCode +"-------"+ body);
         try
         {
+            Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
