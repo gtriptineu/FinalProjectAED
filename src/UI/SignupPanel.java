@@ -4,6 +4,12 @@
  */
 package UI;
 
+
+import com.mysql.jdbc.Connection;
+import static constants.DBConnection.*;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
 /**
  *
  * @author rodri
@@ -26,6 +32,7 @@ public class SignupPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         nameTxtField = new javax.swing.JTextField();
         emailTxtField = new javax.swing.JTextField();
         nameLbl = new javax.swing.JLabel();
@@ -39,6 +46,8 @@ public class SignupPanel extends javax.swing.JPanel {
         addressLbl = new javax.swing.JLabel();
         addressTxtField = new javax.swing.JTextField();
         passwordLbl = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -70,6 +79,11 @@ public class SignupPanel extends javax.swing.JPanel {
 
         signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         signupBtn.setText("SIGN-UP");
+        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupBtnActionPerformed(evt);
+            }
+        });
 
         contactTextField.setForeground(new java.awt.Color(204, 204, 204));
         contactTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +213,32 @@ public class SignupPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTxtFieldActionPerformed
 
+    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+        // TODO add your handling code here:
+        String name = nameTxtField.getText();
+        String email = emailTxtField.getText();
+        String contact = contactTextField.getText();
+        String address = addressTxtField.getText();
+        String password = passwordTxtField.getText();
+        try
+        {
+            Class.forName(DB_CLASSNAME);
+            Connection connection = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS );
+            Statement stm = connection.createStatement();
+            String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
+            stm.executeUpdate(insertPatientDetails);
+        } catch( Exception e){
+            System.out.println(e.getMessage());
+        }
+        nameTxtField.setText("");
+        emailTxtField.setText("");
+        contactTextField.setText("");
+        addressTxtField.setText("");
+        passwordTxtField.setText("");
+
+        
+    }//GEN-LAST:event_signupBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLbl;
@@ -208,6 +248,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel emailLbl;
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JLabel passwordLbl;
