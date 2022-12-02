@@ -6,10 +6,9 @@ package UI;
 
 
 import com.mysql.jdbc.Connection;
-import static constants.DBConnection.*;
-import java.sql.DriverManager;
 import java.sql.Statement;
-import java.sql.ResultSet;
+import SQLConnection.DBConnection;
+import java.sql.SQLException;
 /**
  *
  * @author rodri
@@ -222,12 +221,11 @@ public class SignupPanel extends javax.swing.JPanel {
         String password = passwordTxtField.getText();
         try
         {
-            Class.forName(DB_CLASSNAME);
-            Connection connection = (Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS );
+            Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
             stm.executeUpdate(insertPatientDetails);
-        } catch( Exception e){
+        } catch(SQLException e){
             System.out.println(e.getMessage());
         }
         nameTxtField.setText("");
