@@ -160,6 +160,9 @@ public class LoginPanel extends javax.swing.JPanel {
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
+       //PharmacistPanel pharma=new PharmacistPanel();
+        //pharma.setVisible(true);
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     
