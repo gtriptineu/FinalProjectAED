@@ -37,14 +37,17 @@ public class PublicScreens extends javax.swing.JPanel {
         String storeName = "CVS";
         String comm = "Brighton";
         String viewStore = "View Store";
-        
+        addRows(splitPane,sno,storeName,comm,viewStore);
+        setVisible(true);
+    }
+    public void addRows(JSplitPane splitPane, int sno, String storeName, String comm, String viewStore){
+        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         model.setDataVector(new Object[][] { { sno, storeName, comm, viewStore },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
         medicinesTable.getColumn("View Store").setCellRenderer(new ButtonRenderer());
         medicinesTable.getColumn("View Store").setCellEditor(new ButtonEditor(new JCheckBox()));
         System.out.println("Added Rows to table");
         setVisible(true);
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -4,17 +4,31 @@
  */
 package UI;
 
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nikethanann
  */
 public class PatientProfile extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PatientProfile
-     */
-    public PatientProfile() {
+        JSplitPane splitPane;
+
+    public PatientProfile(JSplitPane splitPane) {
         initComponents();
+        this.splitPane = splitPane;
+        initComponents();
+//        jPanel1 = new JPanel();
+        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
+        
+        int sno = 1;
+        String storeName = "CVS";
+        String comm = "Brighton";
+        String viewStore = "View Store";
+//        addRows(splitPane,sno,storeName,comm,viewStore);
+        setVisible(true);
     }
 
     /**
