@@ -33,7 +33,12 @@ public class PublicScreens extends javax.swing.JPanel {
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         
-        model.setDataVector(new Object[][] { { "1", "CVS", "Brighton", "View Store" },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
+        int sno = 1;
+        String storeName = "CVS";
+        String comm = "Brighton";
+        String viewStore = "View Store";
+        
+        model.setDataVector(new Object[][] { { sno, storeName, comm, viewStore },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
         medicinesTable.getColumn("View Store").setCellRenderer(new ButtonRenderer());
         medicinesTable.getColumn("View Store").setCellEditor(new ButtonEditor(new JCheckBox()));
         System.out.println("Added Rows to table");
@@ -50,7 +55,7 @@ public class PublicScreens extends javax.swing.JPanel {
         commDropDown = new javax.swing.JComboBox<>();
         medicineLbl = new javax.swing.JLabel();
         medicineTxtField = new javax.swing.JTextField();
-        commSearchLbl1 = new javax.swing.JLabel();
+        dosageLbl = new javax.swing.JLabel();
         dosageDropDown = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
@@ -74,8 +79,8 @@ public class PublicScreens extends javax.swing.JPanel {
         medicineLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl.setText("Medicine Name:");
 
-        commSearchLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
-        commSearchLbl1.setText("Dosage:");
+        dosageLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        dosageLbl.setText("Dosage:");
 
         dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +128,7 @@ public class PublicScreens extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(medicineLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(commSearchLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(commSearchLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(dosageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,7 +154,7 @@ public class PublicScreens extends javax.swing.JPanel {
                     .addComponent(medicineTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(commSearchLbl1)
+                    .addComponent(dosageLbl)
                     .addComponent(dosageDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,8 +187,8 @@ public class PublicScreens extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> commDropDown;
     private javax.swing.JLabel commSearchLbl;
-    private javax.swing.JLabel commSearchLbl1;
     private javax.swing.JComboBox<String> dosageDropDown;
+    private javax.swing.JLabel dosageLbl;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel medicineLbl;
