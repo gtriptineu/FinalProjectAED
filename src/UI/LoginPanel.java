@@ -49,14 +49,13 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
-        userNameTxtField.setForeground(new java.awt.Color(204, 204, 204));
+        userNameTxtField.setForeground(new java.awt.Color(51, 51, 51));
         userNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameTxtFieldActionPerformed(evt);
             }
         });
 
-        passwordTxtField.setForeground(new java.awt.Color(204, 204, 204));
         passwordTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordTxtFieldActionPerformed(evt);

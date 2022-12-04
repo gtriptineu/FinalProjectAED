@@ -4,6 +4,8 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rodri
@@ -70,6 +72,11 @@ public class SignupPanel extends javax.swing.JPanel {
 
         signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         signupBtn.setText("SIGN-UP");
+        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupBtnActionPerformed(evt);
+            }
+        });
 
         contactTextField.setForeground(new java.awt.Color(204, 204, 204));
         contactTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +205,11 @@ public class SignupPanel extends javax.swing.JPanel {
     private void addressTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTxtFieldActionPerformed
+
+    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_signupBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
