@@ -4,6 +4,17 @@
  */
 package UI;
 
+
+import SMTPEmail.Email;
+import com.mysql.jdbc.Connection;
+import java.sql.Statement;
+import SQLConnection.DBConnection;
+import static constants.EmailConnection.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
 /**
  *
  * @author rodri
@@ -13,7 +24,7 @@ public class SignupPanel extends javax.swing.JPanel {
     /**
      * Creates new form SignupPanel
      */
-    public SignupPanel() {
+    public SignupPanel(JSplitPane jSplitPane) {
         initComponents();
     }
 
@@ -26,6 +37,7 @@ public class SignupPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         nameTxtField = new javax.swing.JTextField();
         emailTxtField = new javax.swing.JTextField();
         nameLbl = new javax.swing.JLabel();
@@ -39,6 +51,8 @@ public class SignupPanel extends javax.swing.JPanel {
         addressLbl = new javax.swing.JLabel();
         addressTxtField = new javax.swing.JTextField();
         passwordLbl = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -70,6 +84,11 @@ public class SignupPanel extends javax.swing.JPanel {
 
         signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         signupBtn.setText("SIGN-UP");
+        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupBtnActionPerformed(evt);
+            }
+        });
 
         contactTextField.setForeground(new java.awt.Color(204, 204, 204));
         contactTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +218,48 @@ public class SignupPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTxtFieldActionPerformed
 
+    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+        // TODO add your handling code here:
+        String name = nameTxtField.getText();
+        String email = emailTxtField.getText();
+        String contact = contactTextField.getText();
+        String address = addressTxtField.getText();
+        String password = passwordTxtField.getText();
+        
+//        Generating Random 6 digit number as activation code
+        Random rnd = new Random();
+        int activationCode = rnd.nextInt(999999);
+        String body = ACTIVATION_BODY + Integer.toString(activationCode);
+        System.out.print("activationCode:"+ activationCode +"-------"+ body);
+        try
+        {
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String checkPatient = "select email from patientdetails where email='"+email+"';";
+            
+            ResultSet rst= stm.executeQuery(checkPatient);
+            if(rst.next()){
+                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
+            } else {
+                System.out.println("in if");
+                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
+                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
+                stm.executeUpdate(insertPatientDetails);
+                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
+            }
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        nameTxtField.setText("");
+        emailTxtField.setText("");
+        contactTextField.setText("");
+        addressTxtField.setText("");
+        passwordTxtField.setText("");
+
+        
+    }//GEN-LAST:event_signupBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLbl;
@@ -208,6 +269,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel emailLbl;
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JLabel passwordLbl;

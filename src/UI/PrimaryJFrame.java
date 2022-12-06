@@ -135,6 +135,7 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pharmaBtnActionPerformed
 
+
     private void publicPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicPatientBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane1);
         jSplitPane1.setBottomComponent(goToPublic);

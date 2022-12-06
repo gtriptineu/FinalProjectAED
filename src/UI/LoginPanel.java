@@ -4,17 +4,24 @@
  */
 package UI;
 
+import SQLConnection.DBConnection;
+import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+
 /**
  *
  * @author rodri
  */
-public class LoginInPanel extends javax.swing.JPanel {
+public class LoginPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form LoginInPanel
-     */
-    public LoginInPanel() {
+    JSplitPane jSplitPane;
+    public LoginPanel(JSplitPane jSplitPane) {
         initComponents();
+        this.jSplitPane = jSplitPane;
     }
 
     /**
@@ -43,6 +50,11 @@ public class LoginInPanel extends javax.swing.JPanel {
 
         loginBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         loginBtn.setText("LOGIN");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         userNameTxtField.setForeground(new java.awt.Color(204, 204, 204));
         userNameTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +135,38 @@ public class LoginInPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         passwordTxtField.setText("Enter Password");
     }//GEN-LAST:event_passwordTxtFieldActionPerformed
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        // TODO add your handling code here:
+        
+        String email = userNameTxtField.getText();
+        String password = passwordTxtField.getText();
+        
+        try
+        {
+            System.out.println("In try");
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
+            
+            ResultSet rst= stm.executeQuery(loginPatient);
+            if (rst.next()){
+                String patientName = rst.getString("Name");
+                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
+                PatientProfile goToPatient = new PatientProfile(jSplitPane);
+                jSplitPane.setBottomComponent(goToPatient);
+                System.out.println("Going to patient profile");
+            } else {
+                JOptionPane.showMessageDialog(this, "Login Failed");
+                userNameTxtField.setText("");
+                passwordTxtField.setText("");
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+       //PharmacistPanel pharma=new PharmacistPanel();
+        //pharma.setVisible(true);
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     
     

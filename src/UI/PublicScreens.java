@@ -265,11 +265,13 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         }
         if(result == 0) //Login
         {
-//        PatientLoginScreen goToLogin = new PatientLoginScreen();
-//        splitPane.setBottomComponent(goToLogin);
+            LoginPanel goToLogin=new LoginPanel(splitPane);
+            splitPane.setBottomComponent(goToLogin);    
         }
         else // Sign up
         {
+            SignupPanel goToSignup=new SignupPanel(splitPane);
+            splitPane.setBottomComponent(goToSignup);
             
         }
         isPushed = false;
