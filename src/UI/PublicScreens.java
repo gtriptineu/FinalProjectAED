@@ -4,9 +4,15 @@
  */
 package UI;
 
+import SQLConnection.DBConnection;
+import com.mysql.jdbc.Connection;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,17 +24,22 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import model.store.StoreDirectory;
+import model.store.Store;
 
 /**
  *
  * @author nikethanann
  */
 public class PublicScreens extends javax.swing.JPanel {
+    
+    StoreDirectory allStores;
 
     JSplitPane splitPane;
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
+        allStores = new StoreDirectory();
         initComponents();
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
@@ -87,9 +98,6 @@ public class PublicScreens extends javax.swing.JPanel {
                 medicineTxtFieldActionPerformed(evt);
             }
         });
-
-        dosageLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
-        dosageLbl.setText("Dosage:");
 
         dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
@@ -203,10 +211,62 @@ public class PublicScreens extends javax.swing.JPanel {
     }//GEN-LAST:event_medicineTxtFieldActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        String communityText = commDropDown.getSelectedItem().toString();
+        String dosageText = dosageDropDown.getSelectedItem().toString();
+        String medicineName = medicineTxtField.getText();
+        
         if(medicineTxtField.getText().equals("") || isItInteger(medicineTxtField.getText())) {
             JOptionPane.showMessageDialog(this, "Medicine Name Field is empty / invalid!");
         }
-        // TODO add your handling code here:
+        else {
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch;
+            
+            if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
+            } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
+            } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and community='"+communityText+"';";
+            } else{
+                medicineSearch = "select * from inventory where name='"+medicineName+"';";
+            }
+            
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            ArrayList<String> allStoreId = new ArrayList<>();
+            
+            if(rst.isBeforeFirst()){
+                while(rst.next()){
+                    String storeId = rst.getString("storeId");
+                    allStoreId.add(storeId);
+                }
+                System.out.println("All storeid found--"+allStoreId);
+            } else{
+                JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
+            }
+            
+            for(int i =0;i<allStoreId.size();i++){
+                String storeSearch = "select * from storedetails where storeId='"+allStoreId.get(i)+"';";
+                ResultSet rs= stm.executeQuery(storeSearch);
+                while(rs.next()){
+                    Store s = allStores.addNewStore();
+                    s.setStoreId(rs.getString("storeId"));
+                    s.setStoreName(rs.getString("storeName"));
+                    s.setCommunity(rs.getString("community"));
+                }
+            }
+            
+            for(Store s: allStores.getStoreDictionary()){
+                System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+            }
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        }
     }//GEN-LAST:event_searchBtnActionPerformed
 
 
