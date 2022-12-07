@@ -4,16 +4,20 @@
  */
 package UI;
 
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
 /**
  *
  * @author rodri
  */
 public class PurchaseMedicinePanel extends javax.swing.JPanel {
-
+JSplitPane splitPane;
     /**
      * Creates new form PurchaseMedicinePanel
      */
-    public PurchaseMedicinePanel() {
+    public PurchaseMedicinePanel(JSplitPane splitPane) {
+         this.splitPane = splitPane;
         initComponents();
     }
 
@@ -33,13 +37,11 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
         quantitySpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         btnSearchProduct = new javax.swing.JButton();
-        txtSalesPrice = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
         txtSearchKeyWord = new javax.swing.JTextField();
         pharmaComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnRemoveOrderItem = new javax.swing.JButton();
@@ -122,8 +124,6 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Vender");
 
-        jLabel6.setText("Sales Price");
-
         jLabel7.setText("Item in cart");
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -181,10 +181,6 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                                             .addComponent(btnRemoveOrderItem))
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(30, 30, 30)
                                             .addComponent(jLabel5)
                                             .addGap(2, 2, 2)
                                             .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,9 +207,6 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addtoCartButton6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6))
                     .addComponent(jLabel5)
                     .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -224,9 +217,9 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckOut)
                     .addComponent(btnRemoveOrderItem))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnBack)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,7 +244,8 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //coz if we dont checkout and click back the availblty shud b updated.
        
-        
+        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
+        splitPane.setBottomComponent(pharmacistPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRemoveOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveOrderItemActionPerformed
@@ -274,7 +268,6 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
     private javax.swing.JTable drugTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -282,7 +275,6 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
     private javax.swing.JComboBox pharmaComboBox1;
     private javax.swing.JLabel purchaseTitle;
     private javax.swing.JSpinner quantitySpinner;
-    private javax.swing.JTextField txtSalesPrice;
     private javax.swing.JTextField txtSearchKeyWord;
     // End of variables declaration//GEN-END:variables
 }

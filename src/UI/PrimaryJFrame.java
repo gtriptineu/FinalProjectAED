@@ -137,6 +137,8 @@ public class PrimaryJFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+            PharmacistLoginPanel goToLogin=new PharmacistLoginPanel(jSplitPane1);
+            jSplitPane1.setBottomComponent(goToLogin);
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

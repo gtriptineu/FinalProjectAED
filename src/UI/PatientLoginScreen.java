@@ -4,16 +4,26 @@
  */
 package UI;
 
+import SQLConnection.DBConnection;
+import com.mysql.jdbc.Connection;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+
 /**
  *
  * @author nikethanann
  */
 public class PatientLoginScreen extends javax.swing.JPanel {
-
+JSplitPane splitPane;
     /**
      * Creates new form PatientLoginScreen
      */
-    public PatientLoginScreen() {
+    public PatientLoginScreen(JSplitPane splitPane) {
+         this.splitPane = splitPane;
         initComponents();
     }
 
@@ -43,6 +53,11 @@ public class PatientLoginScreen extends javax.swing.JPanel {
 
         loginBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         loginBtn.setText("LOGIN");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
         loginTitle.setText("PATIENT LOGIN");
@@ -89,6 +104,32 @@ public class PatientLoginScreen extends javax.swing.JPanel {
                 .addContainerGap(326, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        // TODO add your handling code here:
+        String email = patientIDTxtField.getText();
+        String password = patientPwdTxtField.getName();
+        
+        try
+        {
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
+            
+            ResultSet rst= stm.executeQuery(loginPatient);
+            
+            if (rst.next()){
+                String patientName = rst.getString("Name");
+                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome"+ patientName+ ".");
+            } else {
+                JOptionPane.showMessageDialog(this, "Login Failed");
+                patientIDTxtField.setText("");
+                patientPwdTxtField.setText("");
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_loginBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
