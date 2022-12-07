@@ -5,9 +5,6 @@
 package UI;
 
 
-
-import javax.swing.JOptionPane;
-
 import SMTPEmail.Email;
 import com.mysql.jdbc.Connection;
 import java.sql.Statement;
@@ -16,9 +13,6 @@ import static constants.EmailConnection.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 /**
@@ -58,6 +52,8 @@ public class SignupPanel extends javax.swing.JPanel {
         passwordLbl = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
 
+        jPasswordField1.setText("jPasswordField1");
+
         setBackground(new java.awt.Color(160, 213, 229));
 
         nameTxtField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
@@ -88,7 +84,6 @@ public class SignupPanel extends javax.swing.JPanel {
 
         signupBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         signupBtn.setText("SIGN-UP");
-
         signupBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signupBtnActionPerformed(evt);
@@ -198,28 +193,16 @@ public class SignupPanel extends javax.swing.JPanel {
                             .addComponent(contactLbl))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(contactLbl1)
-                            .addComponent(ageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(ageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(contactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(contactLbl))
-                    .addComponent(userContactLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                            .addComponent(addressLbl)
+                            .addComponent(addressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordLbl))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressLbl))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(passLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(passwordLbl)))
-                .addGap(67, 67, 67)
-                .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                    .addComponent(signupBtn)
+                    .addComponent(backBtn))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -252,9 +235,7 @@ public class SignupPanel extends javax.swing.JPanel {
         String email = emailTxtField.getText();
         String contact = contactTextField.getText();
         String address = addressTxtField.getText();
-        String age = ageTxtField.getText();
-        //i have done this
-        String password = String.valueOf(passwordTxtField.getPassword());
+        String password = passwordTxtField.getText();
         
         if(nameTxtField.getText().equals("") || isItInteger(nameTxtField.getText())) {
             JOptionPane.showMessageDialog(this, "Doctor Name is empty / invalid!");
@@ -272,10 +253,7 @@ public class SignupPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Password is empty / invalid!");
         }
         else {
-
-            
-        //Generating Random 6 digit number as activation code
-
+//        Generating Random 6 digit number as activation code
         Random rnd = new Random();
         int activationCode = rnd.nextInt(999999);
         String body = ACTIVATION_BODY + Integer.toString(activationCode);
@@ -285,37 +263,20 @@ public class SignupPanel extends javax.swing.JPanel {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String checkPatient = "select email from patientdetails where email='"+email+"';";
-
+            
             ResultSet rst= stm.executeQuery(checkPatient);
             if(rst.next()){
-
                 JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
             } else {
-
-                //Need todo validation 6digit integer
-                String userCode;
-                userCode= JOptionPane.showInputDialog("Enter activation code");
-
-                if (userCode.isBlank()) {
-
-                    JOptionPane.showMessageDialog(null, "Please enter activation code");
-                }
-                else {
-                    System.out.println("in if");
-                    Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
-                    String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-                    stm.executeUpdate(insertPatientDetails);
-                    JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginPanel goToLogin=new LoginPanel(splitPane);
-                    splitPane.setBottomComponent(goToLogin);
-                }
-
+                System.out.println("in if");
+                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
+                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
+                stm.executeUpdate(insertPatientDetails);
+                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
             }
-
+            
         } catch(SQLException e){
             System.out.println(e.getMessage());
-        }
-            
         }
         
         nameTxtField.setText("");
@@ -323,91 +284,14 @@ public class SignupPanel extends javax.swing.JPanel {
         contactTextField.setText("");
         addressTxtField.setText("");
         passwordTxtField.setText("");
-
-        ageTxtField.setText("");
+        }
     }//GEN-LAST:event_signupBtnActionPerformed
-
-    //validation
-    private void nameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtFieldKeyReleased
-        // TODO add your handling code here:
-        String namePattern="^[a-zA-Z]{0,30}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(nameTxtField.getText());
-        if (!match.matches()) {
-            userNameLbl.setText("Naming is incorrect");
-        }
-        else {
-            
-            userNameLbl.setText(null);
-        }
-    }//GEN-LAST:event_nameTxtFieldKeyReleased
-
-    private void ageTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTxtFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ageTxtFieldActionPerformed
-
-    private void emailTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtFieldKeyReleased
-        // TODO add your handling code here:
-        
-          String namePattern="^[a-zA-Z]{3,30}[@][a-zA-Z]{0,9}[.][a-zA-Z]{0,3}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(emailTxtField.getText());
-        if (!match.matches()) {
-             userEmailLbl.setText("emailId is incorrect");
-        }
-        else {
-             userEmailLbl.setText(null);
-        }
-    }//GEN-LAST:event_emailTxtFieldKeyReleased
-
-    private void ageTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTxtFieldKeyReleased
-        // TODO add your handling code here:
-        String namePattern="^[0-9]{1,2}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(ageTxtField.getText());
-        if (!match.matches()) {
-             ageLbl.setText("Age is incorrect!!Age should be int");
-        }
-        else {
-             ageLbl.setText(null);
-        }
-    }//GEN-LAST:event_ageTxtFieldKeyReleased
-
-    private void contactTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTextFieldKeyReleased
-        // TODO add your handling code here:
-        String namePattern="^[0-9]{9,9}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(contactTextField.getText());
-        if (!match.matches()) {
-             userContactLbl.setText("Mobile number is incorrect");
-        }
-        else {
-             userContactLbl.setText(null);
-        }
-  
-    }//GEN-LAST:event_contactTextFieldKeyReleased
-
-    private void passwordTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtFieldKeyReleased
-        // TODO add your handling code here:
-        
-        String namePattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(String.valueOf(passwordTxtField.getPassword()));
-        if (!match.matches()) {
-             passLbl.setText("Invalid password!one uppercase,lowercase,special char and integer needed");
-        }
-        else {
-             passLbl.setText(null);
-        }
-    }//GEN-LAST:event_passwordTxtFieldKeyReleased
-
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane);
         jSplitPane.setBottomComponent(goToPublic);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -420,8 +304,6 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel loginTitle;
-
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JLabel passwordLbl;

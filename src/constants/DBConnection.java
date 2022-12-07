@@ -12,6 +12,6 @@ public class DBConnection {
     public static final String DB_CLASSNAME = "com.mysql.jdbc.Driver";
     public static final String DB_URL = "jdbc:mysql://localhost:3306/finalprojectaed?useSSL=false";
     public static final String DB_USER = "root";
-    public static final String DB_PASS = "Seonaaed#12";
+    public static final String DB_PASS = "Challenge101!";
     
 }

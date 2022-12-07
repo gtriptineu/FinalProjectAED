@@ -201,7 +201,6 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTxtFieldActionPerformed
 
-
     
     
 
