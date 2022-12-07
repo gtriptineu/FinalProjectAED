@@ -4,6 +4,8 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rodri
@@ -233,14 +235,14 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
     private void addtoCartButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtoCartButton6ActionPerformed
         // TODO add your handling code here:
         int selectedRow = drugTable.getSelectedRow();
-        Drug selectedDrug;
+//        Drug selectedDrug;
 
         if(selectedRow<0){
             JOptionPane.showMessageDialog(null, "Please select a row","warning",JOptionPane.ERROR_MESSAGE);
             return;
         }
         else{
-            selectedDrug = (Drug) drugTable.getValueAt(selectedRow, 0);
+//            selectedDrug = (Drug) drugTable.getValueAt(selectedRow, 0);
         }
 
         int salesPrice =0;
@@ -251,69 +253,69 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "enter valid sales price","warning",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (salesPrice < selectedDrug.getDrugPrice()){
-            JOptionPane.showMessageDialog(null, "sales price should be greater than supplier price","warning",JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+//        if (salesPrice < selectedDrug.getDrugPrice()){
+//            JOptionPane.showMessageDialog(null, "sales price should be greater than supplier price","warning",JOptionPane.INFORMATION_MESSAGE);
+//            return;
+//        }
         int fetchQuantity = (Integer)quantitySpinner.getValue();//interger type cast coz getvalue sends a n object wch has to be casted to int
         if(fetchQuantity <=0){
             JOptionPane.showMessageDialog(null, "Please select atleast 1 quantity","warning",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        else if(fetchQuantity <= selectedDrug.getDrugAvailibility()){
-            boolean alreadyPresent=false;
-            for(OrderItem orderItems : order.getOrderItemList()){
-                if (orderItems.getDrug()==selectedDrug){
-                    int oldAvailibility = selectedDrug.getDrugAvailibility();
-                    int newAvailibility = oldAvailibility - fetchQuantity;
-                    selectedDrug.setDrugAvailibility(newAvailibility);
-                    orderItems.setQuantity(fetchQuantity + orderItems.getQuantity());
-                    refreshOrderTable();
-                    populatePharmaTable();
-                    alreadyPresent=true;
-                    break; //wehn we get the order item v need not traverse the whole list
-                }
-            }
-            if(!alreadyPresent){
-                int oldAvailibility = selectedDrug.getDrugAvailibility();
-                int newAvailibility = oldAvailibility - fetchQuantity;
-                selectedDrug.setDrugAvailibility((newAvailibility));
-                order.addOrderItem(selectedDrug, fetchQuantity, salesPrice);
-                refreshOrderTable();
-                populatePharmaTable();
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Please quty shud b > aval","warning",JOptionPane.ERROR_MESSAGE);
-        }
+//        else if(fetchQuantity <= selectedDrug.getDrugAvailibility()){
+//            boolean alreadyPresent=false;
+//            for(OrderItem orderItems : order.getOrderItemList()){
+//                if (orderItems.getDrug()==selectedDrug){
+//                    int oldAvailibility = selectedDrug.getDrugAvailibility();
+//                    int newAvailibility = oldAvailibility - fetchQuantity;
+//                    selectedDrug.setDrugAvailibility(newAvailibility);
+//                    orderItems.setQuantity(fetchQuantity + orderItems.getQuantity());
+//                    refreshOrderTable();
+//                    populatePharmaTable();
+//                    alreadyPresent=true;
+//                    break; //wehn we get the order item v need not traverse the whole list
+//                }
+//            }
+//            if(!alreadyPresent){
+//                int oldAvailibility = selectedDrug.getDrugAvailibility();
+//                int newAvailibility = oldAvailibility - fetchQuantity;
+//                selectedDrug.setDrugAvailibility((newAvailibility));
+//                order.addOrderItem(selectedDrug, fetchQuantity, salesPrice);
+//                refreshOrderTable();
+//                populatePharmaTable();
+//            }
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "Please quty shud b > aval","warning",JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
     private void btnSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProductActionPerformed
 
-        if(txtSearchKeyWord.getText().trim().length() >= 0){
-            try {
-                int  drugID = Integer.parseInt(txtSearchKeyWord.getText());
-                Drug drug = pharmacyDirectory.searchDrug(drugID);
-                if(drug!=null){
-                    ViewDrugDetailJPanel viewDrugDetail = new ViewDrugDetailJPanel(userProcessContainer, drug);
-                    userProcessContainer.add("viewDrugDetail",viewDrugDetail);
-                    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-                    layout.next(userProcessContainer);
-                }else{
-                    JOptionPane.showMessageDialog(null, "No such drug is present","Warning",JOptionPane.INFORMATION_MESSAGE);
-                }
-                errorInkeyword.setText("");
-            }
-            catch(NumberFormatException nfe){
-                errorInkeyword.setText("Enter a Drug ID .");
-            }
-
-        }
+//        if(txtSearchKeyWord.getText().trim().length() >= 0){
+//            try {
+//                int  drugID = Integer.parseInt(txtSearchKeyWord.getText());
+//                Drug drug = pharmacyDirectory.searchDrug(drugID);
+//                if(drug!=null){
+//                    ViewDrugDetailJPanel viewDrugDetail = new ViewDrugDetailJPanel(userProcessContainer, drug);
+//                    userProcessContainer.add("viewDrugDetail",viewDrugDetail);
+//                    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//                    layout.next(userProcessContainer);
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "No such drug is present","Warning",JOptionPane.INFORMATION_MESSAGE);
+//                }
+//                errorInkeyword.setText("");
+//            }
+//            catch(NumberFormatException nfe){
+//                errorInkeyword.setText("Enter a Drug ID .");
+//            }
+//
+//        }
     }//GEN-LAST:event_btnSearchProductActionPerformed
 
     private void pharmaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaComboBox1ActionPerformed
         // TODO add your handling code here:
-        populatePharmaTable();
+//        populatePharmaTable();
         //to make sure products are displayed by default .
 
     }//GEN-LAST:event_pharmaComboBox1ActionPerformed
@@ -321,17 +323,17 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         //coz if we dont checkout and click back the availblty shud b updated.
-        if(order.getOrderItemList().size()>0){
-            for(OrderItem oi: order.getOrderItemList()){
-                Drug drug = oi.getDrug();
-                drug.setDrugAvailibility(oi.getQuantity()+drug.getDrugAvailibility());
-
-            }
-            order.getOrderItemList().removeAll(order.getOrderItemList());
-        }
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+//        if(order.getOrderItemList().size()>0){
+//            for(OrderItem oi: order.getOrderItemList()){
+//                Drug drug = oi.getDrug();
+//                drug.setDrugAvailibility(oi.getQuantity()+drug.getDrugAvailibility());
+//
+//            }
+//            order.getOrderItemList().removeAll(order.getOrderItemList());
+//        }
+//        userProcessContainer.remove(this);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRemoveOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveOrderItemActionPerformed
@@ -342,30 +344,30 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"select a row","warning",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        OrderItem orderItem = (OrderItem) orderTable.getValueAt(selectedRow, 0);
-        int oldQty = orderItem.getDrug().getDrugAvailibility();
-        int newQty = oldQty + orderItem.getQuantity();
-        orderItem.getDrug().setDrugAvailibility(newQty);
-        order.removeOrderItem(orderItem);
-        populatePharmaTable();
-        JOptionPane.showMessageDialog(null,"order item is removed successfully","Order item deletion",JOptionPane.INFORMATION_MESSAGE);
+//        OrderItem orderItem = (OrderItem) orderTable.getValueAt(selectedRow, 0);
+//        int oldQty = orderItem.getDrug().getDrugAvailibility();
+//        int newQty = oldQty + orderItem.getQuantity();
+//        orderItem.getDrug().setDrugAvailibility(newQty);
+//        order.removeOrderItem(orderItem);
+//        populatePharmaTable();
+//        JOptionPane.showMessageDialog(null,"order item is removed successfully","Order item deletion",JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnRemoveOrderItemActionPerformed
 
     private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
         // TODO add your handling code here:
-        if(order.getOrderItemList().size()>=0){
-            MasterOrderCatalog masterOrderCatalog = store.getMasterOrderCatalog();
-            masterOrderCatalog.addOrder(order);
-            isCheckedOut=true;
-            order = new Order();//fr next order
-            refreshOrderTable();
-            populatePharmaTable();
-            JOptionPane.showMessageDialog(null, "Items are checked out!","Info",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No order items present in cart","warning",JOptionPane.ERROR_MESSAGE);
-        }
+//        if(order.getOrderItemList().size()>=0){
+//            MasterOrderCatalog masterOrderCatalog = store.getMasterOrderCatalog();
+//            masterOrderCatalog.addOrder(order);
+//            isCheckedOut=true;
+//            order = new Order();//fr next order
+//            refreshOrderTable();
+//            populatePharmaTable();
+//            JOptionPane.showMessageDialog(null, "Items are checked out!","Info",JOptionPane.INFORMATION_MESSAGE);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "No order items present in cart","warning",JOptionPane.ERROR_MESSAGE);
+//        }
 
     }//GEN-LAST:event_btnCheckOutActionPerformed
 

@@ -47,7 +47,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="medicineLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="commSearchLbl" alignment="0" max="32767" attributes="0"/>
-                              <Component id="commSearchLbl1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dosageLbl" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="86" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -82,7 +82,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="commSearchLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dosageLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dosageDropDown" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -133,8 +133,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="medicineTxtField">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medicineTxtFieldActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="commSearchLbl1">
+        <Component class="javax.swing.JLabel" name="dosageLbl">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="PT Sans" size="14" style="1"/>
