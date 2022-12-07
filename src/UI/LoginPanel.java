@@ -12,8 +12,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
-
-
 /**
  *
  * @author rodri
@@ -134,20 +132,9 @@ JSplitPane splitPane;
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-
         String email = userNameTxtField.getText();
         String password = String.valueOf(passwordTxtField.getPassword());
         System.out.println("password:"+password);
-
-        passwordTxtField.setText("Enter Password");
-    }//GEN-LAST:event_passwordTxtFieldActionPerformed
-
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-        
-        String email = userNameTxtField.getText();
-        String password = passwordTxtField.getText();
-
         
         try
         {
@@ -156,16 +143,10 @@ JSplitPane splitPane;
             String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
             
             ResultSet rst= stm.executeQuery(loginPatient);
-
             
             if (rst.next()){
            PatientProfile patientPanel=new PatientProfile();
            splitPane.setBottomComponent(patientPanel);
-
-            if (rst.next()){
-                String patientName = rst.getString("Name");
-                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-
             } else {
                 JOptionPane.showMessageDialog(this, "Login Failed");
                 userNameTxtField.setText("");
@@ -174,15 +155,8 @@ JSplitPane splitPane;
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
-
         
     }//GEN-LAST:event_searchBtnActionPerformed
-
-       //PharmacistPanel pharma=new PharmacistPanel();
-        //pharma.setVisible(true);
-
-    }//GEN-LAST:event_loginBtnActionPerformed
-
 
     
     

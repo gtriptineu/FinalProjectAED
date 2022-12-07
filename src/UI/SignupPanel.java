@@ -5,8 +5,10 @@
 package UI;
 
 
-
 import javax.swing.JOptionPane;
+
+
+
 import SMTPEmail.Email;
 import com.mysql.jdbc.Connection;
 import java.sql.Statement;
@@ -15,13 +17,10 @@ import static constants.EmailConnection.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
-
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,8 +70,6 @@ public class SignupPanel extends javax.swing.JPanel {
 
         jPasswordField1.setText("jPasswordField1");
 
-        jPasswordField1.setText("jPasswordField1");
-
         setBackground(new java.awt.Color(160, 213, 229));
 
         nameTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +103,9 @@ public class SignupPanel extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add-user (1).png"))); // NOI18N
 
         signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-
         signupBtn.setText("SIGN_UP");
         signupBtn.setMaximumSize(new java.awt.Dimension(74, 26));
         signupBtn.setMinimumSize(new java.awt.Dimension(74, 26));
-
-        signupBtn.setText("SIGN-UP");
-
         signupBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signupBtnActionPerformed(evt);
@@ -270,10 +263,11 @@ public class SignupPanel extends javax.swing.JPanel {
                     .addComponent(addressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressLbl))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLbl)
-                    .addComponent(passLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(passwordLbl)))
                 .addGap(67, 67, 67)
                 .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
@@ -306,10 +300,9 @@ public class SignupPanel extends javax.swing.JPanel {
         String email = emailTxtField.getText();
         String contact = contactTextField.getText();
         String address = addressTxtField.getText();
-
         String age = ageTxtField.getText();
         //i have done this
-        String password = passwordTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
         
         if (name.isEmpty() || email.isEmpty() ||
                 contact.isEmpty() || address.isEmpty() ||
@@ -319,11 +312,6 @@ public class SignupPanel extends javax.swing.JPanel {
         else {
             
         //        Generating Random 6 digit number as activation code
-
-        String password = passwordTxtField.getText();
-        
-//        Generating Random 6 digit number as activation code
-
         Random rnd = new Random();
         int activationCode = rnd.nextInt(999999);
         String body = ACTIVATION_BODY + Integer.toString(activationCode);
@@ -334,7 +322,6 @@ public class SignupPanel extends javax.swing.JPanel {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String checkPatient = "select email from patientdetails where email='"+email+"';";
-
 
             ResultSet rst= stm.executeQuery(checkPatient);
             if(rst.next()){
@@ -368,28 +355,11 @@ public class SignupPanel extends javax.swing.JPanel {
             
         }
         
-            
-            ResultSet rst= stm.executeQuery(checkPatient);
-            if(rst.next()){
-                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
-            } else {
-                System.out.println("in if");
-                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
-                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-                stm.executeUpdate(insertPatientDetails);
-                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-            }
-            
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-
         nameTxtField.setText("");
         emailTxtField.setText("");
         contactTextField.setText("");
         addressTxtField.setText("");
         passwordTxtField.setText("");
-
         ageTxtField.setText("");
     }//GEN-LAST:event_signupBtnActionPerformed
 
@@ -458,7 +428,7 @@ public class SignupPanel extends javax.swing.JPanel {
         
         String namePattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
         Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(passwordTxtField.getText());
+        Matcher match=pat.matcher(String.valueOf(passwordTxtField.getPassword()));
         if (!match.matches()) {
              passLbl.setText("Invalid password!one uppercase,lowercase,special char and integer needed");
         }
@@ -466,11 +436,6 @@ public class SignupPanel extends javax.swing.JPanel {
              passLbl.setText(null);
         }
     }//GEN-LAST:event_passwordTxtFieldKeyReleased
-
-
-        
-    }//GEN-LAST:event_signupBtnActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -485,9 +450,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;
-
     private javax.swing.JLabel loginTitle;
-
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTxtField;
     private javax.swing.JLabel passLbl;
