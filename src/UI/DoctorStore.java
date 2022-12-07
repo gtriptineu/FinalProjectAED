@@ -255,8 +255,8 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
             int selectedRowIndex = medicinesTable.getSelectedRow();
             String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
             String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 2).toString();
-            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm);
-            splitPane.setBottomComponent(goToLogin);    
+//            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm,null);
+//            splitPane.setBottomComponent(goToLogin);    
         }
         else // Sign up
         {

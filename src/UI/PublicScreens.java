@@ -4,15 +4,9 @@
  */
 package UI;
 
-import SQLConnection.DBConnection;
-import com.mysql.jdbc.Connection;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,41 +18,28 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import model.store.StoreDirectory;
-import model.store.Store;
 
 /**
  *
  * @author nikethanann
  */
 public class PublicScreens extends javax.swing.JPanel {
-    
-    StoreDirectory allStores;
 
     JSplitPane splitPane;
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
-        allStores = new StoreDirectory();
         initComponents();
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         
-        int sno = 1;
-        String storeName = "CVS";
-        String comm = "Brighton";
-        String viewStore = "View Store";
-        addRows(splitPane,sno,storeName,comm,viewStore);
-        setVisible(true);
-    }
-    public void addRows(JSplitPane splitPane, int sno, String storeName, String comm, String viewStore){
-        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
-        model.setDataVector(new Object[][] { { sno, storeName, comm, viewStore },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
+        model.setDataVector(new Object[][] { { "1", "CVS", "Brighton", "View Store" },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
         medicinesTable.getColumn("View Store").setCellRenderer(new ButtonRenderer());
         medicinesTable.getColumn("View Store").setCellEditor(new ButtonEditor(new JCheckBox()));
         System.out.println("Added Rows to table");
         setVisible(true);
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,7 +50,7 @@ public class PublicScreens extends javax.swing.JPanel {
         commDropDown = new javax.swing.JComboBox<>();
         medicineLbl = new javax.swing.JLabel();
         medicineTxtField = new javax.swing.JTextField();
-        dosageLbl = new javax.swing.JLabel();
+        commSearchLbl1 = new javax.swing.JLabel();
         dosageDropDown = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
@@ -93,13 +74,10 @@ public class PublicScreens extends javax.swing.JPanel {
         medicineLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl.setText("Medicine Name:");
 
-        medicineTxtField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                medicineTxtFieldActionPerformed(evt);
-            }
-        });
+        commSearchLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        commSearchLbl1.setText("Dosage:");
 
-        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
+        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dosageDropDownActionPerformed(evt);
@@ -127,14 +105,12 @@ public class PublicScreens extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(medicinesTable);
+        if (medicinesTable.getColumnModel().getColumnCount() > 0) {
+            medicinesTable.getColumnModel().getColumn(3).setCellRenderer(null);
+        }
 
         searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         searchBtn.setText("SEARCH");
-        searchBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,7 +126,7 @@ public class PublicScreens extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(medicineLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(commSearchLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dosageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(commSearchLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,7 +152,7 @@ public class PublicScreens extends javax.swing.JPanel {
                     .addComponent(medicineTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dosageLbl)
+                    .addComponent(commSearchLbl1)
                     .addComponent(dosageDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,76 +181,12 @@ public class PublicScreens extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_dosageDropDownActionPerformed
 
-    private void medicineTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicineTxtFieldActionPerformed
-        
-// TODO add your handling code here:
-    }//GEN-LAST:event_medicineTxtFieldActionPerformed
-
-    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        // TODO add your handling code here:
-        String communityText = commDropDown.getSelectedItem().toString();
-        String dosageText = dosageDropDown.getSelectedItem().toString();
-        String medicineName = medicineTxtField.getText();
-        
-        if(medicineTxtField.getText().equals("") || isItInteger(medicineTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Medicine Name Field is empty / invalid!");
-        }
-        else {
-        try{
-            Connection connection= DBConnection.dbconnector();
-            Statement stm = connection.createStatement();
-            String medicineSearch;
-            
-            if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
-            } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
-            } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and community='"+communityText+"';";
-            } else{
-                medicineSearch = "select * from inventory where name='"+medicineName+"';";
-            }
-            
-            ResultSet rst= stm.executeQuery(medicineSearch);
-            ArrayList<String> allStoreId = new ArrayList<>();
-            
-            if(rst.isBeforeFirst()){
-                while(rst.next()){
-                    String storeId = rst.getString("storeId");
-                    allStoreId.add(storeId);
-                }
-                System.out.println("All storeid found--"+allStoreId);
-            } else{
-                JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
-            }
-            
-            for(int i =0;i<allStoreId.size();i++){
-                String storeSearch = "select * from storedetails where storeId='"+allStoreId.get(i)+"';";
-                ResultSet rs= stm.executeQuery(storeSearch);
-                while(rs.next()){
-                    Store s = allStores.addNewStore();
-                    s.setStoreId(rs.getString("storeId"));
-                    s.setStoreName(rs.getString("storeName"));
-                    s.setCommunity(rs.getString("community"));
-                }
-            }
-            
-            for(Store s: allStores.getStoreDictionary()){
-                System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
-            }
-            
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-        }
-    }//GEN-LAST:event_searchBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> commDropDown;
     private javax.swing.JLabel commSearchLbl;
+    private javax.swing.JLabel commSearchLbl1;
     private javax.swing.JComboBox<String> dosageDropDown;
-    private javax.swing.JLabel dosageLbl;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel medicineLbl;
@@ -341,16 +253,21 @@ public class PublicScreens extends javax.swing.JPanel {
           int result = 0 ;
         if (isPushed) {
         String[] buttons = { "Login", "Sign Up"};
+//        JOptionPane.showMessageDialog(button, buttons);
         result = JOptionPane.showOptionDialog(null, "Oops! Login / Sign up, please", "Login / Sign Up",
 JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
+        System.out.println(result);
         }
         if(result == 0) //Login
         {
-            int selectedRowIndex = medicinesTable.getSelectedRow();
-            String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
-            String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 2).toString();
-            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm);
-            splitPane.setBottomComponent(goToLogin);    
+            LoginPanel goToLogin=new LoginPanel(splitPane);
+            splitPane.setBottomComponent(goToLogin);
+            
+//        PatientLoginScreen goToLogin = new PatientLoginScreen();
+//        splitPane.setBottomComponent(goToLogin);
+
+
+        
         }
         else // Sign up
         {
@@ -362,18 +279,13 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         return new String(label);
       }
 
+      public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+      }
+
       protected void fireEditingStopped() {
         super.fireEditingStopped();
       }
-    }
-    private static boolean isItInteger(String s) {
-    try { 
-        Integer.parseInt(s); 
-    } catch(NumberFormatException e) { 
-        return false; 
-    } catch(NullPointerException e) {
-        return false;
-        }
-    return true;
     }
 }
