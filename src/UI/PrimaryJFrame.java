@@ -50,7 +50,7 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Frame 14228Logo.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(800, 100));
+        jLabel1.setMaximumSize(new java.awt.Dimension(1800, 1000));
         jLabel1.setMinimumSize(new java.awt.Dimension(800, 100));
         jSplitPane1.setLeftComponent(jLabel1);
 

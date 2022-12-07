@@ -82,6 +82,12 @@ public class PublicScreens extends javax.swing.JPanel {
         medicineLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl.setText("Medicine Name:");
 
+        medicineTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medicineTxtFieldActionPerformed(evt);
+            }
+        });
+
         dosageLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         dosageLbl.setText("Dosage:");
 
@@ -116,6 +122,11 @@ public class PublicScreens extends javax.swing.JPanel {
 
         searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         searchBtn.setText("SEARCH");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,6 +196,18 @@ public class PublicScreens extends javax.swing.JPanel {
     private void dosageDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosageDropDownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dosageDropDownActionPerformed
+
+    private void medicineTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicineTxtFieldActionPerformed
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_medicineTxtFieldActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        if(medicineTxtField.getText().equals("") || isItInteger(medicineTxtField.getText())) {
+            JOptionPane.showMessageDialog(this, "Medicine Name Field is empty / invalid!");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -265,7 +288,10 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         }
         if(result == 0) //Login
         {
-            LoginPanel goToLogin=new LoginPanel(splitPane);
+            int selectedRowIndex = medicinesTable.getSelectedRow();
+            String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
+            String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 2).toString();
+            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm);
             splitPane.setBottomComponent(goToLogin);    
         }
         else // Sign up
@@ -286,5 +312,15 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
       protected void fireEditingStopped() {
         super.fireEditingStopped();
       }
+    }
+    private static boolean isItInteger(String s) {
+    try { 
+        Integer.parseInt(s); 
+    } catch(NumberFormatException e) { 
+        return false; 
+    } catch(NullPointerException e) {
+        return false;
+        }
+    return true;
     }
 }

@@ -54,7 +54,7 @@
               <Image iconType="3" name="/resources/Frame 14228Logo.png"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[800, 100]"/>
+              <Dimension value="[1800, 1000]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[800, 100]"/>

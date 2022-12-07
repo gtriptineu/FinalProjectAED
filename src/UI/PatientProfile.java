@@ -4,6 +4,7 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,10 +16,19 @@ import javax.swing.table.DefaultTableModel;
 public class PatientProfile extends javax.swing.JPanel {
 
         JSplitPane splitPane;
+        String storeName;
+        String comm;
 
-    public PatientProfile(JSplitPane splitPane) {
+    public PatientProfile(JSplitPane splitPane, String storeName, String comm, String patientName) {
         initComponents();
         this.splitPane = splitPane;
+        this.storeName = storeName;
+        this.comm = comm;
+
+        storeNameDisplay.setText(storeName);
+        commDisplay.setText(comm);
+        patientIDDisplay.setText(patientName);
+        
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         System.out.println("In constructor PatientProfile");
         int sno = 1;
@@ -39,7 +49,7 @@ public class PatientProfile extends javax.swing.JPanel {
     private void initComponents() {
 
         patientIDLbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        patientIDDisplay = new javax.swing.JLabel();
         storeNameDisplay = new javax.swing.JLabel();
         storeNameLbl = new javax.swing.JLabel();
         commDisplay = new javax.swing.JLabel();
@@ -51,14 +61,16 @@ public class PatientProfile extends javax.swing.JPanel {
         checkoutBtn = new javax.swing.JButton();
         qtyLbl = new javax.swing.JLabel();
         qtySpinner = new javax.swing.JSpinner();
+        medicineSearch = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
         patientIDLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         patientIDLbl.setText("Patient ID:");
 
-        jLabel2.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
-        jLabel2.setText("jLabel2");
+        patientIDDisplay.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
+        patientIDDisplay.setText("jLabel2");
 
         storeNameDisplay.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         storeNameDisplay.setText("jLabel2");
@@ -105,88 +117,120 @@ public class PatientProfile extends javax.swing.JPanel {
         qtyLbl.setFont(new java.awt.Font("PT Sans", 1, 15)); // NOI18N
         qtyLbl.setText("Quantity:");
 
+        searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        searchBtn.setText("SEARCH");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(checkoutBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(loginTitle)
+                        .addGap(0, 265, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(storeNameLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(storeNameDisplay)
-                                .addGap(31, 31, 31)
-                                .addComponent(commLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(commDisplay))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(patientIDLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
+                                .addComponent(patientIDDisplay)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ordersBtn))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(loginTitle)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(qtyLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ordersBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(medicineSearch, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(storeNameLbl)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(storeNameDisplay)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(commLbl)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(commDisplay))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(searchBtn)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(67, 67, 67))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(580, 580, 580)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkoutBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(qtyLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientIDLbl)
-                    .addComponent(jLabel2)
+                    .addComponent(patientIDDisplay)
                     .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(storeNameLbl)
                     .addComponent(storeNameDisplay)
                     .addComponent(commLbl)
                     .addComponent(commDisplay))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(medicineSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(qtyLbl)
                     .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                .addGap(28, 28, 28)
                 .addComponent(checkoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        if(medicineSearch.getText().equals("") || isItInteger(medicineSearch.getText())) {
+            JOptionPane.showMessageDialog(this, "Medicine Name Field is empty / invalid!");
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JLabel commDisplay;
     private javax.swing.JLabel commLbl;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel loginTitle;
+    private javax.swing.JTextField medicineSearch;
     private javax.swing.JTable medicinesTable;
     private javax.swing.JButton ordersBtn;
+    private javax.swing.JLabel patientIDDisplay;
     private javax.swing.JLabel patientIDLbl;
     private javax.swing.JLabel qtyLbl;
     private javax.swing.JSpinner qtySpinner;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JLabel storeNameDisplay;
     private javax.swing.JLabel storeNameLbl;
     // End of variables declaration//GEN-END:variables
@@ -201,5 +245,15 @@ public class PatientProfile extends javax.swing.JPanel {
         row[2] = dosage;
         row[3] = price;
         model.addRow(row);
+    }
+    private static boolean isItInteger(String s) {
+    try { 
+        Integer.parseInt(s); 
+    } catch(NumberFormatException e) { 
+        return false; 
+    } catch(NullPointerException e) {
+        return false;
+        }
+    return true;
     }
 }
