@@ -17,13 +17,14 @@ import javax.swing.JSplitPane;
  * @author rodri
  */
 public class LoginPanel extends javax.swing.JPanel {
-JSplitPane splitPane;
-    /**
-     * Creates new form LoginInPanel
-     */
-    public LoginPanel(JSplitPane splitPane) {
-        this.splitPane = splitPane;
+    JSplitPane jSplitPane;
+    String storeName;
+    String comm;
+    public LoginPanel(JSplitPane jSplitPane, String storeName, String comm) {
         initComponents();
+        this.jSplitPane = jSplitPane;
+        this.storeName = storeName;
+        this.comm = comm;       
     }
 
     /**
@@ -138,15 +139,18 @@ JSplitPane splitPane;
         
         try
         {
+            System.out.println("In try");
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
             
             ResultSet rst= stm.executeQuery(loginPatient);
-            
             if (rst.next()){
-           PatientProfile patientPanel=new PatientProfile();
-           splitPane.setBottomComponent(patientPanel);
+                String patientName = rst.getString("Name");
+                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
+                PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, patientName);
+                jSplitPane.setBottomComponent(goToPatient);
+                System.out.println("Going to patient profile");
             } else {
                 JOptionPane.showMessageDialog(this, "Login Failed");
                 userNameTxtField.setText("");
