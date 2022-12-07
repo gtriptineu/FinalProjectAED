@@ -22,6 +22,11 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
+import com.mysql.jdbc.Connection;
+import static constants.DBConnection.*;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
 /**
  *
  * @author rodri
@@ -67,6 +72,8 @@ public class SignupPanel extends javax.swing.JPanel {
         userContactLbl = new javax.swing.JLabel();
         ageLbl = new javax.swing.JLabel();
         passLbl = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -294,7 +301,6 @@ public class SignupPanel extends javax.swing.JPanel {
 
     private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
         // TODO add your handling code here:
-
         String name = nameTxtField.getText();
         String email = emailTxtField.getText();
         String contact = contactTextField.getText();
