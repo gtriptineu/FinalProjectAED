@@ -14,6 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+
+import com.mysql.jdbc.Connection;
+import static constants.DBConnection.*;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author rodri
@@ -50,6 +58,8 @@ public class SignupPanel extends javax.swing.JPanel {
         addressLbl = new javax.swing.JLabel();
         addressTxtField = new javax.swing.JTextField();
         passwordLbl = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
 
         jPasswordField1.setText("jPasswordField1");
 
