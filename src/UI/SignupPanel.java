@@ -56,14 +56,14 @@ public class SignupPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(160, 213, 229));
 
-        nameTxtField.setForeground(new java.awt.Color(204, 204, 204));
+        nameTxtField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
         nameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtFieldActionPerformed(evt);
             }
         });
 
-        emailTxtField.setForeground(new java.awt.Color(204, 204, 204));
+        emailTxtField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
         emailTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTxtFieldActionPerformed(evt);
@@ -90,14 +90,14 @@ public class SignupPanel extends javax.swing.JPanel {
             }
         });
 
-        contactTextField.setForeground(new java.awt.Color(204, 204, 204));
+        contactTextField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
         contactTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contactTextFieldActionPerformed(evt);
             }
         });
 
-        passwordTxtField.setForeground(new java.awt.Color(204, 204, 204));
+        passwordTxtField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
         passwordTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordTxtFieldActionPerformed(evt);
@@ -110,7 +110,7 @@ public class SignupPanel extends javax.swing.JPanel {
         addressLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addressLbl.setText("Address:");
 
-        addressTxtField.setForeground(new java.awt.Color(204, 204, 204));
+        addressTxtField.setFont(new java.awt.Font("PT Sans", 0, 13)); // NOI18N
         addressTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressTxtFieldActionPerformed(evt);
@@ -202,7 +202,7 @@ public class SignupPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(signupBtn)
                     .addComponent(backBtn))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,6 +237,22 @@ public class SignupPanel extends javax.swing.JPanel {
         String address = addressTxtField.getText();
         String password = passwordTxtField.getText();
         
+        if(nameTxtField.getText().equals("") || isItInteger(nameTxtField.getText())) {
+            JOptionPane.showMessageDialog(this, "Doctor Name is empty / invalid!");
+        }
+        else if(emailTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
+            JOptionPane.showMessageDialog(this, "Email ID is empty / invalid!");
+        }
+        else if(contactTextField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
+            JOptionPane.showMessageDialog(this, "Contact Number is empty / invalid!");
+        }
+        else if(addressTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
+            JOptionPane.showMessageDialog(this, "Address is empty / invalid!");
+        }
+        else if(password.equals("")) {
+            JOptionPane.showMessageDialog(this, "Password is empty / invalid!");
+        }
+        else {
 //        Generating Random 6 digit number as activation code
         Random rnd = new Random();
         int activationCode = rnd.nextInt(999999);
@@ -262,13 +278,13 @@ public class SignupPanel extends javax.swing.JPanel {
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
+        
         nameTxtField.setText("");
         emailTxtField.setText("");
         contactTextField.setText("");
         addressTxtField.setText("");
         passwordTxtField.setText("");
-
-        
+        }
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -295,4 +311,14 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel registerLbl;
     private javax.swing.JButton signupBtn;
     // End of variables declaration//GEN-END:variables
+    private static boolean isItInteger(String s) {
+    try { 
+        Integer.parseInt(s); 
+    } catch(NumberFormatException e) { 
+        return false; 
+    } catch(NullPointerException e) {
+        return false;
+        }
+    return true;
+    }
 }

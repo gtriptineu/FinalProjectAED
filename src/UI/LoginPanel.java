@@ -36,11 +36,11 @@ public class LoginPanel extends javax.swing.JPanel {
         loginLbl = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
         userNameTxtField = new javax.swing.JTextField();
-        passwordTxtField = new javax.swing.JTextField();
         userNameLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
         signUpBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
+        passwordTxtField = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(160, 213, 229));
         setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
@@ -65,13 +65,6 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
-        passwordTxtField.setForeground(new java.awt.Color(204, 204, 204));
-        passwordTxtField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTxtFieldActionPerformed(evt);
-            }
-        });
-
         userNameLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         userNameLbl.setText("UserName:");
 
@@ -91,6 +84,12 @@ public class LoginPanel extends javax.swing.JPanel {
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
+            }
+        });
+
+        passwordTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTxtFieldActionPerformed(evt);
             }
         });
 
@@ -138,8 +137,8 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addComponent(userNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLbl))
+                    .addComponent(passwordLbl)
+                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginBtn)
@@ -154,16 +153,11 @@ public class LoginPanel extends javax.swing.JPanel {
         userNameTxtField.setText("Enter UserName");
     }//GEN-LAST:event_userNameTxtFieldActionPerformed
 
-    private void passwordTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtFieldActionPerformed
-        // TODO add your handling code here:
-        passwordTxtField.setText("Enter Password");
-    }//GEN-LAST:event_passwordTxtFieldActionPerformed
-
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
         
         String email = userNameTxtField.getText();
-        String password = passwordTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
         
         try
         {
@@ -203,6 +197,10 @@ public class LoginPanel extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void passwordTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTxtFieldActionPerformed
+
     
     
 
@@ -212,7 +210,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel loginLbl;
     private javax.swing.JLabel passwordLbl;
-    private javax.swing.JTextField passwordTxtField;
+    private javax.swing.JPasswordField passwordTxtField;
     private javax.swing.JButton signUpBtn;
     private javax.swing.JLabel userNameLbl;
     private javax.swing.JTextField userNameTxtField;

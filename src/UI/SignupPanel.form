@@ -116,7 +116,7 @@
                   <Component id="signupBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="backBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="104" max="32767" attributes="0"/>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,8 +124,8 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="nameTxtField">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="13" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -134,8 +134,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="emailTxtField">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="13" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -187,8 +187,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="contactTextField">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="13" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -197,8 +197,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="passwordTxtField">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="13" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -223,8 +223,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="addressTxtField">
       <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="13" style="0"/>
         </Property>
       </Properties>
       <Events>
