@@ -327,7 +327,7 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         }
         if(result == 0) //Login
         {
-            LoginPanel goToLogin=new LoginPanel();
+            LoginPanel goToLogin=new LoginPanel(splitPane);
             splitPane.setBottomComponent(goToLogin);
             
 //        PatientLoginScreen goToLogin = new PatientLoginScreen();
@@ -338,7 +338,7 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         }
         else // Sign up
         {
-            SignupPanel goToSignup=new SignupPanel();
+            SignupPanel goToSignup=new SignupPanel(splitPane);
             splitPane.setBottomComponent(goToSignup);
             
         }

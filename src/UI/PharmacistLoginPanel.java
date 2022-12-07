@@ -12,18 +12,16 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
-
-
 /**
  *
  * @author rodri
  */
-public class LoginPanel extends javax.swing.JPanel {
+public class PharmacistLoginPanel extends javax.swing.JPanel {
 JSplitPane splitPane;
     /**
-     * Creates new form LoginInPanel
+     * Creates new form PharmacistLoginPanel
      */
-    public LoginPanel(JSplitPane splitPane) {
+    public PharmacistLoginPanel(JSplitPane splitPane) {
         this.splitPane = splitPane;
         initComponents();
     }
@@ -38,19 +36,19 @@ JSplitPane splitPane;
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        loginTitle = new javax.swing.JLabel();
         userNameTxtField = new javax.swing.JTextField();
         userNameLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
         passwordTxtField = new javax.swing.JPasswordField();
         searchBtn = new javax.swing.JButton();
-        loginTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(160, 213, 229));
-        setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        setPreferredSize(new java.awt.Dimension(812, 582));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
+
+        loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
+        loginTitle.setText("WELCOME PHARMACIST!!");
 
         userNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,30 +70,26 @@ JSplitPane splitPane;
             }
         });
 
-        loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
-        loginTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginTitle.setText("WELCOME USER!!");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(280, 280, 280))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(userNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(230, 230, 230))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loginTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 151, Short.MAX_VALUE)
+                .addGap(0, 155, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -103,8 +97,8 @@ JSplitPane splitPane;
                             .addComponent(passwordLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(435, 435, 435))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(253, 253, 253))))
+                        .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,71 +115,43 @@ JSplitPane splitPane;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLbl)
                     .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void userNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtFieldActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_userNameTxtFieldActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-
         String email = userNameTxtField.getText();
         String password = String.valueOf(passwordTxtField.getPassword());
-        System.out.println("password:"+password);
-
-        passwordTxtField.setText("Enter Password");
-    }//GEN-LAST:event_passwordTxtFieldActionPerformed
-
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-        
-        String email = userNameTxtField.getText();
-        String password = passwordTxtField.getText();
-
         
         try
         {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-            
-            ResultSet rst= stm.executeQuery(loginPatient);
-
-            
-            if (rst.next()){
-           PatientProfile patientPanel=new PatientProfile();
-           splitPane.setBottomComponent(patientPanel);
-
-            if (rst.next()){
-                String patientName = rst.getString("Name");
-                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-
+            String checkPatient = "select email from patientdetails where email='"+email+"';";
+            ResultSet rst= stm.executeQuery(checkPatient);
+            if(rst.next()){
+            PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
+           splitPane.setBottomComponent(pharmacistPanel);
             } else {
-                JOptionPane.showMessageDialog(this, "Login Failed");
-                userNameTxtField.setText("");
-                passwordTxtField.setText("");
+             JOptionPane.showMessageDialog(this, "Invalid user");
+ 
             }
-        } catch(SQLException e){
+        }
+        catch(SQLException e){
             System.out.println(e.getMessage());
         }
 
-        
+
     }//GEN-LAST:event_searchBtnActionPerformed
 
-       //PharmacistPanel pharma=new PharmacistPanel();
-        //pharma.setVisible(true);
-
-    }//GEN-LAST:event_loginBtnActionPerformed
-
-
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
