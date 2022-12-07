@@ -11,20 +11,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
-
 
 /**
  *
  * @author nikethanann
  */
 public class PatientLoginScreen extends javax.swing.JPanel {
-JSplitPane splitPane;
+
     /**
      * Creates new form PatientLoginScreen
      */
-    public PatientLoginScreen(JSplitPane splitPane) {
-         this.splitPane = splitPane;
+    public PatientLoginScreen() {
         initComponents();
     }
 
