@@ -6,6 +6,7 @@ package UI;
 
 import java.awt.CardLayout;
 import javax.swing.JSplitPane;
+import model.pharmacist.Pharmacist;
 
 /**
  *
@@ -13,11 +14,13 @@ import javax.swing.JSplitPane;
  */
 public class PharmacistJPanel extends javax.swing.JPanel {
 JSplitPane splitPane;
+Pharmacist phar;
     /**
      * Creates new form PharmacistJPanel
      */
-    public PharmacistJPanel(JSplitPane splitPane) {
+    public PharmacistJPanel(JSplitPane splitPane, Pharmacist phar) {
         this.splitPane = splitPane;
+        this.phar = phar;
         initComponents();
     }
 
@@ -181,14 +184,14 @@ JSplitPane splitPane;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       PharmacistSellPanel pharmacistSellPanel=new PharmacistSellPanel(splitPane);
+       PharmacistSellPanel pharmacistSellPanel=new PharmacistSellPanel(splitPane,phar );
         splitPane.setBottomComponent(pharmacistSellPanel);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        PurchaseMedicinePanel pharmacistPanel=new PurchaseMedicinePanel(splitPane);
+        PurchaseMedicinePanel pharmacistPanel=new PurchaseMedicinePanel(splitPane, phar);
         splitPane.setBottomComponent(pharmacistPanel);
 
     }//GEN-LAST:event_jButton3ActionPerformed
