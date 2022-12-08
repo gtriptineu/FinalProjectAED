@@ -6,6 +6,7 @@ package UI;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import model.pharmacist.Pharmacist;
 
 /**
  *
@@ -13,11 +14,13 @@ import javax.swing.JSplitPane;
  */
 public class PurchaseMedicinePanel extends javax.swing.JPanel {
 JSplitPane splitPane;
+Pharmacist phar;
     /**
      * Creates new form PurchaseMedicinePanel
      */
-    public PurchaseMedicinePanel(JSplitPane splitPane) {
+    public PurchaseMedicinePanel(JSplitPane splitPane, Pharmacist phar) {
          this.splitPane = splitPane;
+         this.phar = phar;
         initComponents();
     }
 
@@ -244,7 +247,7 @@ JSplitPane splitPane;
         // TODO add your handling code here:
         //coz if we dont checkout and click back the availblty shud b updated.
        
-        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
+        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane, phar);
         splitPane.setBottomComponent(pharmacistPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
