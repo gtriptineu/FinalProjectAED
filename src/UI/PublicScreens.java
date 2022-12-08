@@ -4,9 +4,15 @@
  */
 package UI;
 
+import SQLConnection.DBConnection;
+import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,6 +24,8 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import model.store.Store;
+import model.store.StoreDirectory;
 
 /**
  *
@@ -26,6 +34,7 @@ import javax.swing.table.TableCellRenderer;
 public class PublicScreens extends javax.swing.JPanel {
 
     JSplitPane splitPane;
+    StoreDirectory allStores;
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
@@ -105,12 +114,14 @@ public class PublicScreens extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(medicinesTable);
-        if (medicinesTable.getColumnModel().getColumnCount() > 0) {
-            medicinesTable.getColumnModel().getColumn(3).setCellRenderer(null);
-        }
 
         searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         searchBtn.setText("SEARCH");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,6 +191,61 @@ public class PublicScreens extends javax.swing.JPanel {
     private void dosageDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosageDropDownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dosageDropDownActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        allStores = new StoreDirectory();
+        String communityText = commDropDown.getSelectedItem().toString();
+        String dosageText = dosageDropDown.getSelectedItem().toString();
+        String medicineName = medicineTxtField.getText();
+        
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch;
+            
+            if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
+            } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
+            } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
+                medicineSearch = "select * from inventory where name='"+medicineName+"'and community='"+communityText+"';";
+            } else{
+                medicineSearch = "select * from inventory where name='"+medicineName+"';";
+            }
+            
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            ArrayList<String> allStoreId = new ArrayList<>();
+            
+            if(rst.isBeforeFirst()){
+                while(rst.next()){
+                    String storeId = rst.getString("storeId");
+                    allStoreId.add(storeId);
+                }
+                System.out.println("All storeid found--"+allStoreId);
+            } else{
+                JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
+            }
+           
+            for(int i =0;i<allStoreId.size();i++){
+                String storeSearch = "select * from storedetails where storeId='"+allStoreId.get(i)+"';";
+                ResultSet rs= stm.executeQuery(storeSearch);
+                while(rs.next()){
+                    Store s = allStores.addNewStore();
+                    s.setStoreId(rs.getString("storeId"));
+                    s.setStoreName(rs.getString("storeName"));
+                    s.setCommunity(rs.getString("community"));
+                }
+            }
+            
+            for(Store s: allStores.getStoreDictionary()){
+                System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+            }
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

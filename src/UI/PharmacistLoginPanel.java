@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import model.pharmacist.Pharmacist;
 
 /**
  *
@@ -128,20 +129,32 @@ JSplitPane splitPane;
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        String email = userNameTxtField.getText();
+        Pharmacist p = new Pharmacist();
+        String username = userNameTxtField.getText();
         String password = String.valueOf(passwordTxtField.getPassword());
         
         try
         {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String checkPatient = "select email from patientdetails where email='"+email+"';";
-            ResultSet rst= stm.executeQuery(checkPatient);
+            String loginPharmacist = "select * from pharmacistdetails where username='"+username+"' and password='"+password+"';";
+            ResultSet rst= stm.executeQuery(loginPharmacist);
             if(rst.next()){
-            PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
-           splitPane.setBottomComponent(pharmacistPanel);
+                String pharName = rst.getString("name");
+                String pharAge = rst.getString("age");
+                String community = rst.getString("community");
+                String storeName = rst.getString("storeName");
+                p.setName(pharName);
+                p.setAge(Integer.parseInt(pharAge));
+                p.setStoreName(storeName);
+                p.setCommunity(community);
+                
+                PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane, p);
+               splitPane.setBottomComponent(pharmacistPanel);
             } else {
              JOptionPane.showMessageDialog(this, "Invalid user");
+             userNameTxtField.setText("");
+             passwordTxtField.setText("");
  
             }
         }
