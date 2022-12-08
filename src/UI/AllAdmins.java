@@ -35,6 +35,11 @@ public class AllAdmins extends javax.swing.JPanel {
 
         pharmacyBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         pharmacyBtn.setText("PHARMACY ADMIN");
+        pharmacyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pharmacyBtnActionPerformed(evt);
+            }
+        });
 
         vendorBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         vendorBtn.setText("VENDOR ADMIN");
@@ -77,6 +82,12 @@ public class AllAdmins extends javax.swing.JPanel {
         jSplitPane1.setBottomComponent(goToPublic);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void pharmacyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmacyBtnActionPerformed
+        // TODO add your handling code here:
+        PharmacyAdminPanel pharmacyAdminPnl = new PharmacyAdminPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(pharmacyAdminPnl);
+    }//GEN-LAST:event_pharmacyBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
