@@ -78,7 +78,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="pharmaAddBtn" alignment="1" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="medicineViewBtn" alignment="1" min="-2" pref="148" max="-2" attributes="0"/>
                           <Component id="medicineAddBtn" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="124" max="32767" attributes="0"/>
@@ -88,23 +88,26 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="pharmaAddBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="medicineAddBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="352" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                      <Component id="medicineAddBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="medicineViewBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace pref="282" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="pharmaAddBtn">
+            <Component class="javax.swing.JButton" name="medicineViewBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="PT Sans" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ADD PHARMACIST"/>
+                <Property name="text" type="java.lang.String" value="VIEW MEDICINES"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medicineViewBtnActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="medicineAddBtn">
               <Properties>
@@ -113,6 +116,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="ADD MEDICINES"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medicineAddBtnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -131,46 +137,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="welcomeLbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="inventoryAdminLbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="460" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="655" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="welcomeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="inventoryAdminLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="485" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="574" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="welcomeLbl">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="PT Sans" size="17" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Welcome,"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="inventoryAdminLbl">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="PT Sans" size="17" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="jLabel1"/>
-              </Properties>
-            </Component>
-          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
