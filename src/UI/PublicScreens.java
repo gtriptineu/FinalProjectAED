@@ -86,7 +86,7 @@ public class PublicScreens extends javax.swing.JPanel {
         commSearchLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         commSearchLbl1.setText("Dosage:");
 
-        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","250 mg", "500 mg", "600 mg", "650 mg"}));
+        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dosageDropDownActionPerformed(evt);
@@ -205,21 +205,23 @@ public class PublicScreens extends javax.swing.JPanel {
             String medicineSearch;
             
             if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
+                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
             } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
+                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
             } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
-                medicineSearch = "select * from inventory where name='"+medicineName+"'and community='"+communityText+"';";
+                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and community='"+communityText+"';";
             } else{
-                medicineSearch = "select * from inventory where name='"+medicineName+"';";
+                medicineSearch = "select *from inventory where name='"+medicineName+"';";
             }
-            
+            System.out.println("query---"+medicineSearch);
             ResultSet rst= stm.executeQuery(medicineSearch);
             ArrayList<String> allStoreId = new ArrayList<>();
-            
+// 
             if(rst.isBeforeFirst()){
+                System.out.println("in if");
                 while(rst.next()){
                     String storeId = rst.getString("storeId");
+                    System.out.println("storeid"+storeId);
                     allStoreId.add(storeId);
                 }
                 System.out.println("All storeid found--"+allStoreId);
