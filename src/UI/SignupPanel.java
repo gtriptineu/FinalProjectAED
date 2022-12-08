@@ -353,7 +353,7 @@ public class SignupPanel extends javax.swing.JPanel {
                     String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
                     stm.executeUpdate(insertPatientDetails);
                     JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginPanel goToLogin=new LoginPanel(splitPane);
+                    LoginPanel goToLogin=new LoginPanel(splitPane,null,null);
                     splitPane.setBottomComponent(goToLogin);
                 }
 

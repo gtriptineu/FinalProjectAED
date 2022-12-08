@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author nikethanann
  */
-public class LoginDoctor extends javax.swing.JPanel {
+public class LoginInventory extends javax.swing.JPanel {
 
-    JSplitPane jSplitPane;
-    public LoginDoctor(JSplitPane jSplitPane) {
+    JSplitPane jSplitPane1;
+    public LoginInventory(JSplitPane jSplitPane1) {
         initComponents();
-        this.jSplitPane = jSplitPane;
+        this.jSplitPane1 = jSplitPane1;
     }
 
     /**
@@ -70,7 +70,7 @@ public class LoginDoctor extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
 
         loginLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
-        loginLbl.setText("Welcome, Doctor");
+        loginLbl.setText("INVENTORY LOGIN");
 
         loginBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         loginBtn.setText("LOGIN");
@@ -119,7 +119,7 @@ public class LoginDoctor extends javax.swing.JPanel {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50))
                             .addComponent(loginLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 385, Short.MAX_VALUE))
+                .addGap(0, 338, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,27 +141,26 @@ public class LoginDoctor extends javax.swing.JPanel {
                     .addComponent(loginBtn)
                     .addComponent(signUpBtn)
                     .addComponent(backBtn))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane);
-        jSplitPane.setBottomComponent(goToSignUp);
+        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToSignUp);
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-//        PublicScreens goToPublic = new PublicScreens(jSplitPane);
-//        jSplitPane.setBottomComponent(goToPublic);
+        //        PublicScreens goToPublic = new PublicScreens(jSplitPane);
+        //        jSplitPane.setBottomComponent(goToPublic);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-
-        DoctorStore goToStore = new DoctorStore(jSplitPane);
-        jSplitPane.setBottomComponent(goToStore);
+        InventoryProfile goToProfile = new InventoryProfile(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToProfile);
 //        String email = userNameTxtField.getText();
 //        String password = String.valueOf(passwordTxtField.getPassword());
 //
@@ -170,20 +169,20 @@ public class LoginDoctor extends javax.swing.JPanel {
 //            System.out.println("In try");
 //            Connection connection= DBConnection.dbconnector();
 //            Statement stm = connection.createStatement();
-//            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-//
-//            ResultSet rst= stm.executeQuery(loginPatient);
-//            if (rst.next()){
-//                String patientName = rst.getString("Name");
-//                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-//                PatientProfile goToPatient = new PatientProfile(jSplitPane);
-//                jSplitPane.setBottomComponent(goToPatient);
-//                System.out.println("Going to patient profile");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Login Failed");
-//                userNameTxtField.setText("");
-//                passwordTxtField.setText("");
-//            }
+            //            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
+            //
+            //            ResultSet rst= stm.executeQuery(loginPatient);
+            //            if (rst.next()){
+                //                String patientName = rst.getString("Name");
+                //                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
+                //                PatientProfile goToPatient = new PatientProfile(jSplitPane);
+                //                jSplitPane.setBottomComponent(goToPatient);
+                //                System.out.println("Going to patient profile");
+                //            } else {
+                //                JOptionPane.showMessageDialog(this, "Login Failed");
+                //                userNameTxtField.setText("");
+                //                passwordTxtField.setText("");
+                //            }
 //        } catch(SQLException e){
 //            System.out.println(e.getMessage());
 //        }

@@ -242,6 +242,8 @@ public class SignUpDoctor extends javax.swing.JPanel {
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane);
         jSplitPane.setBottomComponent(goToPublic);
+//        PrimaryJFrame goToJframe = new PrimaryJFrame(jSplitPane);
+//        jSplitPane.setBottomComponent(goToJframe);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 

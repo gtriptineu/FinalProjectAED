@@ -28,7 +28,6 @@ public class DoctorStore extends javax.swing.JPanel {
     public DoctorStore(JSplitPane splitPane) {
         initComponents();
         this.splitPane = splitPane;
-//                jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         
         int sno = 1;
