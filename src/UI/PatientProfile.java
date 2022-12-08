@@ -57,6 +57,8 @@ public class PatientProfile extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
         checkoutBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -86,17 +88,17 @@ public class PatientProfile extends javax.swing.JPanel {
 
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "S.no", "Medicine Name", "Dosage", "Quantity", "Price / qty", "Add"
+                "S.no", "Medicine Name", "Dosage", "Price / qty"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -107,6 +109,9 @@ public class PatientProfile extends javax.swing.JPanel {
 
         checkoutBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         checkoutBtn.setText("CHECKOUT");
+
+        jLabel1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        jLabel1.setText("Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,14 +141,18 @@ public class PatientProfile extends javax.swing.JPanel {
                         .addComponent(loginTitle)))
                 .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
-                        .addComponent(checkoutBtn)))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkoutBtn))
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +172,13 @@ public class PatientProfile extends javax.swing.JPanel {
                     .addComponent(commDisplay))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(checkoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,7 +187,9 @@ public class PatientProfile extends javax.swing.JPanel {
     private javax.swing.JButton checkoutBtn;
     private javax.swing.JLabel commDisplay;
     private javax.swing.JLabel commLbl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel loginTitle;
     private javax.swing.JTable medicinesTable;
     private javax.swing.JButton ordersBtn;

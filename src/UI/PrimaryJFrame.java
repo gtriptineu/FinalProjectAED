@@ -26,10 +26,6 @@ public class PrimaryJFrame extends javax.swing.JFrame {
       JFrame frame = new JFrame("Pharmacy Management System");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       jPanel2.setSize(800,600);
-//        Image bg_img;
-//        bg_img = jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pharmacy.png")));
-//        bg_img.setImage(bg_img.getImage().getScaledInstance(800,600,Image.SCALE_DEFAULT));
-//      frame.setVisible(true);
     }
 
     /**
@@ -45,9 +41,10 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        publicBtn = new javax.swing.JButton();
+        adminBtn = new javax.swing.JButton();
+        pharmaBtn = new javax.swing.JButton();
+        doctorBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,22 +62,35 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pharmacy.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jButton1.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
-        jButton1.setText("PUBLIC / PATIENTS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        publicBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        publicBtn.setText("PUBLIC / PATIENTS");
+        publicBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                publicBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
-        jButton2.setText("ADMIN");
-
-        jButton3.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
-        jButton3.setText("PHARMACISTS");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        adminBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        adminBtn.setText("ADMIN");
+        adminBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                adminBtnActionPerformed(evt);
+            }
+        });
+
+        pharmaBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        pharmaBtn.setText("PHARMACISTS");
+        pharmaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pharmaBtnActionPerformed(evt);
+            }
+        });
+
+        doctorBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        doctorBtn.setText("DOCTOR");
+        doctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorBtnActionPerformed(evt);
             }
         });
 
@@ -92,9 +102,10 @@ public class PrimaryJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(publicBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pharmaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(doctorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -105,11 +116,13 @@ public class PrimaryJFrame extends javax.swing.JFrame {
                 .addGap(47, 47, 47))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(publicBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(adminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(pharmaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -135,18 +148,30 @@ public class PrimaryJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void pharmaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaBtnActionPerformed
         // TODO add your handling code here:
             PharmacistLoginPanel goToLogin=new PharmacistLoginPanel(jSplitPane1);
             jSplitPane1.setBottomComponent(goToLogin);
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_pharmaBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void publicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane1);
         jSplitPane1.setBottomComponent(goToPublic);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_publicBtnActionPerformed
+
+    private void doctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorBtnActionPerformed
+        LoginDoctor goToLogin = new LoginDoctor(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToLogin);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorBtnActionPerformed
+
+    private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
+        AllAdmins goToAdmin = new AllAdmins(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToAdmin);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,12 +209,13 @@ public class PrimaryJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton adminBtn;
+    private javax.swing.JButton doctorBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton pharmaBtn;
+    private javax.swing.JButton publicBtn;
     // End of variables declaration//GEN-END:variables
 }
