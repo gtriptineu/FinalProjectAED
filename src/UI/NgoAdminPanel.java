@@ -16,6 +16,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     public NgoAdminPanel() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,6 +209,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_signupBtn1ActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 

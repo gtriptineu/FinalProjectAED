@@ -38,11 +38,23 @@ public class PublicScreens extends javax.swing.JPanel {
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
+        allStores = new StoreDirectory();
         initComponents();
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         
-        model.setDataVector(new Object[][] { { "1", "CVS", "Brighton", "View Store" },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
+        for(Store store: allStores.getStoreDictionary())
+        {
+        String storeName = store.getStoreName();
+        String comm = store.getCommunity();
+        String viewStore = "View Store";
+        addRows(splitPane,storeName,comm,viewStore);
+        setVisible(true);
+        }
+    }
+    public void addRows(JSplitPane splitPane, String storeName, String comm, String viewStore){
+        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
+        model.setDataVector(new Object[][] { {storeName, comm, viewStore }}, new Object[] {"Store Name", "Community", "View Store" });
         medicinesTable.getColumn("View Store").setCellRenderer(new ButtonRenderer());
         medicinesTable.getColumn("View Store").setCellEditor(new ButtonEditor(new JCheckBox()));
         System.out.println("Added Rows to table");
@@ -96,17 +108,17 @@ public class PublicScreens extends javax.swing.JPanel {
         medicinesTable.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "S.no", "Store Name", "Community", "View Store"
+                "Store Name", "Community", "View Store"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
