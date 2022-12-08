@@ -59,6 +59,7 @@ public class SignupPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         signupBtn = new javax.swing.JButton();
         contactTextField = new javax.swing.JTextField();
+        contactTextField1 = new javax.swing.JTextField();
         contactLbl = new javax.swing.JLabel();
         addressLbl = new javax.swing.JLabel();
         addressTxtField = new javax.swing.JTextField();
@@ -72,8 +73,6 @@ public class SignupPanel extends javax.swing.JPanel {
         userContactLbl = new javax.swing.JLabel();
         ageLbl = new javax.swing.JLabel();
         passLbl = new javax.swing.JLabel();
-
-        jPasswordField1.setText("jPasswordField1");
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -110,21 +109,26 @@ public class SignupPanel extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/add-user (1).png"))); // NOI18N
 
         signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        signupBtn.setText("SIGN_UP");
-        signupBtn.setMaximumSize(new java.awt.Dimension(74, 26));
-        signupBtn.setMinimumSize(new java.awt.Dimension(74, 26));
+        signupBtn.setText("SIGN-UP");
         signupBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signupBtnActionPerformed(evt);
             }
         });
 
+        contactTextField.setForeground(new java.awt.Color(204, 204, 204));
         contactTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupBtnActionPerformed(evt);
+            }
+        });
+
+        contactTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contactTextFieldActionPerformed(evt);
             }
         });
-        contactTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        contactTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 contactTextFieldKeyReleased(evt);
             }
@@ -270,10 +274,11 @@ public class SignupPanel extends javax.swing.JPanel {
                     .addComponent(addressTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addressLbl))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLbl)
-                    .addComponent(passLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(passwordTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(passwordLbl)))
                 .addGap(67, 67, 67)
                 .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
@@ -451,6 +456,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel contactLbl;
     private javax.swing.JLabel contactLbl1;
     private javax.swing.JTextField contactTextField;
+    private javax.swing.JTextField contactTextField1;
     private javax.swing.JLabel emailLbl;
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;
