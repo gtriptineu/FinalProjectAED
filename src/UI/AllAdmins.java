@@ -32,6 +32,7 @@ public class AllAdmins extends javax.swing.JPanel {
         backBtn = new javax.swing.JButton();
         inventoryBtn = new javax.swing.JButton();
         vendorBtn1 = new javax.swing.JButton();
+        salesdoctorBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -75,6 +76,14 @@ public class AllAdmins extends javax.swing.JPanel {
             }
         });
 
+        salesdoctorBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        salesdoctorBtn.setText("SALES REPORT");
+        salesdoctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesdoctorBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,23 +91,24 @@ public class AllAdmins extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(352, 352, 352)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pharmacyBtn)
-                            .addComponent(inventoryBtn)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(371, 371, 371)
-                        .addComponent(ngoAdmin)))
-                .addContainerGap(467, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(362, 362, 362)
                         .addComponent(vendorBtn1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(387, 387, 387)
-                        .addComponent(backBtn)))
+                        .addGap(374, 374, 374)
+                        .addComponent(ngoAdmin)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(352, 352, 352)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(salesdoctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pharmacyBtn)
+                            .addComponent(inventoryBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(396, 396, 396)
+                        .addComponent(backBtn)))
+                .addContainerGap(467, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,11 +119,13 @@ public class AllAdmins extends javax.swing.JPanel {
                 .addComponent(pharmacyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(inventoryBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(salesdoctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ngoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,8 +138,8 @@ public class AllAdmins extends javax.swing.JPanel {
 
     private void pharmacyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmacyBtnActionPerformed
         // TODO add your handling code here:
-        PharmacyAdminPanel pharmacyAdminPnl = new PharmacyAdminPanel(jSplitPane1);
-        jSplitPane1.setBottomComponent(pharmacyAdminPnl);
+        LoginPharmacyAdminPanel adminPanel=new LoginPharmacyAdminPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(adminPanel);
     }//GEN-LAST:event_pharmacyBtnActionPerformed
 
     private void inventoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBtnActionPerformed
@@ -138,8 +150,9 @@ public class AllAdmins extends javax.swing.JPanel {
 
     private void ngoAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngoAdminActionPerformed
         // TODO add your handling code here:
-        NgoAdminPanel ngoAdmin = new NgoAdminPanel(jSplitPane1);
-        jSplitPane1.setBottomComponent(ngoAdmin);
+   
+        LoginNgoPanel ngopanel = new LoginNgoPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(ngopanel);
     }//GEN-LAST:event_ngoAdminActionPerformed
 
     private void vendorBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorBtn1ActionPerformed
@@ -148,12 +161,19 @@ public class AllAdmins extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_vendorBtn1ActionPerformed
 
+    private void salesdoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesdoctorBtnActionPerformed
+        // TODO add your handling code here:
+        SalesPanel goToLogin = new SalesPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToLogin);
+    }//GEN-LAST:event_salesdoctorBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JButton inventoryBtn;
     private javax.swing.JButton ngoAdmin;
     private javax.swing.JButton pharmacyBtn;
+    private javax.swing.JButton salesdoctorBtn;
     private javax.swing.JButton vendorBtn1;
     // End of variables declaration//GEN-END:variables
 }

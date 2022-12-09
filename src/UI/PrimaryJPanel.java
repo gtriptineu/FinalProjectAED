@@ -32,6 +32,7 @@ public class PrimaryJPanel extends javax.swing.JPanel {
         adminBtn = new javax.swing.JButton();
         pharmaBtn = new javax.swing.JButton();
         doctorBtn = new javax.swing.JButton();
+        findNgoBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -71,6 +72,14 @@ public class PrimaryJPanel extends javax.swing.JPanel {
             }
         });
 
+        findNgoBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        findNgoBtn.setText("FIND NGO");
+        findNgoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findNgoBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +92,8 @@ public class PrimaryJPanel extends javax.swing.JPanel {
                     .addComponent(publicBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pharmaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findNgoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(199, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,7 +102,8 @@ public class PrimaryJPanel extends javax.swing.JPanel {
                 .addGap(140, 140, 140)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
+                        .addComponent(findNgoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(publicBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(adminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,10 +142,17 @@ public class PrimaryJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorBtnActionPerformed
 
+    private void findNgoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findNgoBtnActionPerformed
+        FindNgoPanel ngoPanel = new FindNgoPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(ngoPanel);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_findNgoBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminBtn;
     private javax.swing.JButton doctorBtn;
+    private javax.swing.JButton findNgoBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton pharmaBtn;
     private javax.swing.JButton publicBtn;

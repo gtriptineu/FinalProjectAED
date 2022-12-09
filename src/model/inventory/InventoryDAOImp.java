@@ -61,7 +61,7 @@ public class InventoryDAOImp implements InventoryDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and community='"+community+"';";
+            String medicineSearch = "select * from inventory where name='"+medicineName+"'and community='"+community+"';";
             ResultSet rst= stm.executeQuery(medicineSearch);
             if(rst.isBeforeFirst()){
                 while(rst.next()){
@@ -86,7 +86,7 @@ public class InventoryDAOImp implements InventoryDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosage+"';";
+            String medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosage+"';";
             ResultSet rst= stm.executeQuery(medicineSearch);
             if(rst.isBeforeFirst()){
                 while(rst.next()){
@@ -111,7 +111,7 @@ public class InventoryDAOImp implements InventoryDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosage+"'and community='"+community+"';";
+            String medicineSearch = "select * from inventory where name='"+medicineName+"'and dosage='"+dosage+"'and community='"+community+"';";
             ResultSet rst= stm.executeQuery(medicineSearch);
             if(rst.isBeforeFirst()){
                 while(rst.next()){
