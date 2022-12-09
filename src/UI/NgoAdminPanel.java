@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.Person;
+import model.ngo.Ngo;
+import model.ngo.NgoDAOImp;
+import model.ngo.NgoDirectory;
 
 /**
  *
@@ -25,6 +30,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     public NgoAdminPanel(JSplitPane splitPane) {
         this.splitPane = splitPane;
         initComponents();
+        populateTable();
     }
     
 
@@ -48,11 +54,13 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         nameTextField = new javax.swing.JTextField();
         medicineLbl3 = new javax.swing.JLabel();
         functionalityDropdown = new javax.swing.JComboBox<>();
-        signupBtn = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ngoTbl = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
+        ngoIdLabel = new javax.swing.JLabel();
+        ngoIdTextField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -69,7 +77,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         medicineLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl.setText("City:");
 
-        communityDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        communityDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Community", "Brighton", "Allston", "Brookline", "Chestnut Hill", "Huntington Avenue" }));
 
         medicineLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl1.setText("Community:");
@@ -80,15 +88,15 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         medicineLbl3.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl3.setText("Functionality");
 
-        functionalityDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blood Donation camp" }));
+        functionalityDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a Functionality", "Blood Donation camp", "Organ Donation camp", "Food contribution", "Children fundraiser", "Women Health Awareness" }));
 
-        signupBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        signupBtn.setText("DELETE");
-        signupBtn.setMaximumSize(new java.awt.Dimension(74, 26));
-        signupBtn.setMinimumSize(new java.awt.Dimension(74, 26));
-        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        deleteButton.setText("DELETE");
+        deleteButton.setMaximumSize(new java.awt.Dimension(74, 26));
+        deleteButton.setMinimumSize(new java.awt.Dimension(74, 26));
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signupBtnActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -104,13 +112,13 @@ public class NgoAdminPanel extends javax.swing.JPanel {
 
         ngoTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "NgoName", "Functionality", "Community", "City"
+                "Ngo Id", "NgoName", "Functionality", "Community", "City"
             }
         ));
         jScrollPane2.setViewportView(ngoTbl);
@@ -125,6 +133,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
             }
         });
 
+        ngoIdLabel.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        ngoIdLabel.setText("NGO ID:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,19 +146,22 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                     .addComponent(loginTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(medicineLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(medicineLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(medicineLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(medicineLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(communityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cityTextField)
-                            .addComponent(nameTextField)
-                            .addComponent(functionalityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(medicineLbl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(medicineLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(medicineLbl2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(medicineLbl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ngoIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ngoIdTextField)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(communityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cityTextField)
+                                .addComponent(nameTextField)
+                                .addComponent(functionalityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -155,7 +169,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                                 .addGap(120, 120, 120))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -176,7 +190,6 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(communityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(medicineLbl1))
@@ -192,14 +205,18 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(medicineLbl3)
                             .addComponent(functionalityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(56, 56, 56))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ngoIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ngoIdLabel))
+                        .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(storeNameLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(signupBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,32 +227,48 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
     
-    }//GEN-LAST:event_signupBtnActionPerformed
+        int selectedRowIndex = ngoTbl.getSelectedRow();
+        System.out.print("search---"+ selectedRowIndex);
+        if(selectedRowIndex < 0){
+             JOptionPane.showMessageDialog(this, "Please select a row to be deleted.");
+        } else {
+            DefaultTableModel table = (DefaultTableModel) ngoTbl.getModel();
+            Ngo ngo = (Ngo)table.getValueAt(selectedRowIndex, 0);
+            NgoDAOImp ngoDao = new NgoDAOImp();
+            ngoDao.delete(ngo);
+            JOptionPane.showMessageDialog(this, "Ngo Id: "+ ngo.getId()+ " is deleted.");
+            populateTable();
+        }
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         
-        try{
-            String community = communityDropdown.getSelectedItem().toString();
-            String city = cityTextField.getText();
-            String name = nameTextField.getText();
-            String functionality = functionalityDropdown.getSelectedItem().toString();
-            Connection connection= DBConnection.dbconnector();
-            Statement stm = connection.createStatement();
-            String addNgo = 
-                    "insert into ngodetails(name,community,city,functionality) values('"+name+"','"+community+"','"+city+"','"+functionality+"')";
-            stm.executeUpdate(addNgo);
-            JOptionPane.showMessageDialog(this, "Details for Ngo have been added");
-            communityDropdown.setSelectedIndex(0);
-            cityTextField.setText("");
-            nameTextField.setText("");
-            functionalityDropdown.setSelectedIndex(0);
-            
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
+        String community = communityDropdown.getSelectedItem().toString();
+        String city = cityTextField.getText();
+        String name = nameTextField.getText();
+        String functionality = functionalityDropdown.getSelectedItem().toString();
+        String id = ngoIdTextField.getText();
+        Ngo ngo = new Ngo();
+        ngo.setCommunity(community);
+        ngo.setCity(city);
+        ngo.setName(name);
+        ngo.setFunctionality(functionality);
+        ngo.setId(id);
+        System.out.println(ngo.getCity()+"---"+ngo.getId()+"--"+ngo.getName());
+        NgoDAOImp ngoDao = new NgoDAOImp();
+        ngoDao.add(ngo);
+        JOptionPane.showMessageDialog(this, "Ngo Details have been added.");
+        communityDropdown.setSelectedIndex(0);
+        cityTextField.setText("");
+        nameTextField.setText("");
+        functionalityDropdown.setSelectedIndex(0);
+        ngoIdTextField.setText("");
+        
+        populateTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -245,12 +278,34 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         splitPane.setBottomComponent(allAdmin);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void populateTable() {
+        System.out.println("in populate Table");
+        NgoDirectory ngoDir = new NgoDirectory();
+        NgoDAOImp ngoDao = new NgoDAOImp();
+        ngoDir = ngoDao.getAll();
+        
+        DefaultTableModel model = (DefaultTableModel) ngoTbl.getModel();
+        model.setRowCount(0);
+         
+         for(Ngo p: ngoDir.getNgoDirectory())
+         {
+             Object[] row = new Object[6];
+             row[0]=p;
+             row[1]=p.getName();
+             row[2]=p.getFunctionality();
+             row[3]=p.getCommunity();
+             row[4]=p.getCity();
+             
+             model.addRow(row);
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backBtn;
     private javax.swing.JTextField cityTextField;
     private javax.swing.JComboBox<String> communityDropdown;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JComboBox<String> functionalityDropdown;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -260,8 +315,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel medicineLbl2;
     private javax.swing.JLabel medicineLbl3;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel ngoIdLabel;
+    private javax.swing.JTextField ngoIdTextField;
     private javax.swing.JTable ngoTbl;
-    private javax.swing.JButton signupBtn;
     private javax.swing.JLabel storeNameLbl;
     // End of variables declaration//GEN-END:variables
 }

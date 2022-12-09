@@ -4,16 +4,20 @@
  */
 package UI;
 
+import javax.swing.JSplitPane;
+
 /**
  *
  * @author rodri
  */
 public class FindNgoPanel extends javax.swing.JPanel {
 
+  JSplitPane splitPane;
     /**
      * Creates new form FindNgoPanel
      */
-    public FindNgoPanel() {
+    public FindNgoPanel(JSplitPane splitPane) {
+        this.splitPane = splitPane;
         initComponents();
     }
 
@@ -35,7 +39,6 @@ public class FindNgoPanel extends javax.swing.JPanel {
         findBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ngoTbl = new javax.swing.JTable();
-        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -82,14 +85,6 @@ public class FindNgoPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(ngoTbl);
 
-        btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,9 +112,7 @@ public class FindNgoPanel extends javax.swing.JPanel {
                                         .addComponent(commDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(159, 159, 159))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -146,9 +139,7 @@ public class FindNgoPanel extends javax.swing.JPanel {
                 .addComponent(findBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addContainerGap())
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,17 +151,8 @@ public class FindNgoPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_findBtnActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        //coz if we dont checkout and click back the availblty shud b updated.
-
-//        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
-//        splitPane.setBottomComponent(pharmacistPanel);
-    }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JLabel cityLbl;
     private javax.swing.JTextField cityTxtField;
     private javax.swing.JComboBox<String> commDropDown;

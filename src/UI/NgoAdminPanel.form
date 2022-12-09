@@ -27,21 +27,25 @@
                   <Component id="loginTitle" max="32767" attributes="0"/>
                   <Component id="jLabel1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="medicineLbl1" min="-2" pref="122" max="-2" attributes="0"/>
-                          <Component id="medicineLbl" min="-2" pref="122" max="-2" attributes="0"/>
-                          <Component id="medicineLbl2" min="-2" pref="122" max="-2" attributes="0"/>
-                          <Component id="medicineLbl3" min="-2" pref="122" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="medicineLbl1" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="medicineLbl" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="medicineLbl2" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="medicineLbl3" alignment="1" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="ngoIdLabel" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="communityDropdown" max="32767" attributes="0"/>
-                          <Component id="cityTextField" max="32767" attributes="0"/>
-                          <Component id="nameTextField" max="32767" attributes="0"/>
-                          <Component id="functionalityDropdown" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="ngoIdTextField" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="communityDropdown" max="32767" attributes="0"/>
+                              <Component id="cityTextField" max="32767" attributes="0"/>
+                              <Component id="nameTextField" max="32767" attributes="0"/>
+                              <Component id="functionalityDropdown" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" alignment="1" min="-2" pref="431" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -52,7 +56,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                      <Component id="signupBtn" min="-2" pref="107" max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="backBtn" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -79,7 +83,6 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="communityDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="medicineLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -99,7 +102,12 @@
                           <Component id="medicineLbl3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="functionalityDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="56" pref="56" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ngoIdTextField" min="-2" max="-2" attributes="0"/>
+                          <Component id="ngoIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="storeNameLbl" min="-2" max="-2" attributes="0"/>
@@ -109,7 +117,7 @@
               </Group>
               <EmptySpace pref="161" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="signupBtn" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="deleteButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="backBtn" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -161,11 +169,13 @@
     <Component class="javax.swing.JComboBox" name="communityDropdown">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="6">
+            <StringItem index="0" value="Select a Community"/>
+            <StringItem index="1" value="Brighton"/>
+            <StringItem index="2" value="Allston"/>
+            <StringItem index="3" value="Brookline"/>
+            <StringItem index="4" value="Chestnut Hill"/>
+            <StringItem index="5" value="Huntington Avenue"/>
           </StringArray>
         </Property>
       </Properties>
@@ -204,8 +214,13 @@
     <Component class="javax.swing.JComboBox" name="functionalityDropdown">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="Blood Donation camp"/>
+          <StringArray count="6">
+            <StringItem index="0" value="Select a Functionality"/>
+            <StringItem index="1" value="Blood Donation camp"/>
+            <StringItem index="2" value="Organ Donation camp"/>
+            <StringItem index="3" value="Food contribution"/>
+            <StringItem index="4" value="Children fundraiser"/>
+            <StringItem index="5" value="Women Health Awareness"/>
           </StringArray>
         </Property>
       </Properties>
@@ -213,7 +228,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="signupBtn">
+    <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="SansSerif" size="14" style="1"/>
@@ -227,7 +242,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signupBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addButton">
@@ -257,12 +272,42 @@
         <Component class="javax.swing.JTable" name="ngoTbl">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="5" rowCount="4">
+                <Column editable="true" title="Ngo Id" type="java.lang.Object"/>
                 <Column editable="true" title="NgoName" type="java.lang.Object"/>
                 <Column editable="true" title="Functionality" type="java.lang.Object"/>
                 <Column editable="true" title="Community" type="java.lang.Object"/>
                 <Column editable="true" title="City" type="java.lang.Object"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -287,6 +332,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ngoIdLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="NGO ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ngoIdTextField">
     </Component>
   </SubComponents>
 </Form>
