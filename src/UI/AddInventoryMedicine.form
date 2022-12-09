@@ -62,6 +62,11 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="storeIDTxtField" min="-2" pref="172" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="priceLbl" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="priceTxtField" min="-2" pref="172" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -107,6 +112,11 @@
                   <Component id="dosageLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="dosageTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="priceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="priceTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="commLbl" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -117,9 +127,9 @@
                   <Component id="storeIDLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="storeIDTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="addBtn" min="-2" pref="39" max="-2" attributes="0"/>
-              <EmptySpace pref="124" max="32767" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,6 +274,24 @@
         </Property>
         <Property name="text" type="java.lang.String" value="ADD"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="priceLbl">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="15" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Price / quantity"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="priceTxtField">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="PT Sans" size="15" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceTxtFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

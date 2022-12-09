@@ -43,6 +43,8 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         storeIDLbl = new javax.swing.JLabel();
         storeIDTxtField = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
+        priceLbl = new javax.swing.JLabel();
+        priceTxtField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -118,6 +120,16 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         addBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         addBtn.setText("ADD");
 
+        priceLbl.setFont(new java.awt.Font("PT Sans", 1, 15)); // NOI18N
+        priceLbl.setText("Price / quantity");
+
+        priceTxtField.setFont(new java.awt.Font("PT Sans", 1, 15)); // NOI18N
+        priceTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceTxtFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +167,11 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(storeIDLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(priceLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(priceTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(345, 345, 345)
                         .addComponent(addBtn))
@@ -189,6 +205,10 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dosageLbl)
                     .addComponent(dosageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceLbl)
+                    .addComponent(priceTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commLbl)
@@ -197,9 +217,9 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(storeIDLbl)
                     .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
                 .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -227,6 +247,10 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_storeIDTxtFieldActionPerformed
 
+    private void priceTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceTxtFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
@@ -240,6 +264,8 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
     private javax.swing.JLabel medicineNameLbl;
     private javax.swing.JTextField medicineNameTxtField;
     private javax.swing.JLabel medicineTitle;
+    private javax.swing.JLabel priceLbl;
+    private javax.swing.JTextField priceTxtField;
     private javax.swing.JLabel qtyLbl;
     private javax.swing.JTextField qtyTxtField;
     private javax.swing.JLabel storeIDLbl;

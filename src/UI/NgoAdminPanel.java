@@ -26,6 +26,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         this.splitPane = splitPane;
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,9 +239,10 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        
         // TODO add your handling code here:
-//        AllAdmins allAdmin = new AllAdmins(splitPane);
-//        splitPane.setBottomComponent(splitPane);
+        AllAdmins allAdmin = new AllAdmins(splitPane);
+        splitPane.setBottomComponent(allAdmin);
     }//GEN-LAST:event_backBtnActionPerformed
 
 
