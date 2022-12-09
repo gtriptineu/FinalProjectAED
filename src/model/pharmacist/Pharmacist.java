@@ -11,7 +11,7 @@ import model.Person;
  * @author Lenovo
  */
 public class Pharmacist extends Person{
-    private String username;
+    private String email;
     private String password;
     private String storeId;
     private String storeName;
@@ -33,12 +33,12 @@ public class Pharmacist extends Person{
         this.storeName = storeName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -56,6 +56,4 @@ public class Pharmacist extends Person{
     public void setStoreId(String storeId) {
         this.storeId = storeId;
     }
-    
-    
 }
