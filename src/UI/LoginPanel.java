@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import model.Patient.Patient;
+import model.Patient.PatientDAOImp;
 
 /**
  *
@@ -135,18 +137,13 @@ public class LoginPanel extends javax.swing.JPanel {
         String password = String.valueOf(passwordTxtField.getPassword());
         System.out.println("password:"+password);
         
-        try
-        {
-            System.out.println("In try");
-            Connection connection= DBConnection.dbconnector();
-            Statement stm = connection.createStatement();
-            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-            
-            ResultSet rst= stm.executeQuery(loginPatient);
-            if (rst.next()){
-                String patientName = rst.getString("Name");
-                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-                PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, patientName);
+        PatientDAOImp pDao = new PatientDAOImp();
+        Patient p = pDao.getPatient(email, password);
+        
+        
+            if (!p.getName().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ p.getName()+ ".");
+                PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, p);
                 jSplitPane.setBottomComponent(goToPatient);
                 System.out.println("Going to patient profile");
             } else {
@@ -154,9 +151,6 @@ public class LoginPanel extends javax.swing.JPanel {
                 userNameTxtField.setText("");
                 passwordTxtField.setText("");
             }
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
         
     }//GEN-LAST:event_loginBtnActionPerformed
 
