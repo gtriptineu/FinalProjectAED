@@ -4,16 +4,19 @@
  */
 package UI;
 
+import javax.swing.JSplitPane;
+
 /**
  *
  * @author rodri
  */
 public class FindNgoPanel extends javax.swing.JPanel {
-
+JSplitPane splitPane;
     /**
      * Creates new form FindNgoPanel
      */
-    public FindNgoPanel() {
+    public FindNgoPanel(JSplitPane splitPane) {
+        this.splitPane = splitPane;
         initComponents();
     }
 

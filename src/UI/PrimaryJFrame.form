@@ -77,13 +77,16 @@
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="501" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="publicBtn" max="32767" attributes="0"/>
-                          <Component id="pharmaBtn" max="32767" attributes="0"/>
-                          <Component id="adminBtn" alignment="1" max="32767" attributes="0"/>
-                          <Component id="doctorBtn" alignment="1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="salesdoctorBtn" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="publicBtn" max="32767" attributes="0"/>
+                              <Component id="pharmaBtn" max="32767" attributes="0"/>
+                              <Component id="adminBtn" alignment="1" max="32767" attributes="0"/>
+                              <Component id="doctorBtn" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="305" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="298" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -106,7 +109,9 @@
                               <Component id="jLabel2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="salesdoctorBtn" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -163,6 +168,17 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="salesdoctorBtn">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="PT Sans Caption" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SALES REPORT"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salesdoctorBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
