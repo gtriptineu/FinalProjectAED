@@ -241,8 +241,8 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         
         // TODO add your handling code here:
-//        AllAdmins allAdmin = new AllAdmins(splitPane);
-//        splitPane.setBottomComponent(splitPane);
+        AllAdmins allAdmin = new AllAdmins(splitPane);
+        splitPane.setBottomComponent(allAdmin);
     }//GEN-LAST:event_backBtnActionPerformed
 
 

@@ -49,7 +49,7 @@
                               <Component id="commSearchLbl" alignment="0" max="32767" attributes="0"/>
                               <Component id="commSearchLbl1" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="86" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="searchTitle" min="-2" pref="283" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
