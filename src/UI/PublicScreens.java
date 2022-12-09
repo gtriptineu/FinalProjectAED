@@ -24,7 +24,11 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.inventory.InventoryDirectory;
 import model.store.Store;
+import model.store.StoreDAOImp;
 import model.store.StoreDirectory;
 
 /**
@@ -211,53 +215,37 @@ public class PublicScreens extends javax.swing.JPanel {
         String dosageText = dosageDropDown.getSelectedItem().toString();
         String medicineName = medicineTxtField.getText();
         
-        try{
-            Connection connection= DBConnection.dbconnector();
-            Statement stm = connection.createStatement();
-            String medicineSearch;
+        InventoryDAOImp invDao = new InventoryDAOImp();
+        InventoryDirectory invDir = new InventoryDirectory();
             
-            if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
-                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosageText+"'and community='"+communityText+"';";
-            } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
-                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and dosage='"+dosageText+"';";
-            } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
-                medicineSearch = "select name,storeId,community from inventory where name='"+medicineName+"'and community='"+communityText+"';";
-            } else{
-                medicineSearch = "select *from inventory where name='"+medicineName+"';";
-            }
-            System.out.println("query---"+medicineSearch);
-            ResultSet rst= stm.executeQuery(medicineSearch);
-            ArrayList<String> allStoreId = new ArrayList<>();
-// 
-            if(rst.isBeforeFirst()){
-                System.out.println("in if");
-                while(rst.next()){
-                    String storeId = rst.getString("storeId");
-                    System.out.println("storeid"+storeId);
-                    allStoreId.add(storeId);
-                }
-                System.out.println("All storeid found--"+allStoreId);
-            } else{
-                JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
-            }
-           
-            for(int i =0;i<allStoreId.size();i++){
-                String storeSearch = "select * from storedetails where storeId='"+allStoreId.get(i)+"';";
-                ResultSet rs= stm.executeQuery(storeSearch);
-                while(rs.next()){
-                    Store s = allStores.addNewStore();
-                    s.setStoreId(rs.getString("storeId"));
-                    s.setStoreName(rs.getString("storeName"));
-                    s.setCommunity(rs.getString("community"));
-                }
-            }
+        if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
+            invDir = invDao.getByMedicineCommunityDosage(medicineName, communityText, dosageText);
+        } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
+            invDir = invDao.getByMedicineDosage(medicineName, dosageText);
+        } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
+            invDir = invDao.getByMedicineCommunity(medicineName, communityText);
+        } else{
+            invDir = invDao.getByMedicine(medicineName);
+        }
             
-            for(Store s: allStores.getStoreDictionary()){
-                System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+        ArrayList<String> allStoreId = new ArrayList<>();
+        StoreDAOImp sDao = new StoreDAOImp();
+        if(invDir.getSize()>0){
+            for(Inventory i : invDir.getInventoryDirectory()){
+                allStoreId.add(i.getStoreID());
             }
+            System.out.println("All store id--"+ allStoreId);
+            allStores = sDao.getMultipleStore(allStoreId);
+        } else {
+            JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
+            medicineTxtField.setText("");
+            commDropDown.setSelectedItem(0);
+            dosageDropDown.setSelectedItem(0);
             
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
+        }
+        
+        for(Store s: allStores.getStoreDictionary()){
+            System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
         }
     }//GEN-LAST:event_searchBtnActionPerformed
 
