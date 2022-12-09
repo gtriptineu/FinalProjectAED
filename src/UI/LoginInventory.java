@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import model.admin.AdminDAOImp;
+import model.admin.AdminLogin;
 
 /**
  *
@@ -159,33 +161,25 @@ public class LoginInventory extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-        InventoryProfile goToProfile = new InventoryProfile(jSplitPane1);
-        jSplitPane1.setBottomComponent(goToProfile);
-//        String email = userNameTxtField.getText();
-//        String password = String.valueOf(passwordTxtField.getPassword());
-//
-//        try
-//        {
-//            System.out.println("In try");
-//            Connection connection= DBConnection.dbconnector();
-//            Statement stm = connection.createStatement();
-            //            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-            //
-            //            ResultSet rst= stm.executeQuery(loginPatient);
-            //            if (rst.next()){
-                //                String patientName = rst.getString("Name");
-                //                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-                //                PatientProfile goToPatient = new PatientProfile(jSplitPane);
-                //                jSplitPane.setBottomComponent(goToPatient);
-                //                System.out.println("Going to patient profile");
-                //            } else {
-                //                JOptionPane.showMessageDialog(this, "Login Failed");
-                //                userNameTxtField.setText("");
-                //                passwordTxtField.setText("");
-                //            }
-//        } catch(SQLException e){
-//            System.out.println(e.getMessage());
-//        }
+        
+        String username = userNameTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
+        boolean loginSuccess = false;
+        AdminLogin admin = new AdminLogin();
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setAdminType("inventory");
+        AdminDAOImp adminDao = new AdminDAOImp();
+        loginSuccess = adminDao.loginAdmin(admin);
+        
+        if(loginSuccess){
+            InventoryProfile goToProfile = new InventoryProfile(jSplitPane1);
+            jSplitPane1.setBottomComponent(goToProfile);
+        } else {
+            JOptionPane.showMessageDialog(this, "Login Failed.");
+            userNameTxtField.setText("");
+            passwordTxtField.setText("");
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void userNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtFieldActionPerformed
