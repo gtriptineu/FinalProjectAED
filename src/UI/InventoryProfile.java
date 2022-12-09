@@ -43,7 +43,6 @@ public class InventoryProfile extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(160, 213, 229));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setMinimumSize(new java.awt.Dimension(300, 100));
-        jPanel1.setSize(new java.awt.Dimension(300, 100));
 
         medicineViewBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineViewBtn.setText("VIEW MEDICINES");
@@ -90,7 +89,7 @@ public class InventoryProfile extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

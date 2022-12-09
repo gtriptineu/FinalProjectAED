@@ -4,7 +4,10 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import model.admin.AdminDAOImp;
+import model.admin.AdminLogin;
 
 /**
  *
@@ -156,33 +159,24 @@ public class LoginVendor extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-        VendorProfile goToProfile = new VendorProfile(splitPane);
-        splitPane.setBottomComponent(goToProfile);
-        //        String email = userNameTxtField.getText();
-        //        String password = String.valueOf(passwordTxtField.getPassword());
-        //
-        //        try
-        //        {
-            //            System.out.println("In try");
-            //            Connection connection= DBConnection.dbconnector();
-            //            Statement stm = connection.createStatement();
-            //            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-            //
-            //            ResultSet rst= stm.executeQuery(loginPatient);
-            //            if (rst.next()){
-                //                String patientName = rst.getString("Name");
-                //                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-                //                PatientProfile goToPatient = new PatientProfile(jSplitPane);
-                //                jSplitPane.setBottomComponent(goToPatient);
-                //                System.out.println("Going to patient profile");
-                //            } else {
-                //                JOptionPane.showMessageDialog(this, "Login Failed");
-                //                userNameTxtField.setText("");
-                //                passwordTxtField.setText("");
-                //            }
-            //        } catch(SQLException e){
-            //            System.out.println(e.getMessage());
-            //        }
+        String username = userNameTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
+        boolean loginSuccess = false;
+        AdminLogin admin = new AdminLogin();
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setAdminType("vendor");
+        AdminDAOImp adminDao = new AdminDAOImp();
+        loginSuccess = adminDao.loginAdmin(admin);
+        
+        if(loginSuccess){
+            VendorProfile goToProfile = new VendorProfile(splitPane);
+            splitPane.setBottomComponent(goToProfile);
+        } else {
+            JOptionPane.showMessageDialog(this, "Login Failed.");
+            userNameTxtField.setText("");
+            passwordTxtField.setText("");
+        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
 
