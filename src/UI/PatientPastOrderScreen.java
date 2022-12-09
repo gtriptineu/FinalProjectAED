@@ -42,13 +42,12 @@ Patient patient;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
-        backBtn1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
         loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
         loginTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginTitle.setText("ORDER HISTORY");
+        loginTitle.setText("PAST ORDER HISTORY");
 
         patientIDLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         patientIDLbl.setText("Patient ID:");
@@ -58,13 +57,13 @@ Patient patient;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "OrderNo", "Status", "StoreName"
+                "SrNo", "CustNo", "OrderNo", "Status", "StoreName"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -76,9 +75,6 @@ Patient patient;
                 backBtnActionPerformed(evt);
             }
         });
-
-        backBtn1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
-        backBtn1.setText("BACK");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -100,11 +96,6 @@ Patient patient;
                             .addComponent(backBtn))
                         .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(backBtn1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +111,6 @@ Patient patient;
                 .addGap(52, 52, 52)
                 .addComponent(backBtn)
                 .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(backBtn1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,7 +123,6 @@ Patient patient;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JButton backBtn1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
