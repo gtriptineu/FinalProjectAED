@@ -69,6 +69,11 @@ public class AllAdmins extends javax.swing.JPanel {
 
         vendorBtn1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         vendorBtn1.setText("VENDOR ADMIN");
+        vendorBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendorBtn1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,6 +141,12 @@ public class AllAdmins extends javax.swing.JPanel {
         NgoAdminPanel ngoAdmin = new NgoAdminPanel(jSplitPane1);
         jSplitPane1.setBottomComponent(ngoAdmin);
     }//GEN-LAST:event_ngoAdminActionPerformed
+
+    private void vendorBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorBtn1ActionPerformed
+        LoginVendor goToVendor = new LoginVendor(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToVendor);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vendorBtn1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
