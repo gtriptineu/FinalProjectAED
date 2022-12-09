@@ -13,6 +13,15 @@ public class Ngo {
     private String community;
     private String city;
     private String functionality;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -46,5 +55,9 @@ public class Ngo {
         this.functionality = functionality;
     }
     
+    @Override
+    public String toString(){
+        return id;
+    }
     
 }
