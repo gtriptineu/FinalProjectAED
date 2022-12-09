@@ -113,7 +113,7 @@ public class AllAdmins extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        PrimaryJFrame homePage = new PrimaryJFrame(jSplitPane1);
+        PrimaryJPanel homePage = new PrimaryJPanel(jSplitPane1);
         jSplitPane1.setBottomComponent(homePage);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
