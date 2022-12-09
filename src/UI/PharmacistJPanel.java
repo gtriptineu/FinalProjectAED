@@ -36,9 +36,9 @@ Pharmacist phar;
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        sellBtn = new javax.swing.JButton();
+        purchaseBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -54,24 +54,27 @@ Pharmacist phar;
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pharmacist.png"))); // NOI18N
 
-        jButton1.setText("Sell Medicine");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        sellBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        sellBtn.setText("SELL MEDICINE");
+        sellBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sellBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Purchase Medicine");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        purchaseBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        purchaseBtn.setText("PURCHASE MEDICINE");
+        purchaseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                purchaseBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setText("BACK");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        backBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        backBtn.setText("BACK");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                backBtnActionPerformed(evt);
             }
         });
 
@@ -81,14 +84,14 @@ Pharmacist phar;
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(purchaseBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sellBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jButton4)
+                .addGap(42, 42, 42)
+                .addComponent(backBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,12 +100,12 @@ Pharmacist phar;
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(purchaseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(77, 77, 77))
+                .addComponent(sellBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -182,32 +185,29 @@ Pharmacist phar;
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void sellBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellBtnActionPerformed
         // TODO add your handling code here:
        PharmacistSellPanel pharmacistSellPanel=new PharmacistSellPanel(splitPane,phar );
         splitPane.setBottomComponent(pharmacistSellPanel);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_sellBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void purchaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseBtnActionPerformed
         // TODO add your handling code here:
         PurchaseMedicinePanel pharmacistPanel=new PurchaseMedicinePanel(splitPane, phar);
         splitPane.setBottomComponent(pharmacistPanel);
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_purchaseBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
 
-           PrimaryJFrame primaryFrame = new PrimaryJFrame();
+         PrimaryJFrame primaryFrame = new PrimaryJFrame();
            primaryFrame.setVisible(true);
-           //splitPane.setBottomComponent(primaryFrame);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -217,5 +217,7 @@ Pharmacist phar;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel loginTitle;
+    private javax.swing.JButton purchaseBtn;
+    private javax.swing.JButton sellBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,10 +28,12 @@ public class PrimaryJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        publicBtn = new javax.swing.JButton();
+        findNgoBtn = new javax.swing.JButton();
         adminBtn = new javax.swing.JButton();
         pharmaBtn = new javax.swing.JButton();
         doctorBtn = new javax.swing.JButton();
+        publicBtn1 = new javax.swing.JButton();
+        salesBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -39,11 +41,11 @@ public class PrimaryJPanel extends javax.swing.JPanel {
         jLabel2.setText("jLabel2");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        publicBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
-        publicBtn.setText("PUBLIC / PATIENTS");
-        publicBtn.addActionListener(new java.awt.event.ActionListener() {
+        findNgoBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        findNgoBtn.setText("FIND NGO");
+        findNgoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                publicBtnActionPerformed(evt);
+                findNgoBtnActionPerformed(evt);
             }
         });
 
@@ -71,6 +73,22 @@ public class PrimaryJPanel extends javax.swing.JPanel {
             }
         });
 
+        publicBtn1.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        publicBtn1.setText("PUBLIC / PATIENTS");
+        publicBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                publicBtn1ActionPerformed(evt);
+            }
+        });
+
+        salesBtn.setFont(new java.awt.Font("PT Sans Caption", 1, 14)); // NOI18N
+        salesBtn.setText("SALES REPORT");
+        salesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,11 +97,14 @@ public class PrimaryJPanel extends javax.swing.JPanel {
                 .addGap(70, 70, 70)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(publicBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pharmaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(salesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(findNgoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pharmaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(publicBtn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(doctorBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(199, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,24 +113,27 @@ public class PrimaryJPanel extends javax.swing.JPanel {
                 .addGap(140, 140, 140)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(publicBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(findNgoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
+                        .addComponent(publicBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(adminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(pharmaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(doctorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(salesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void publicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicBtnActionPerformed
-        PublicScreens goToPublic = new PublicScreens(jSplitPane1);
-        jSplitPane1.setBottomComponent(goToPublic);
+    private void findNgoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findNgoBtnActionPerformed
+        FindNgoPanel ngoPanel = new FindNgoPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(ngoPanel);
         // TODO add your handling code here:
-    }//GEN-LAST:event_publicBtnActionPerformed
+    }//GEN-LAST:event_findNgoBtnActionPerformed
 
     private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
         AllAdmins goToAdmin = new AllAdmins(jSplitPane1);
@@ -131,12 +155,24 @@ public class PrimaryJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorBtnActionPerformed
 
+    private void publicBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_publicBtn1ActionPerformed
+
+    private void salesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesBtnActionPerformed
+        // TODO add your handling code here:
+        SalesPanel goToLogin = new SalesPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToLogin);
+    }//GEN-LAST:event_salesBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminBtn;
     private javax.swing.JButton doctorBtn;
+    private javax.swing.JButton findNgoBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton pharmaBtn;
-    private javax.swing.JButton publicBtn;
+    private javax.swing.JButton publicBtn1;
+    private javax.swing.JButton salesBtn;
     // End of variables declaration//GEN-END:variables
 }
