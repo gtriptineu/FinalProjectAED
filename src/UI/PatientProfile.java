@@ -88,6 +88,11 @@ public class PatientProfile extends javax.swing.JPanel {
 
         ordersBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         ordersBtn.setText("PAST ORDERS");
+        ordersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordersBtnActionPerformed(evt);
+            }
+        });
 
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,6 +189,14 @@ public class PatientProfile extends javax.swing.JPanel {
                 .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
+        // TODO add your handling code here:
+        PatientPastOrderScreen orderPanel = new PatientPastOrderScreen(splitPane,storeName,comm,patient);
+        splitPane.setBottomComponent(orderPanel);
+        
+        
+    }//GEN-LAST:event_ordersBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
