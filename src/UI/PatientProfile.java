@@ -6,6 +6,7 @@ package UI;
 
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.Patient.Patient;
 
 /**
  *
@@ -16,16 +17,18 @@ public class PatientProfile extends javax.swing.JPanel {
         JSplitPane splitPane;
         String storeName;
         String comm;
+        Patient patient;
 
-    public PatientProfile(JSplitPane splitPane, String storeName, String comm, String patientName) {
+    public PatientProfile(JSplitPane splitPane, String storeName, String comm, Patient patient) {
         initComponents();
         this.splitPane = splitPane;
         this.storeName = storeName;
         this.comm = comm;
+        this.patient = patient;
 
         storeNameDisplay.setText(storeName);
         commDisplay.setText(comm);
-        patientIDDisplay.setText(patientName);
+        patientIDDisplay.setText(patient.getName());
         
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         System.out.println("In constructor PatientProfile");
