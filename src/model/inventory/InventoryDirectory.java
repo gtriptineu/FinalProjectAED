@@ -18,21 +18,25 @@ public class InventoryDirectory {
         this.inventoryDirectory = new ArrayList<>();
     }
 
-    public ArrayList<Inventory> getStoreDictionary() {
+    public ArrayList<Inventory> getInventoryDirectory() {
         return inventoryDirectory;
     }
 
-    public void setStoreDictionary(ArrayList<Inventory> inventoryDirectory) {
+    public void setInventoryDirectory(ArrayList<Inventory> inventoryDirectory) {
         this.inventoryDirectory = inventoryDirectory;
     }
     
-    public Inventory addNewStore(){
+    public Inventory addNewInventory(){
         Inventory newMedicine = new Inventory();
         inventoryDirectory.add(newMedicine);
         return newMedicine;
     }
     
-    public void viewStore(Inventory inv){
+    public void viewInventory(Inventory inv){
         System.out.print(inv.getMedicineID()+" ---- "+inv.getMedicineName()+" --- "+ inv.getStoreID());       
+    }
+    
+    public int getSize(){
+        return inventoryDirectory.size();
     }
 }
