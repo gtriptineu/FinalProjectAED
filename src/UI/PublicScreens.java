@@ -46,9 +46,12 @@ public class PublicScreens extends javax.swing.JPanel {
         initComponents();
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
-        
+       
+        System.out.println("In public screen constructor");
+        System.out.println("Getting store dictionary"+ allStores.getStoreDictionary());
         for(Store store: allStores.getStoreDictionary())
         {
+        System.out.println("Details"+ store.getStoreName() + store.getCommunity());
         String storeName = store.getStoreName();
         String comm = store.getCommunity();
         String viewStore = "View Store";
@@ -241,6 +244,14 @@ public class PublicScreens extends javax.swing.JPanel {
             medicineTxtField.setText("");
             commDropDown.setSelectedItem(0);
             dosageDropDown.setSelectedItem(0);
+            
+            for(Store s: allStores.getStoreDictionary()){
+                System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+                String storeName = s.getStoreName();
+                String comm = s.getCommunity();
+                String viewStore = "View Store";
+                addRows(splitPane,storeName,comm,viewStore);
+            }
             
         }
         
