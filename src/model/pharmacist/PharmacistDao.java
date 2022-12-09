@@ -4,10 +4,13 @@
  */
 package model.pharmacist;
 
+
 /**
  *
  * @author nikethanann
  */
 public interface PharmacistDao {
-    
+    void add(Pharmacist p);
+//    boolean checkPharmacistAlreadyPresent(String id);
+    Pharmacist getPharmacist(String emailId, String password);
 }
