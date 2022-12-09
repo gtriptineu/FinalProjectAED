@@ -9,5 +9,7 @@ package model.ngo;
  * @author Lenovo
  */
 public interface NgoDAO {
-    
+    public void add(Ngo ngo);
+    public void delete(Ngo ngo);
+    public NgoDirectory getAll();
 }
