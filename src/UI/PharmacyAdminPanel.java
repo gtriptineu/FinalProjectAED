@@ -4,9 +4,6 @@
  */
 package UI;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
 /**
@@ -46,7 +43,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         commSearchLbl = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ngoTbl1 = new javax.swing.JTable();
-        createBtn = new javax.swing.JButton();
+        findBtn1 = new javax.swing.JButton();
         nameTxtField = new javax.swing.JTextField();
         emailTxtField = new javax.swing.JTextField();
         nameLbl = new javax.swing.JLabel();
@@ -57,20 +54,15 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         contactTextField1 = new javax.swing.JTextField();
         passwordLbl1 = new javax.swing.JLabel();
         passwordTxtField1 = new javax.swing.JPasswordField();
-        commTxtField = new javax.swing.JTextField();
-        cityTxtField = new javax.swing.JTextField();
+        nameTxtField1 = new javax.swing.JTextField();
+        emailTxtField1 = new javax.swing.JTextField();
         nameLbl1 = new javax.swing.JLabel();
-        cityLbl = new javax.swing.JLabel();
+        emailLbl1 = new javax.swing.JLabel();
         emailLbl2 = new javax.swing.JLabel();
-        storeTxtField = new javax.swing.JTextField();
+        emailTxtField2 = new javax.swing.JTextField();
         emailLbl3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
-        nmErrorLbl = new javax.swing.JLabel();
-        emailErrorLbl = new javax.swing.JLabel();
-        ageErrorLbl = new javax.swing.JLabel();
-        contactErrorLbl = new javax.swing.JLabel();
-        pwdErrorLbl = new javax.swing.JLabel();
 
         ngoTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -154,13 +146,13 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(ngoTbl1);
 
-        createBtn.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        createBtn.setText("CREATE");
-        createBtn.setMaximumSize(new java.awt.Dimension(74, 26));
-        createBtn.setMinimumSize(new java.awt.Dimension(74, 26));
-        createBtn.addActionListener(new java.awt.event.ActionListener() {
+        findBtn1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        findBtn1.setText("CREATE");
+        findBtn1.setMaximumSize(new java.awt.Dimension(74, 26));
+        findBtn1.setMinimumSize(new java.awt.Dimension(74, 26));
+        findBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createBtnActionPerformed(evt);
+                findBtn1ActionPerformed(evt);
             }
         });
 
@@ -215,11 +207,6 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                 contactTextField1signupBtnActionPerformed(evt);
             }
         });
-        contactTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                contactTextField1KeyReleased(evt);
-            }
-        });
 
         passwordLbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         passwordLbl1.setText("Password:");
@@ -230,45 +217,45 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
             }
         });
 
-        commTxtField.addActionListener(new java.awt.event.ActionListener() {
+        nameTxtField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                commTxtFieldActionPerformed(evt);
+                nameTxtField1ActionPerformed(evt);
             }
         });
-        commTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+        nameTxtField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                commTxtFieldKeyReleased(evt);
+                nameTxtField1KeyReleased(evt);
             }
         });
 
-        cityTxtField.addActionListener(new java.awt.event.ActionListener() {
+        emailTxtField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cityTxtFieldActionPerformed(evt);
+                emailTxtField1ActionPerformed(evt);
             }
         });
-        cityTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+        emailTxtField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cityTxtFieldKeyReleased(evt);
+                emailTxtField1KeyReleased(evt);
             }
         });
 
         nameLbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         nameLbl1.setText("Community:");
 
-        cityLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cityLbl.setText("City:");
+        emailLbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        emailLbl1.setText("City:");
 
         emailLbl2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         emailLbl2.setText("storeName:");
 
-        storeTxtField.addActionListener(new java.awt.event.ActionListener() {
+        emailTxtField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storeTxtFieldActionPerformed(evt);
+                emailTxtField2ActionPerformed(evt);
             }
         });
-        storeTxtField.addKeyListener(new java.awt.event.KeyAdapter() {
+        emailTxtField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                storeTxtFieldKeyReleased(evt);
+                emailTxtField2KeyReleased(evt);
             }
         });
 
@@ -277,23 +264,13 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-
-        nmErrorLbl.setForeground(new java.awt.Color(255, 0, 0));
-
-        emailErrorLbl.setForeground(new java.awt.Color(255, 0, 0));
-
-        ageErrorLbl.setForeground(new java.awt.Color(255, 0, 0));
-
-        contactErrorLbl.setForeground(new java.awt.Color(255, 0, 0));
-
-        pwdErrorLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -312,7 +289,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(findBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(324, 324, 324))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,55 +297,45 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jScrollPane3)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(emailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(45, 45, 45)
-                                                        .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(45, 45, 45)
-                                                        .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(contactLbl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(contactLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(passwordLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                            .addGap(26, 26, 26))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(emailLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGap(18, 18, 18)))
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(emailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(45, 45, 45)
+                                                    .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(nmErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                                        .addComponent(emailErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(ageErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(contactErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGap(30, 30, 30)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                            .addComponent(nameLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                            .addComponent(commTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                            .addComponent(cityLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addGap(27, 27, 27)
-                                                            .addComponent(cityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                            .addComponent(emailLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(45, 45, 45)
+                                                    .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(contactLbl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(contactLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(passwordLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(emailLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addGap(16, 16, 16)
+                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
                                                             .addGap(18, 18, 18)
-                                                            .addComponent(storeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addComponent(pwdErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addGap(183, 183, 183)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(nameLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(nameTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(emailLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(27, 27, 27)
+                                                    .addComponent(emailTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(emailLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(emailTxtField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addGap(29, 29, 29))))))
         );
         layout.setVerticalGroup(
@@ -384,50 +351,47 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(commTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nameLbl1)
-                        .addComponent(nmErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(nameTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nameLbl1))
                     .addComponent(nameLbl))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailLbl)
                     .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLbl)
-                    .addComponent(cityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailLbl1)
+                    .addComponent(emailTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(emailLbl2)
-                            .addComponent(storeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(contactLbl3)
-                            .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ageErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contactLbl2)
-                            .addComponent(contactErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLbl1)
-                            .addComponent(pwdErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailLbl3))
-                .addGap(27, 27, 27)
-                .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contactLbl2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(passwordLbl1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(emailLbl2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emailTxtField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)))
                 .addGap(18, 18, 18)
-                .addComponent(btnBack)
-                .addGap(17, 17, 17))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLbl3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(findBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBack))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -435,29 +399,9 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_findBtnActionPerformed
 
-    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+    private void findBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findBtn1ActionPerformed
         // TODO add your handling code here:
-        String name = nameTxtField.getText();
-        String email = emailTxtField.getText();
-        String contact = contactTextField.getText();
-        String community = commTxtField.getText();
-        String age = ageTxtField.getText();
-        String city=cityTxtField.getText(); 
-        String storeName=storeTxtField.getText(); 
-
-        //Need to add database interaction
-        String password = String.valueOf(passwordTxtField.getPassword());
-        if (name.isEmpty() || email.isEmpty() ||
-                contact.isEmpty() || community.isEmpty() || community.isEmpty() || age.isEmpty() 
-                || city.isEmpty() ||
-                password.isEmpty() || jComboBox1.getSelectedItem().toString().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Please Enter all fields");
-        }
-        else {
-        
-        }
-        
-    }//GEN-LAST:event_createBtnActionPerformed
+    }//GEN-LAST:event_findBtn1ActionPerformed
 
     private void nameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtFieldActionPerformed
         // TODO add your handling code here:
@@ -467,16 +411,16 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void nameTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtFieldKeyReleased
         // TODO add your handling code here:
-        String namePattern="^[a-zA-Z]{0,30}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(nameTxtField.getText());
-        if (!match.matches()) {
-            nmErrorLbl.setText("Naming is incorrect");
-        }
-        else {
-
-            nmErrorLbl.setText(null);
-        }
+//        String namePattern="^[a-zA-Z]{0,30}$";
+//        Pattern pat=Pattern.compile(namePattern);
+//        Matcher match=pat.matcher(nameTxtField.getText());
+//        if (!match.matches()) {
+//            userNameLbl.setText("Naming is incorrect");
+//        }
+//        else {
+//
+//            userNameLbl.setText(null);
+//        }
     }//GEN-LAST:event_nameTxtFieldKeyReleased
 
     private void emailTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTxtFieldActionPerformed
@@ -487,15 +431,15 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
     private void emailTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtFieldKeyReleased
         // TODO add your handling code here:
 
-        String namePattern="^[a-zA-Z]{3,30}[@][a-zA-Z]{0,9}[.][a-zA-Z]{0,3}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(emailTxtField.getText());
-        if (!match.matches()) {
-            emailErrorLbl.setText("emailId is incorrect");
-        }
-        else {
-            emailErrorLbl.setText(null);
-        }
+//        String namePattern="^[a-zA-Z]{3,30}[@][a-zA-Z]{0,9}[.][a-zA-Z]{0,3}$";
+//        Pattern pat=Pattern.compile(namePattern);
+//        Matcher match=pat.matcher(emailTxtField.getText());
+//        if (!match.matches()) {
+//            userEmailLbl.setText("emailId is incorrect");
+//        }
+//        else {
+//            userEmailLbl.setText(null);
+//        }
     }//GEN-LAST:event_emailTxtFieldKeyReleased
 
     private void ageTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTxtFieldActionPerformed
@@ -525,15 +469,15 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void ageTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ageTxtField1KeyReleased
 //        // TODO add your handling code here:
-        String namePattern="^[0-9]{1,2}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(ageTxtField.getText());
-        if (!match.matches()) {
-            ageErrorLbl.setText("Age is incorrect!!Age should be int");
-        }
-        else {
-            ageErrorLbl.setText(null);
-        }
+//        String namePattern="^[0-9]{1,2}$";
+//        Pattern pat=Pattern.compile(namePattern);
+//        Matcher match=pat.matcher(ageTxtField.getText());
+//        if (!match.matches()) {
+//            ageLbl.setText("Age is incorrect!!Age should be int");
+//        }
+//        else {
+//            ageLbl.setText(null);
+//        }
     }//GEN-LAST:event_ageTxtField1KeyReleased
 
     private void contactTextField1signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTextField1signupBtnActionPerformed
@@ -556,40 +500,41 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void passwordTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTxtField1KeyReleased
         // TODO add your handling code here:
-        String namePattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(passwordTxtField.getText());
-        if (!match.matches()) {
-            pwdErrorLbl.setText("Invalid password!one uppercase,lowercase,special char and integer needed");
-        }
-        else {
-            pwdErrorLbl.setText(null);
-        }
+
+//        String namePattern="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+//        Pattern pat=Pattern.compile(namePattern);
+//        Matcher match=pat.matcher(passwordTxtField.getText());
+//        if (!match.matches()) {
+//            passLbl.setText("Invalid password!one uppercase,lowercase,special char and integer needed");
+//        }
+//        else {
+//            passLbl.setText(null);
+//        }
     }//GEN-LAST:event_passwordTxtField1KeyReleased
 
-    private void commTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commTxtFieldActionPerformed
+    private void nameTxtField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_commTxtFieldActionPerformed
+    }//GEN-LAST:event_nameTxtField1ActionPerformed
 
-    private void commTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commTxtFieldKeyReleased
+    private void nameTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtField1KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_commTxtFieldKeyReleased
+    }//GEN-LAST:event_nameTxtField1KeyReleased
 
-    private void cityTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityTxtFieldActionPerformed
+    private void emailTxtField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTxtField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cityTxtFieldActionPerformed
+    }//GEN-LAST:event_emailTxtField1ActionPerformed
 
-    private void cityTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cityTxtFieldKeyReleased
+    private void emailTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtField1KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_cityTxtFieldKeyReleased
+    }//GEN-LAST:event_emailTxtField1KeyReleased
 
-    private void storeTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeTxtFieldActionPerformed
+    private void emailTxtField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTxtField2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_storeTxtFieldActionPerformed
+    }//GEN-LAST:event_emailTxtField2ActionPerformed
 
-    private void storeTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeTxtFieldKeyReleased
+    private void emailTxtField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtField2KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_storeTxtFieldKeyReleased
+    }//GEN-LAST:event_emailTxtField2KeyReleased
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -599,43 +544,27 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         splitPane.setBottomComponent(allAdminPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void contactTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTextField1KeyReleased
-        // TODO add your handling code here:
-         String namePattern="^[0-9]{9,9}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(contactTextField.getText());
-        if (!match.matches()) {
-             contactErrorLbl.setText("Mobile number is incorrect");
-        }
-        else {
-             contactErrorLbl.setText(null);
-        }
-    }//GEN-LAST:event_contactTextField1KeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ageErrorLbl;
     private javax.swing.JTextField ageTxtField;
     private javax.swing.JTextField ageTxtField1;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel cityLbl;
-    private javax.swing.JTextField cityTxtField;
     private javax.swing.JLabel commSearchLbl;
-    private javax.swing.JTextField commTxtField;
-    private javax.swing.JLabel contactErrorLbl;
     private javax.swing.JLabel contactLbl;
     private javax.swing.JLabel contactLbl1;
     private javax.swing.JLabel contactLbl2;
     private javax.swing.JLabel contactLbl3;
     private javax.swing.JTextField contactTextField;
     private javax.swing.JTextField contactTextField1;
-    private javax.swing.JButton createBtn;
-    private javax.swing.JLabel emailErrorLbl;
     private javax.swing.JLabel emailLbl;
+    private javax.swing.JLabel emailLbl1;
     private javax.swing.JLabel emailLbl2;
     private javax.swing.JLabel emailLbl3;
     private javax.swing.JTextField emailTxtField;
+    private javax.swing.JTextField emailTxtField1;
+    private javax.swing.JTextField emailTxtField2;
     private javax.swing.JButton findBtn;
+    private javax.swing.JButton findBtn1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -644,14 +573,12 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel nameLbl1;
     private javax.swing.JTextField nameTxtField;
+    private javax.swing.JTextField nameTxtField1;
     private javax.swing.JTable ngoTbl;
     private javax.swing.JTable ngoTbl1;
-    private javax.swing.JLabel nmErrorLbl;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JLabel passwordLbl1;
     private javax.swing.JPasswordField passwordTxtField;
     private javax.swing.JPasswordField passwordTxtField1;
-    private javax.swing.JLabel pwdErrorLbl;
-    private javax.swing.JTextField storeTxtField;
     // End of variables declaration//GEN-END:variables
 }

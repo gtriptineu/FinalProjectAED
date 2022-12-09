@@ -4,7 +4,6 @@
  */
 package UI;
 
-import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import model.pharmacist.Pharmacist;
 
@@ -269,49 +268,6 @@ Pharmacist phar;
 
     private void addtoCartButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtoCartButton6ActionPerformed
         // TODO add your handling code here:
-        
-        int selectedRow = drugTable.getSelectedRow();
-        //Drug selectedDrug;
-        
-        if(selectedRow<0){
-            JOptionPane.showMessageDialog(null, "Please select a row","warning",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else{
-            //selectedDrug = (Drug) drugTable.getValueAt(selectedRow, 0);
-        }
-        
-        int fetchQuantity = (Integer)quantitySpinner.getValue();//interger type cast coz getvalue sends a n object wch has to be casted to int
-           if(fetchQuantity <=0){
-               JOptionPane.showMessageDialog(null, "Please select atleast 1 quantity","warning",JOptionPane.ERROR_MESSAGE);
-               return;
-           }
-//           else if(fetchQuantity <= selectedDrug.getDrugAvailibility()){
-//               boolean alreadyPresent=false;
-//               for(OrderItem orderItems : order.getOrderItemList()){
-//                   if (orderItems.getDrug()==selectedDrug){
-//                       int oldAvailibility = selectedDrug.getDrugAvailibility();
-//                       int newAvailibility = oldAvailibility - fetchQuantity;
-//                       selectedDrug.setDrugAvailibility(newAvailibility);
-//                       orderItems.setQuantity(fetchQuantity + orderItems.getQuantity());
-//                       refreshOrderTable();
-//                       populatePharmaTable();
-//                       alreadyPresent=true;
-//                       break; //wehn we get the order item v need not traverse the whole list
-//                   }
-//               }
-//               if(!alreadyPresent){
-//                       int oldAvailibility = selectedDrug.getDrugAvailibility();
-//                       int newAvailibility = oldAvailibility - fetchQuantity;
-//                       selectedDrug.setDrugAvailibility((newAvailibility));
-//                       order.addOrderItem(selectedDrug, fetchQuantity, salesPrice);
-//                       refreshOrderTable();
-//                       populatePharmaTable();
-//               }
-//           }
-//               else{
-//                   JOptionPane.showMessageDialog(null, "Please quty shud b > aval","warning",JOptionPane.ERROR_MESSAGE);
-//               }
 
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
