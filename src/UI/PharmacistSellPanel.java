@@ -5,6 +5,7 @@
 package UI;
 
 import javax.swing.JSplitPane;
+import model.pharmacist.Pharmacist;
 
 /**
  *
@@ -12,11 +13,13 @@ import javax.swing.JSplitPane;
  */
 public class PharmacistSellPanel extends javax.swing.JPanel {
 JSplitPane splitPane;
+Pharmacist phar;
     /**
      * Creates new form PharmacistSellPanel
      */
-    public PharmacistSellPanel(JSplitPane splitPane) {
+    public PharmacistSellPanel(JSplitPane splitPane, Pharmacist phar) {
         this.splitPane = splitPane;
+        this.phar = phar;
         initComponents();
     }
 
@@ -32,6 +35,7 @@ JSplitPane splitPane;
         loginTitle = new javax.swing.JLabel();
         patientIDLbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel2.setText(this.phar.getName());
         jLabel3 = new javax.swing.JLabel();
         storeNameLbl = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -64,16 +68,18 @@ JSplitPane splitPane;
         patientIDLbl.setText("Pharmacist Name:");
 
         jLabel2.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
-        jLabel2.setText("jLabel2");
+        jLabel2.setText(this.phar.getName());
 
         jLabel3.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         jLabel3.setText("jLabel2");
+        jLabel3.setText(this.phar.getStoreName());
 
         storeNameLbl.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         storeNameLbl.setText("Store Name:");
 
         jLabel5.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         jLabel5.setText("jLabel2");
+        jLabel5.setText(this.phar.getCommunity());
 
         commLbl.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         commLbl.setText("Community:");
@@ -276,7 +282,7 @@ JSplitPane splitPane;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane);
+        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane, phar);
         splitPane.setBottomComponent(pharmacistPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
 

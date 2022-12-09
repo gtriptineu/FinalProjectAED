@@ -4,9 +4,15 @@
  */
 package UI;
 
+import SQLConnection.DBConnection;
+import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,6 +24,12 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.inventory.InventoryDirectory;
+import model.store.Store;
+import model.store.StoreDAOImp;
+import model.store.StoreDirectory;
 
 /**
  *
@@ -26,14 +38,27 @@ import javax.swing.table.TableCellRenderer;
 public class PublicScreens extends javax.swing.JPanel {
 
     JSplitPane splitPane;
+    StoreDirectory allStores;
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
+        allStores = new StoreDirectory();
         initComponents();
         jPanel1 = new JPanel();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         
-        model.setDataVector(new Object[][] { { "1", "CVS", "Brighton", "View Store" },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
+        for(Store store: allStores.getStoreDictionary())
+        {
+        String storeName = store.getStoreName();
+        String comm = store.getCommunity();
+        String viewStore = "View Store";
+        addRows(splitPane,storeName,comm,viewStore);
+        setVisible(true);
+        }
+    }
+    public void addRows(JSplitPane splitPane, String storeName, String comm, String viewStore){
+        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
+        model.setDataVector(new Object[][] { {storeName, comm, viewStore }}, new Object[] {"Store Name", "Community", "View Store" });
         medicinesTable.getColumn("View Store").setCellRenderer(new ButtonRenderer());
         medicinesTable.getColumn("View Store").setCellEditor(new ButtonEditor(new JCheckBox()));
         System.out.println("Added Rows to table");
@@ -77,7 +102,7 @@ public class PublicScreens extends javax.swing.JPanel {
         commSearchLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         commSearchLbl1.setText("Dosage:");
 
-        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","250 mg", "500 mg", "600 mg", "650 mg"}));
+        dosageDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Dosage","250 mg", "500 mg", "600 mg", "650 mg"}));
         dosageDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dosageDropDownActionPerformed(evt);
@@ -87,17 +112,17 @@ public class PublicScreens extends javax.swing.JPanel {
         medicinesTable.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "S.no", "Store Name", "Community", "View Store"
+                "Store Name", "Community", "View Store"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -105,12 +130,14 @@ public class PublicScreens extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(medicinesTable);
-        if (medicinesTable.getColumnModel().getColumnCount() > 0) {
-            medicinesTable.getColumnModel().getColumn(3).setCellRenderer(null);
-        }
 
         searchBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         searchBtn.setText("SEARCH");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,7 +154,7 @@ public class PublicScreens extends javax.swing.JPanel {
                             .addComponent(medicineLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(commSearchLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(commSearchLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGap(86, 86, 86)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -180,6 +207,47 @@ public class PublicScreens extends javax.swing.JPanel {
     private void dosageDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosageDropDownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dosageDropDownActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        allStores = new StoreDirectory();
+        String communityText = commDropDown.getSelectedItem().toString();
+        String dosageText = dosageDropDown.getSelectedItem().toString();
+        String medicineName = medicineTxtField.getText();
+        
+        InventoryDAOImp invDao = new InventoryDAOImp();
+        InventoryDirectory invDir = new InventoryDirectory();
+            
+        if(!communityText.equals("Select Community") && !dosageText.equals("Select Dosage") && !medicineName.isEmpty() ){
+            invDir = invDao.getByMedicineCommunityDosage(medicineName, communityText, dosageText);
+        } else if(!dosageText.equals("Select Dosage") && !medicineName.isEmpty()){
+            invDir = invDao.getByMedicineDosage(medicineName, dosageText);
+        } else if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
+            invDir = invDao.getByMedicineCommunity(medicineName, communityText);
+        } else{
+            invDir = invDao.getByMedicine(medicineName);
+        }
+            
+        ArrayList<String> allStoreId = new ArrayList<>();
+        StoreDAOImp sDao = new StoreDAOImp();
+        if(invDir.getSize()>0){
+            for(Inventory i : invDir.getInventoryDirectory()){
+                allStoreId.add(i.getStoreID());
+            }
+            System.out.println("All store id--"+ allStoreId);
+            allStores = sDao.getMultipleStore(allStoreId);
+        } else {
+            JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
+            medicineTxtField.setText("");
+            commDropDown.setSelectedItem(0);
+            dosageDropDown.setSelectedItem(0);
+            
+        }
+        
+        for(Store s: allStores.getStoreDictionary()){
+            System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+        }
+    }//GEN-LAST:event_searchBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,14 +328,11 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         }
         if(result == 0) //Login
         {
-            LoginPanel goToLogin=new LoginPanel(splitPane);
+            int selectedRowIndex = medicinesTable.getSelectedRow();
+            String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
+            String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 2).toString();
+            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm);
             splitPane.setBottomComponent(goToLogin);
-            
-//        PatientLoginScreen goToLogin = new PatientLoginScreen();
-//        splitPane.setBottomComponent(goToLogin);
-
-
-        
         }
         else // Sign up
         {

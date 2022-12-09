@@ -27,6 +27,8 @@ import static constants.DBConnection.*;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import model.Patient.Patient;
+import model.Patient.PatientDAOImp;
 /**
  *
  * @author rodri
@@ -312,7 +314,7 @@ public class SignupPanel extends javax.swing.JPanel {
         String address = addressTxtField.getText();
         String age = ageTxtField.getText();
         //i have done this
-        String password = passwordTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
         
         if (name.isEmpty() || email.isEmpty() ||
                 contact.isEmpty() || address.isEmpty() ||
@@ -321,21 +323,24 @@ public class SignupPanel extends javax.swing.JPanel {
         }
         else {
             
-        //        Generating Random 6 digit number as activation code
+        //Generating Random 6 digit number as activation code
         Random rnd = new Random();
         int activationCode = rnd.nextInt(999999);
         String body = ACTIVATION_BODY + Integer.toString(activationCode);
         System.out.print("activationCode:"+ activationCode +"-------"+ body);
+        
+        Patient p = new Patient();
+        p.setEmail(email);
+        p.setName(name);
+        p.setContactNo(contact);
+        p.setAddress(address);
+        p.setAge(Integer.parseInt(age));
+        p.setPassword(password);
+        PatientDAOImp pDao = new PatientDAOImp();
+        boolean present = pDao.checkPatientAlreadyPresent(email);
 
-        try
-        {
-            Connection connection= DBConnection.dbconnector();
-            Statement stm = connection.createStatement();
-            String checkPatient = "select email from patientdetails where email='"+email+"';";
-
-            ResultSet rst= stm.executeQuery(checkPatient);
-            if(rst.next()){
-
+            
+            if(present){
                 JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
             } else {
 
@@ -348,20 +353,15 @@ public class SignupPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Please enter activation code");
                 }
                 else {
-                    System.out.println("in if");
+                    System.out.println("in if of add");
                     Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
-                    String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-                    stm.executeUpdate(insertPatientDetails);
+                    pDao.add(p);
                     JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginPanel goToLogin=new LoginPanel(splitPane);
+                    LoginPanel goToLogin=new LoginPanel(splitPane,null,null);
                     splitPane.setBottomComponent(goToLogin);
                 }
 
             }
-
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
             
         }
         
