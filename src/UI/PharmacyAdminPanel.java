@@ -4,7 +4,15 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.inventory.InventoryDirectory;
+import model.pharmacist.Pharmacist;
+import model.pharmacist.PharmacistDAOImp;
+import model.pharmacist.PharmacistDirectory;
 
 /**
  *
@@ -18,6 +26,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
     public PharmacyAdminPanel(JSplitPane splitPane) {
         this.splitPane = splitPane;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -42,7 +51,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         loginTitle = new javax.swing.JLabel();
         commSearchLbl = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        ngoTbl1 = new javax.swing.JTable();
+        pharmacistTable = new javax.swing.JTable();
         findBtn1 = new javax.swing.JButton();
         nameTxtField = new javax.swing.JTextField();
         emailTxtField = new javax.swing.JTextField();
@@ -54,15 +63,19 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         contactTextField1 = new javax.swing.JTextField();
         passwordLbl1 = new javax.swing.JLabel();
         passwordTxtField1 = new javax.swing.JPasswordField();
-        nameTxtField1 = new javax.swing.JTextField();
-        emailTxtField1 = new javax.swing.JTextField();
+        communityTextfield = new javax.swing.JTextField();
         nameLbl1 = new javax.swing.JLabel();
-        emailLbl1 = new javax.swing.JLabel();
-        emailLbl2 = new javax.swing.JLabel();
-        emailTxtField2 = new javax.swing.JTextField();
+        storeIdLbl = new javax.swing.JLabel();
+        storeIdText = new javax.swing.JTextField();
         emailLbl3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        statusDropdown = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
+        storeNameLbl = new javax.swing.JLabel();
+        storeText = new javax.swing.JTextField();
+        nameLbl2 = new javax.swing.JLabel();
+        addressText = new javax.swing.JTextField();
+        deleteBtn = new javax.swing.JButton();
+        refreshBtn = new javax.swing.JButton();
 
         ngoTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,7 +146,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         commSearchLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         commSearchLbl.setText("Create new Pharmasicts");
 
-        ngoTbl1.setModel(new javax.swing.table.DefaultTableModel(
+        pharmacistTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -141,10 +154,10 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Email", "Status", "Community", "City", "StoreName"
+                "Name", "Email", "Status", "Community", "Contact Number", "StoreName"
             }
         ));
-        jScrollPane3.setViewportView(ngoTbl1);
+        jScrollPane3.setViewportView(pharmacistTable);
 
         findBtn1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         findBtn1.setText("CREATE");
@@ -217,58 +230,88 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
             }
         });
 
-        nameTxtField1.addActionListener(new java.awt.event.ActionListener() {
+        communityTextfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTxtField1ActionPerformed(evt);
+                communityTextfieldActionPerformed(evt);
             }
         });
-        nameTxtField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        communityTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameTxtField1KeyReleased(evt);
-            }
-        });
-
-        emailTxtField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTxtField1ActionPerformed(evt);
-            }
-        });
-        emailTxtField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                emailTxtField1KeyReleased(evt);
+                communityTextfieldKeyReleased(evt);
             }
         });
 
         nameLbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         nameLbl1.setText("Community:");
 
-        emailLbl1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        emailLbl1.setText("City:");
+        storeIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        storeIdLbl.setText("Store Id:");
 
-        emailLbl2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        emailLbl2.setText("storeName:");
-
-        emailTxtField2.addActionListener(new java.awt.event.ActionListener() {
+        storeIdText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailTxtField2ActionPerformed(evt);
+                storeIdTextActionPerformed(evt);
             }
         });
-        emailTxtField2.addKeyListener(new java.awt.event.KeyAdapter() {
+        storeIdText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                emailTxtField2KeyReleased(evt);
+                storeIdTextKeyReleased(evt);
             }
         });
 
         emailLbl3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         emailLbl3.setText("Status:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
+        statusDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
+            }
+        });
+
+        storeNameLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        storeNameLbl.setText("Store Name:");
+
+        storeText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeTextActionPerformed(evt);
+            }
+        });
+        storeText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                storeTextKeyReleased(evt);
+            }
+        });
+
+        nameLbl2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        nameLbl2.setText("Address:");
+
+        addressText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addressTextActionPerformed(evt);
+            }
+        });
+        addressText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addressTextKeyReleased(evt);
+            }
+        });
+
+        deleteBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        deleteBtn.setText("DELETE");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+
+        refreshBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        refreshBtn.setText("REFRESH");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
             }
         });
 
@@ -282,61 +325,66 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(loginTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-                            .addComponent(commSearchLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(loginTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(commSearchLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(findBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(324, 324, 324))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(emailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(contactLbl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(statusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(88, 88, 88))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane3)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(emailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(45, 45, 45)
-                                                    .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(45, 45, 45)
-                                                    .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(contactLbl3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(contactLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(passwordLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(emailLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addGap(16, 16, 16)
-                                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                            .addGap(183, 183, 183)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addComponent(nameLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(nameTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addComponent(emailLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(27, 27, 27)
-                                                    .addComponent(emailTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addComponent(emailLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(emailTxtField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addGap(29, 29, 29))))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(contactLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(emailLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(passwordLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(communityTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(storeNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(storeText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(storeIdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(storeIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nameLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nameLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22)
+                                .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(findBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refreshBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(92, 92, 92))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,51 +395,63 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
                 .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(commSearchLbl)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nameTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nameLbl1))
-                    .addComponent(nameLbl))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLbl)
-                    .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailLbl1)
-                    .addComponent(emailTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameLbl)
+                            .addComponent(nameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLbl)
+                            .addComponent(emailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(contactLbl3)
                             .addComponent(ageTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(statusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailLbl3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(contactTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contactLbl2))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBack)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(communityTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nameLbl1))
                                 .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nameLbl2)
+                                    .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(storeIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(storeIdLbl))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(storeNameLbl)
+                                    .addComponent(storeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(passwordTxtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(passwordLbl1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(emailLbl2))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(emailTxtField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLbl3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(findBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBack))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(findBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(refreshBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,6 +461,45 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void findBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findBtn1ActionPerformed
         // TODO add your handling code here:
+        String name = nameTxtField.getText();
+        String email = emailTxtField.getText();
+        String age = ageTxtField1.getText();
+        String status = statusDropdown.getSelectedItem().toString();
+        String community = communityTextfield.getText();
+        String storeName = storeText.getText();
+        String storeId = storeIdText.getText();
+        String password = String.valueOf(passwordTxtField1.getPassword());
+        String contact = contactTextField1.getText();
+        String address = addressText.getText();
+        
+        System.out.println("age---"+age);
+        
+        Pharmacist p = new Pharmacist();
+        p.setEmail(email);
+        p.setName(name);
+        p.setAddress(address);
+        p.setStoreId(storeId);
+        p.setCommunity(community);
+        p.setAge(Integer.parseInt(age));
+        p.setPassword(password);
+        p.setContactNo(contact);
+        p.setStoreName(storeName);
+        p.setStatus(status);
+        
+        PharmacistDAOImp pDao = new PharmacistDAOImp();
+        pDao.add(p);
+        JOptionPane.showMessageDialog(this, "Pharmacist details are added.");
+        populateTable();
+        nameTxtField.setText("");
+        emailTxtField.setText("");
+        ageTxtField1.setText("");
+        statusDropdown.setSelectedIndex(0);
+        communityTextfield.setText("");
+        storeText.setText("");
+        storeIdText.setText("");
+        passwordTxtField1.setText("");
+        contactTextField1.setText("");
+        addressText.setText("");
     }//GEN-LAST:event_findBtn1ActionPerformed
 
     private void nameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtFieldActionPerformed
@@ -512,29 +611,21 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 //        }
     }//GEN-LAST:event_passwordTxtField1KeyReleased
 
-    private void nameTxtField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtField1ActionPerformed
+    private void communityTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_communityTextfieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameTxtField1ActionPerformed
+    }//GEN-LAST:event_communityTextfieldActionPerformed
 
-    private void nameTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTxtField1KeyReleased
+    private void communityTextfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_communityTextfieldKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameTxtField1KeyReleased
+    }//GEN-LAST:event_communityTextfieldKeyReleased
 
-    private void emailTxtField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTxtField1ActionPerformed
+    private void storeIdTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeIdTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailTxtField1ActionPerformed
+    }//GEN-LAST:event_storeIdTextActionPerformed
 
-    private void emailTxtField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtField1KeyReleased
+    private void storeIdTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeIdTextKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailTxtField1KeyReleased
-
-    private void emailTxtField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTxtField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailTxtField2ActionPerformed
-
-    private void emailTxtField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtField2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emailTxtField2KeyReleased
+    }//GEN-LAST:event_storeIdTextKeyReleased
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -544,41 +635,103 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         splitPane.setBottomComponent(allAdminPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void storeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_storeTextActionPerformed
+
+    private void storeTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeTextKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_storeTextKeyReleased
+
+    private void addressTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTextActionPerformed
+
+    private void addressTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTextKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addressTextKeyReleased
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = pharmacistTable.getSelectedRow();
+        System.out.print("search---"+ selectedRowIndex);
+        if(selectedRowIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to be deleted.");
+        } else {
+            DefaultTableModel table = (DefaultTableModel) pharmacistTable.getModel();
+            Pharmacist inv = (Pharmacist)table.getValueAt(selectedRowIndex, 1);
+            PharmacistDAOImp invDao = new PharmacistDAOImp();
+            invDao.delete(inv);
+            JOptionPane.showMessageDialog(this, "Medicine Id: "+ inv.getEmail()+ " is deleted.");
+            populateTable();
+        }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_refreshBtnActionPerformed
+
+    private void populateTable() {
+        PharmacistDirectory pDir = new PharmacistDirectory();
+        PharmacistDAOImp phDao = new PharmacistDAOImp();
+        pDir = phDao.getAll();
+        
+        DefaultTableModel model = (DefaultTableModel) pharmacistTable.getModel();
+        model.setRowCount(0);
+         
+         for(Pharmacist p: pDir.getPharDir())
+         {
+             Object[] row = new Object[7];
+             row[0]=p.getName();
+             row[1]=p;
+             row[2]=p.getStatus();
+             row[3]=p.getCommunity();
+             row[4] = p.getContactNo();
+             row[5] = p.getStoreName();
+             
+             model.addRow(row);
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addressText;
     private javax.swing.JTextField ageTxtField;
     private javax.swing.JTextField ageTxtField1;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel commSearchLbl;
+    private javax.swing.JTextField communityTextfield;
     private javax.swing.JLabel contactLbl;
     private javax.swing.JLabel contactLbl1;
     private javax.swing.JLabel contactLbl2;
     private javax.swing.JLabel contactLbl3;
     private javax.swing.JTextField contactTextField;
     private javax.swing.JTextField contactTextField1;
+    private javax.swing.JButton deleteBtn;
     private javax.swing.JLabel emailLbl;
-    private javax.swing.JLabel emailLbl1;
-    private javax.swing.JLabel emailLbl2;
     private javax.swing.JLabel emailLbl3;
     private javax.swing.JTextField emailTxtField;
-    private javax.swing.JTextField emailTxtField1;
-    private javax.swing.JTextField emailTxtField2;
     private javax.swing.JButton findBtn;
     private javax.swing.JButton findBtn1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel loginTitle;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel nameLbl1;
+    private javax.swing.JLabel nameLbl2;
     private javax.swing.JTextField nameTxtField;
-    private javax.swing.JTextField nameTxtField1;
     private javax.swing.JTable ngoTbl;
-    private javax.swing.JTable ngoTbl1;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JLabel passwordLbl1;
     private javax.swing.JPasswordField passwordTxtField;
     private javax.swing.JPasswordField passwordTxtField1;
+    private javax.swing.JTable pharmacistTable;
+    private javax.swing.JButton refreshBtn;
+    private javax.swing.JComboBox<String> statusDropdown;
+    private javax.swing.JLabel storeIdLbl;
+    private javax.swing.JTextField storeIdText;
+    private javax.swing.JLabel storeNameLbl;
+    private javax.swing.JTextField storeText;
     // End of variables declaration//GEN-END:variables
 }

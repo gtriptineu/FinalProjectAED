@@ -10,6 +10,8 @@ package model.inventory;
  */
 public interface InventoryDAO {
     public void add(Inventory i);
+    public InventoryDirectory getAll();
+    public void delete(Inventory inv);
     public InventoryDirectory getByMedicine(String medicineName);
     public InventoryDirectory getByMedicineCommunity(String medicineName, String community);
     public InventoryDirectory getByMedicineDosage(String medicineName, String dosage);

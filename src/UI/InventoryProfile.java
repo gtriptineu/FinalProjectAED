@@ -117,7 +117,7 @@ public class InventoryProfile extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void medicineAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicineAddBtnActionPerformed
-        AddInventoryMedicine goToAddInventory = new AddInventoryMedicine(jSplitPane1);
+        AddInventoryMedicine goToAddInventory = new AddInventoryMedicine(jSplitPane1, null);
         jSplitPane1.setRightComponent(goToAddInventory);
         // TODO add your handling code here:
     }//GEN-LAST:event_medicineAddBtnActionPerformed

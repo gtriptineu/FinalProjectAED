@@ -15,6 +15,15 @@ public class Inventory {
     String dosage;
     String comm;
     String storeID;
+    float price;
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public String getMedicineID() {
         return medicineID;
@@ -62,6 +71,11 @@ public class Inventory {
 
     public void setStoreID(String storeID) {
         this.storeID = storeID;
+    }
+    
+    @Override
+    public String toString(){
+        return medicineID;
     }
     
 }
