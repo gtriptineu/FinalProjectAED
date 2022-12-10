@@ -67,4 +67,28 @@ public class NgoDAOImp implements NgoDAO{
         return ngoDir;
     }
     
+    
+    @Override
+    public NgoDirectory getByCommunityCity(String community, String city) {
+        NgoDirectory ngoDir = new NgoDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch = "select * from ngodetails where community='"+community+"'and city='"+city+"';";
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            if(rst.isBeforeFirst()){
+                while(rst.next()){
+                    Ngo i = ngoDir.addNewNgo();
+                    i.setCity(rst.getString("city"));
+                    i.setCommunity(rst.getString("community"));
+                    i.setFunctionality(rst.getString("functionality"));
+                    i.setName(rst.getString("name"));
+                }
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return ngoDir;
+    }
+    
 }

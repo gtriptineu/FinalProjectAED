@@ -4,7 +4,14 @@
  */
 package UI;
 
+import java.util.ArrayList;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.ngo.Ngo;
+import model.ngo.NgoDAOImp;
+import model.ngo.NgoDirectory;
 
 /**
  *
@@ -13,10 +20,12 @@ import javax.swing.JSplitPane;
 public class FindNgoPanel extends javax.swing.JPanel {
 
   JSplitPane splitPane;
+   NgoDirectory allNgo;
     /**
      * Creates new form FindNgoPanel
      */
     public FindNgoPanel(JSplitPane splitPane) {
+        allNgo = new NgoDirectory();
         this.splitPane = splitPane;
         initComponents();
     }
@@ -39,6 +48,7 @@ public class FindNgoPanel extends javax.swing.JPanel {
         findBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ngoTbl = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -52,7 +62,7 @@ public class FindNgoPanel extends javax.swing.JPanel {
         cityLbl.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         cityLbl.setText("City:");
 
-        commDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","Brighton", "Brookline", "Allston", "Chestnut Hill"}));
+        commDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Select Community","Brighton", "Brookline", "Allston", "Chestnut Hill","Huntington Avenue"}));
         commDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 commDropDownActionPerformed(evt);
@@ -85,6 +95,9 @@ public class FindNgoPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(ngoTbl);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("NGO Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,31 +107,31 @@ public class FindNgoPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                             .addComponent(loginTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addContainerGap(222, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(commLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(cityLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(commDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cityLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(cityTxtField))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(commLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(commDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(159, 159, 159))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(findBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(278, 278, 278)
-                .addComponent(findBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,11 +148,13 @@ public class FindNgoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cityLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(findBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,9 +164,46 @@ public class FindNgoPanel extends javax.swing.JPanel {
 
     private void findBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findBtnActionPerformed
         // TODO add your handling code here:
+        allNgo = new NgoDirectory();
+        String communityText = commDropDown.getSelectedItem().toString();
+        String cityName = cityTxtField.getText();
+        
+          if (communityText.isEmpty() || cityName.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please Enter all fields");
+        }
+        else {
+        NgoDAOImp ngoDao = new NgoDAOImp();
+        NgoDirectory ngoDir = new NgoDirectory();
+        ngoDir = ngoDao.getByCommunityCity(communityText, cityName);
+        
+        
+        if(ngoDir.getSize()>0){
+           System.out.println("All store id--");
+           for(Ngo i : ngoDir.getNgoDirectory()){
+               addRows(splitPane,i.getName(),i.getFunctionality(),i.getCommunity(),i.getCity());
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Ngo not found.\nTry for a different community and city.");
+            cityTxtField.setText("");
+            commDropDown.setSelectedItem(0);
+            
+        }
+              
+              
+          }
+          
+        
     }//GEN-LAST:event_findBtnActionPerformed
 
 
+     public void addRows(JSplitPane splitPane, String ngoName,String ngofunc, String comm, String city){
+        DefaultTableModel model = (DefaultTableModel) ngoTbl.getModel();
+        model.setDataVector(new Object[][] { {ngoName,ngofunc, comm, city }}, new Object[] {"NgoName","Functionality", "Community", "City" });
+        
+        System.out.println("Added Rows to table");
+        setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cityLbl;
     private javax.swing.JTextField cityTxtField;
@@ -159,8 +211,11 @@ public class FindNgoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel commLbl;
     private javax.swing.JButton findBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel loginTitle;
     private javax.swing.JTable ngoTbl;
     // End of variables declaration//GEN-END:variables
 }
+
+
