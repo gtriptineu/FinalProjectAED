@@ -10,7 +10,10 @@ package model.pharmacist;
  * @author nikethanann
  */
 public interface PharmacistDao {
-    void add(Pharmacist p);
+    public void add(Pharmacist p);
+    public void delete(Pharmacist p);
 //    boolean checkPharmacistAlreadyPresent(String id);
-    Pharmacist getPharmacist(String emailId, String password);
+    public Pharmacist getPharmacist(String emailId, String password);
+    public PharmacistDirectory getAll();
+    
 }

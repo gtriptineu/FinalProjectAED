@@ -4,8 +4,10 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
-
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
 /**
  *
  * @author nikethanann
@@ -13,9 +15,18 @@ import javax.swing.JSplitPane;
 public class AddInventoryMedicine extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public AddInventoryMedicine(JSplitPane jSplitPane) {
+    public AddInventoryMedicine(JSplitPane jSplitPane, Inventory inv) {
         initComponents();
         this.jSplitPane = jSplitPane;
+        if(!inv.getMedicineID().isEmpty()){
+            medicineIDTxtField.setText(inv.getMedicineID());
+            medicineNameTxtField.setText(inv.getMedicineName());
+            qtyTxtField.setText(Integer.toString(inv.getQuantity()));
+            dosageTxtField.setText(inv.getDosage());
+            priceTxtField.setText(Float.toString(inv.getPrice()));
+            commTxtField.setText(inv.getComm());
+            storeIDTxtField.setText(inv.getStoreID());
+        }
     }
 
     /**
@@ -27,8 +38,6 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        welcomeLbl = new javax.swing.JLabel();
-        adminLbl = new javax.swing.JLabel();
         medicineTitle = new javax.swing.JLabel();
         medicineIDLbl = new javax.swing.JLabel();
         medicineIDTxtField = new javax.swing.JTextField();
@@ -45,14 +54,9 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         addBtn = new javax.swing.JButton();
         priceLbl = new javax.swing.JLabel();
         priceTxtField = new javax.swing.JTextField();
+        backBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
-
-        welcomeLbl.setFont(new java.awt.Font("PT Sans", 1, 17)); // NOI18N
-        welcomeLbl.setText("Welcome,");
-
-        adminLbl.setFont(new java.awt.Font("PT Sans", 1, 17)); // NOI18N
-        adminLbl.setText("<Name>");
 
         medicineTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
         medicineTitle.setText("ADD MEDICINES");
@@ -119,6 +123,11 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
 
         addBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         addBtn.setText("ADD");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         priceLbl.setFont(new java.awt.Font("PT Sans", 1, 15)); // NOI18N
         priceLbl.setText("Price / quantity");
@@ -130,6 +139,14 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
             }
         });
 
+        backBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        backBtn.setText("BACK");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,59 +154,53 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(welcomeLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(adminLbl))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(commLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(commTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dosageLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dosageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(qtyLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(qtyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(medicineIDLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(medicineIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(medicineNameLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(medicineNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(storeIDLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(priceLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(priceTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(345, 345, 345)
-                        .addComponent(addBtn))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(323, 323, 323)
-                        .addComponent(medicineTitle)))
-                .addContainerGap(337, Short.MAX_VALUE))
+                        .addComponent(medicineTitle))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(commLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(commTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(dosageLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dosageTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(qtyLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(qtyTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(medicineIDLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(medicineIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(medicineNameLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(medicineNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(storeIDLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(priceLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(priceTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(93, 93, 93)
+                                .addComponent(backBtn)
+                                .addGap(31, 31, 31)
+                                .addComponent(addBtn)))))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(medicineTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(welcomeLbl)
-                    .addComponent(adminLbl))
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(medicineIDLbl)
                     .addComponent(medicineIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,8 +229,10 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
                     .addComponent(storeIDLbl)
                     .addComponent(storeIDTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,10 +264,49 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceTxtFieldActionPerformed
 
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // TODO add your handling code here:
+        String medicineId = medicineIDTxtField.getText();
+        String name = medicineNameTxtField.getText();
+        String quantity = qtyTxtField.getText();
+        String dosage = dosageTxtField.getText();
+        String price = priceTxtField.getText();
+        String community = commTxtField.getText();
+        String storeId = storeIDTxtField.getText();
+        
+        Inventory i = new Inventory();
+        i.setMedicineID(medicineId);
+        i.setMedicineName(name);
+        i.setQuantity(Integer.parseInt(quantity));
+        i.setDosage(dosage);
+        i.setPrice(Float.parseFloat(price));
+        i.setComm(community);
+        i.setStoreID(storeId);
+        
+        InventoryDAOImp invDao = new InventoryDAOImp();
+        invDao.add(i);
+        JOptionPane.showMessageDialog(this, "Medicine details are added.");
+        
+        medicineIDTxtField.setText("");
+        medicineNameTxtField.setText("");
+        qtyTxtField.setText("");
+        dosageTxtField.setText("");
+        priceTxtField.setText("");
+        commTxtField.setText("");
+        storeIDTxtField.setText("");
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+
+        // TODO add your handling code here:
+        InventoryProfile goToProfile = new InventoryProfile(jSplitPane);
+        jSplitPane.setBottomComponent(goToProfile);
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
-    private javax.swing.JLabel adminLbl;
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel commLbl;
     private javax.swing.JTextField commTxtField;
     private javax.swing.JLabel dosageLbl;
@@ -270,6 +322,5 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
     private javax.swing.JTextField qtyTxtField;
     private javax.swing.JLabel storeIDLbl;
     private javax.swing.JTextField storeIDTxtField;
-    private javax.swing.JLabel welcomeLbl;
     // End of variables declaration//GEN-END:variables
 }

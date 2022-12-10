@@ -16,6 +16,15 @@ public class Pharmacist extends Person{
     private String storeId;
     private String storeName;
     private String community;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getCommunity() {
         return community;
@@ -55,5 +64,10 @@ public class Pharmacist extends Person{
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+    
+    @Override
+    public String toString(){
+        return email;
     }
 }
