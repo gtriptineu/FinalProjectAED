@@ -21,7 +21,8 @@ public class InventoryDAOImp implements InventoryDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String insertInventory = "insert into inventory(medicineId,name,quantity,dosage,storeId,community) values('"+i.getMedicineID()+"','"+i.getMedicineName()+"','"+i.getQuantity()+"','"+i.getDosage()+"','"+i.getStoreID()+"','"+i.getComm()+"')";
+            String insertInventory = "insert into inventory(medicineId,name,quantity,dosage,storeId,community,price) values('"+i.getMedicineID()+"','"+i.getMedicineName()+"','"+i.getQuantity()+"','"+i.getDosage()+"','"+i.getStoreID()+"','"+i.getComm()+"','"+i.getPrice()+"')";
+            System.out.println("Inventory add query --"+ insertInventory);
             stm.executeUpdate(insertInventory);
         } catch(SQLException e){
             System.out.println(e.getMessage());
@@ -45,6 +46,7 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){
@@ -72,6 +74,7 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){
@@ -97,6 +100,7 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){
@@ -122,12 +126,53 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
         return invDir;
+    }
+
+    @Override
+    public InventoryDirectory getAll() {
+        InventoryDirectory invDir = new InventoryDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch = "select * from inventory where quantity>0;";
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            if(rst.isBeforeFirst()){
+                while(rst.next()){
+                    Inventory i = invDir.addNewInventory();
+                    i.setMedicineID(rst.getString("medicineId"));
+                    i.setMedicineName(rst.getString("name"));
+                    i.setQuantity(Integer.parseInt(rst.getString("quantity")));
+                    i.setDosage(rst.getString("dosage"));
+                    i.setStoreID(rst.getString("storeId"));
+                    i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
+                }
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return invDir;
+    }
+
+    @Override
+    public void delete(Inventory inv) {
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            System.out.println("in delete"+inv.getMedicineID());
+            String deleteNgoDetails = "delete from inventory where medicineId='"+inv.getMedicineID()+"'";
+            System.out.println(deleteNgoDetails);
+            stm.executeUpdate(deleteNgoDetails);
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
     
 }
