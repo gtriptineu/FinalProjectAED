@@ -59,6 +59,7 @@ public class PublicScreens extends javax.swing.JPanel {
         setVisible(true);
         }
     }
+    
     public void addRows(JSplitPane splitPane, String storeName, String comm, String viewStore){
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         model.setDataVector(new Object[][] { {storeName, comm, viewStore }}, new Object[] {"Store Name", "Community", "View Store" });

@@ -12,4 +12,5 @@ public interface NgoDAO {
     public void add(Ngo ngo);
     public void delete(Ngo ngo);
     public NgoDirectory getAll();
+    public NgoDirectory getByCommunityCity(String community, String city);
 }

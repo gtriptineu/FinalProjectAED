@@ -63,7 +63,7 @@ Patient patient;
                 {null, null, null, null, null}
             },
             new String [] {
-                "SrNo", "CustNo", "OrderNo", "Status", "StoreName"
+                "MedicineName", "Qty", "StoreName", "Status", "createdOn"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -94,7 +94,7 @@ Patient patient;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel2))
                             .addComponent(backBtn))
-                        .addGap(0, 29, Short.MAX_VALUE)))
+                        .addGap(0, 105, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
