@@ -4,8 +4,18 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.inventory.InventoryDirectory;
+import model.ngo.Ngo;
+import model.ngo.NgoDAOImp;
+import model.ngo.NgoDirectory;
 import model.pharmacist.Pharmacist;
 
 /**
@@ -35,7 +45,7 @@ Pharmacist phar;
 
         purchaseTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        drugTable = new javax.swing.JTable();
+        drugTbl = new javax.swing.JTable();
         addtoCartButton6 = new javax.swing.JButton();
         quantitySpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
@@ -54,8 +64,8 @@ Pharmacist phar;
         purchaseTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         purchaseTitle.setText("PURCHASE MEDICINE FROM VENDORS");
 
-        drugTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        drugTable.setModel(new javax.swing.table.DefaultTableModel(
+        drugTbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        drugTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,7 +84,7 @@ Pharmacist phar;
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(drugTable);
+        jScrollPane1.setViewportView(drugTbl);
 
         addtoCartButton6.setText("ADD TO CART");
         addtoCartButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +98,7 @@ Pharmacist phar;
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Quantity:");
 
-        btnSearchProduct.setText("Search Drug");
+        btnSearchProduct.setText("Search Medicine Name");
         btnSearchProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchProductActionPerformed(evt);
@@ -115,6 +125,12 @@ Pharmacist phar;
             }
         });
         jScrollPane2.setViewportView(orderTable);
+
+        txtSearchKeyWord.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyWordKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("Item in cart");
 
@@ -155,8 +171,8 @@ Pharmacist phar;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtSearchKeyWord)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(74, 74, 74))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -211,11 +227,47 @@ Pharmacist phar;
 
     private void addtoCartButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtoCartButton6ActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRow = drugTbl.getSelectedRow();
+        Inventory selectedDrug;
+        
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null, "Please select a row","warning",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else{
+            selectedDrug = (Inventory) drugTbl.getValueAt(selectedRow, 0);
+        }
+           int fetchQuantity = (Integer)quantitySpinner.getValue();//interger type cast coz getvalue sends a n object wch has to be casted to int
+           if(fetchQuantity <=0){
+               JOptionPane.showMessageDialog(null, "Please select atleast 1 quantity","warning",JOptionPane.ERROR_MESSAGE);
+               return;
+           }
+
        
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
     private void btnSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProductActionPerformed
 
+        String medcineName = txtSearchKeyWord.getText();
+        InventoryDAOImp inventoryDao = new InventoryDAOImp();
+        InventoryDirectory invenDir = new InventoryDirectory();
+        invenDir = inventoryDao.getByMedicine(medcineName);
+        
+        if(invenDir.getSize()>0){
+           System.out.println("All store id--");
+           for(Inventory i : invenDir.getInventoryDirectory()){
+               addRows(splitPane,i.getMedicineName(),i.getMedicineID(),String.valueOf(i.getPrice()),String.valueOf(i.getQuantity()));
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No medicine present");
+            txtSearchKeyWord.setText("");
+            
+            
+        }
+                    
+          
       
     }//GEN-LAST:event_btnSearchProductActionPerformed
 
@@ -237,14 +289,30 @@ Pharmacist phar;
 
     }//GEN-LAST:event_btnCheckOutActionPerformed
 
+    private void txtSearchKeyWordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyWordKeyReleased
+        // TODO add your handling code here:
+         DefaultTableModel model =(DefaultTableModel) drugTbl.getModel();
+        TableRowSorter<DefaultTableModel> trs= new TableRowSorter<>(model);
+        drugTbl.setRowSorter(trs);
+        trs.setRowFilter(RowFilter.regexFilter(txtSearchKeyWord.getText()));
+    }//GEN-LAST:event_txtSearchKeyWordKeyReleased
 
+
+    public void addRows(JSplitPane splitPane, String ngoName,String ngofunc, String comm, String city){
+        DefaultTableModel model = (DefaultTableModel) drugTbl.getModel();
+        model.setDataVector(new Object[][] { {ngoName,ngofunc, comm, city }}, new Object[] {"Name","Drug Id", "Price", "Avail" });
+        
+        System.out.println("Added Rows to table");
+        setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addtoCartButton6;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCheckOut;
     private javax.swing.JButton btnRemoveOrderItem;
     private javax.swing.JButton btnSearchProduct;
-    private javax.swing.JTable drugTable;
+    private javax.swing.JTable drugTbl;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
