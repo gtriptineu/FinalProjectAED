@@ -46,7 +46,7 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
-//                    i.setPrice(Float.parseFloat(rst.getString("price")));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){
@@ -141,7 +141,7 @@ public class InventoryDAOImp implements InventoryDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String medicineSearch = "select * from inventory where quantity>0;";
+            String medicineSearch = "select * from inventory;";
             ResultSet rst= stm.executeQuery(medicineSearch);
             if(rst.isBeforeFirst()){
                 while(rst.next()){
@@ -170,6 +170,46 @@ public class InventoryDAOImp implements InventoryDAO{
             String deleteNgoDetails = "delete from inventory where medicineId='"+inv.getMedicineID()+"'";
             System.out.println(deleteNgoDetails);
             stm.executeUpdate(deleteNgoDetails);
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public InventoryDirectory getByMedicineStoreId(String medicinename, String storeId) {
+        InventoryDirectory invDir = new InventoryDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch = "select * from inventory where name='"+medicinename+"'and storeId='"+storeId+"';";
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            if(rst.isBeforeFirst()){
+                while(rst.next()){
+                    Inventory i = invDir.addNewInventory();
+                    i.setMedicineID(rst.getString("medicineId"));
+                    i.setMedicineName(rst.getString("name"));
+                    i.setQuantity(Integer.parseInt(rst.getString("quantity")));
+                    i.setDosage(rst.getString("dosage"));
+                    i.setStoreID(rst.getString("storeId"));
+                    i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
+                }
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return invDir;
+    }
+
+    @Override
+    public void updateQuantity(String medicineId, int quantity) {
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String updateInvDetails = "UPDATE inventory SET quantity = quantity - '"+quantity+"' WHERE medicineId = '"+medicineId+"';";
+
+            System.out.println(updateInvDetails);
+            stm.executeUpdate(updateInvDetails);
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }

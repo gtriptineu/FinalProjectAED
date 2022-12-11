@@ -16,14 +16,16 @@ JSplitPane splitPane;
 String storeName;
 String comm;
 Patient patient;
+String medicineSearched;
     /**
      * Creates new form PatientPastOrderScreen
      */
-    public PatientPastOrderScreen(JSplitPane splitPane, String storeName, String comm, Patient patient) {
+    public PatientPastOrderScreen(JSplitPane splitPane, String storeName, String comm, Patient patient, String medicineName) {
          this.splitPane = splitPane;
         this.storeName = storeName;
         this.comm = comm;
         this.patient = patient;
+        this.medicineSearched = medicineName;
         initComponents();
     }
 
@@ -116,7 +118,7 @@ Patient patient;
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        PatientProfile allAdminPanel=new PatientProfile(splitPane,storeName,comm,patient);
+        PatientProfile allAdminPanel=new PatientProfile(splitPane,storeName,comm,patient, medicineSearched);
         splitPane.setBottomComponent(allAdminPanel);
     }//GEN-LAST:event_backBtnActionPerformed
 

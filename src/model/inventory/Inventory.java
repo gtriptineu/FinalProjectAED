@@ -75,7 +75,7 @@ public class Inventory {
     
     @Override
     public String toString(){
-        return medicineID;
+        return medicineName;
     }
     
 }

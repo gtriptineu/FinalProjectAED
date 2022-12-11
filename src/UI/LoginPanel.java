@@ -22,11 +22,13 @@ public class LoginPanel extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     String storeName;
     String comm;
-    public LoginPanel(JSplitPane jSplitPane, String storeName, String comm) {
+    String medicineSearched;
+    public LoginPanel(JSplitPane jSplitPane, String storeName, String comm, String medicineName) {
         initComponents();
         this.jSplitPane = jSplitPane;
         this.storeName = storeName;
-        this.comm = comm;       
+        this.comm = comm;
+        this.medicineSearched = medicineName;
     }
 
     /**
@@ -142,7 +144,7 @@ public class LoginPanel extends javax.swing.JPanel {
         
             if (!p.getName().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ p.getName()+ ".");
-                PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, p);
+                PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, p, medicineSearched);
                 jSplitPane.setBottomComponent(goToPatient);
                 System.out.println("Going to patient profile");
             } else {

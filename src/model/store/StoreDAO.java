@@ -13,5 +13,6 @@ import java.util.ArrayList;
 public interface StoreDAO {
     public StoreDirectory getMultipleStore(ArrayList<String> storeIdList);
     public void add(Store s);
+    public String getStoreId(String storeName, String comm);
     
 }
