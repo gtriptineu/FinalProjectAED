@@ -63,8 +63,8 @@ public class DoctorDAOImpl implements DoctorDAO{
                 loggedInDoctor.setDocEmail(rst.getString("email"));
                 loggedInDoctor.setDocPassword(rst.getString("password"));
                 loggedInDoctor.setDocName(rst.getString("name"));
-                loggedInDoctor.setDocContact(Integer.parseInt(rst.getString("contact")));
-                loggedInDoctor.setDocLicense(String.valueOf(rst.getString("license")));
+                loggedInDoctor.setDocContact(rst.getString("contact"));
+                loggedInDoctor.setDocLicense(Integer.valueOf(rst.getString("license")));
                 loggedInDoctor.setDocAddress(rst.getString("address"));
             }
         } catch(SQLException e){

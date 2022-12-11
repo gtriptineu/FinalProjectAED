@@ -11,8 +11,8 @@ package model.doctor;
 public class Doctor {
     String docName;
     String docEmail;
-    String docLicense;
-    int docContact;
+    int docLicense;
+    String docContact;
     String docAddress;
     String docPassword;
 
@@ -32,19 +32,19 @@ public class Doctor {
         this.docEmail = docEmail;
     }
 
-    public String getDocLicense() {
+    public int getDocLicense() {
         return docLicense;
     }
 
-    public void setDocLicense(String docLicense) {
+    public void setDocLicense(int docLicense) {
         this.docLicense = docLicense;
     }
 
-    public int getDocContact() {
+    public String getDocContact() {
         return docContact;
     }
 
-    public void setDocContact(int docContact) {
+    public void setDocContact(String docContact) {
         this.docContact = docContact;
     }
 
