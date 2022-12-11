@@ -13,10 +13,10 @@ import model.admin.AdminLogin;
  *
  * @author nikethanann
  */
-public class LoginVendor extends javax.swing.JPanel {
+public class LoginAdminVendor extends javax.swing.JPanel {
 
     JSplitPane splitPane;
-    public LoginVendor(JSplitPane splitPane) {
+    public LoginAdminVendor(JSplitPane splitPane) {
         this.splitPane = splitPane;
         initComponents();
     }
@@ -36,14 +36,13 @@ public class LoginVendor extends javax.swing.JPanel {
         passwordLbl = new javax.swing.JLabel();
         passwordTxtField = new javax.swing.JPasswordField();
         backBtn = new javax.swing.JButton();
-        signUpBtn = new javax.swing.JButton();
         loginBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
         loginLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         loginLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginLbl.setText("VENDOR LOGIN");
+        loginLbl.setText("VENDOR ADMIN LOGIN");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
@@ -65,14 +64,6 @@ public class LoginVendor extends javax.swing.JPanel {
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
-            }
-        });
-
-        signUpBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
-        signUpBtn.setText("SIGNUP");
-        signUpBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signUpBtnActionPerformed(evt);
             }
         });
 
@@ -110,9 +101,7 @@ public class LoginVendor extends javax.swing.JPanel {
                                 .addComponent(passwordTxtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(backBtn)
-                        .addGap(35, 35, 35)
-                        .addComponent(signUpBtn)
-                        .addGap(26, 26, 26)
+                        .addGap(80, 80, 80)
                         .addComponent(loginBtn)))
                 .addGap(280, 280, 280))
         );
@@ -134,7 +123,6 @@ public class LoginVendor extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginBtn)
-                    .addComponent(signUpBtn)
                     .addComponent(backBtn))
                 .addContainerGap(276, Short.MAX_VALUE))
         );
@@ -151,17 +139,33 @@ public class LoginVendor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-       
-        // TODO add your handling code here:
-    }//GEN-LAST:event_signUpBtnActionPerformed
-
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
 
-        VendorProfile goToProfile = new VendorProfile(splitPane);
-        splitPane.setBottomComponent(goToProfile);
+  
+String username = userNameTxtField.getText();
+String password = String.valueOf(passwordTxtField.getPassword());
+        boolean loginSuccess = false;
+        AdminLogin admin = new AdminLogin();
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setAdminType("vendor");
+        AdminDAOImp adminDao = new AdminDAOImp();
+        loginSuccess = adminDao.loginAdmin(admin);
         
+        if(loginSuccess){
+//            VendorProfile goToProfile = new VendorProfile(splitPane);
+//            splitPane.setBottomComponent(goToProfile);
+
+        VendorAdminPanel goToVendorAdmin=new VendorAdminPanel(splitPane);
+        splitPane.setBottomComponent(goToVendorAdmin);
+        } else {
+            JOptionPane.showMessageDialog(this, "Login Failed.");
+            userNameTxtField.setText("");
+            passwordTxtField.setText("");
+        }
+         
+
 //        String username = userNameTxtField.getText();
 //        String password = String.valueOf(passwordTxtField.getPassword());
 //        boolean loginSuccess = false;
@@ -181,6 +185,7 @@ public class LoginVendor extends javax.swing.JPanel {
 //            passwordTxtField.setText("");
 //        }
 
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
 
@@ -191,7 +196,6 @@ public class LoginVendor extends javax.swing.JPanel {
     private javax.swing.JLabel loginLbl;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JPasswordField passwordTxtField;
-    private javax.swing.JButton signUpBtn;
     private javax.swing.JLabel userNameLbl;
     private javax.swing.JTextField userNameTxtField;
     // End of variables declaration//GEN-END:variables

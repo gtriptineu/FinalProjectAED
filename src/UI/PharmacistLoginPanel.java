@@ -144,7 +144,7 @@ JSplitPane splitPane;
         if (username.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
-            PharmacistDAOImp pharmaDao = new PharmacistDAOImp();
+        PharmacistDAOImp pharmaDao = new PharmacistDAOImp();
         Pharmacist pharma = pharmaDao.getPharmacist(username, password);
         
         
