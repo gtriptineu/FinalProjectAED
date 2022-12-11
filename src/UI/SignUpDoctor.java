@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import model.doctor.Doctor;
+import model.doctor.DoctorDAOImpl;
 /**
  *
  * @author nikethanann
@@ -20,9 +22,13 @@ import javax.swing.JSplitPane;
 public class SignUpDoctor extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public SignUpDoctor(JSplitPane jSplitPane) {
+    String storeName;
+    String comm;
+    public SignUpDoctor(JSplitPane jSplitPane, String storeName, String comm) {
         initComponents();
         this.jSplitPane = jSplitPane;
+        this.storeName = storeName;
+        this.comm = comm;
     }
 
     /**
@@ -46,7 +52,7 @@ public class SignUpDoctor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         registerLbl = new javax.swing.JLabel();
         signupBtn = new javax.swing.JButton();
-        contactTextField = new javax.swing.JTextField();
+        contactTxtField = new javax.swing.JTextField();
         passwordTxtField = new javax.swing.JPasswordField();
         licenseLbl = new javax.swing.JLabel();
         licenseTxtField = new javax.swing.JTextField();
@@ -59,21 +65,18 @@ public class SignUpDoctor extends javax.swing.JPanel {
         addressLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addressLbl.setText("Address:");
 
-        nameTxtField.setForeground(new java.awt.Color(204, 204, 204));
         nameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtFieldActionPerformed(evt);
             }
         });
 
-        addressTxtField.setForeground(new java.awt.Color(204, 204, 204));
         addressTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressTxtFieldActionPerformed(evt);
             }
         });
 
-        emailTxtField.setForeground(new java.awt.Color(204, 204, 204));
         emailTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTxtFieldActionPerformed(evt);
@@ -111,10 +114,9 @@ public class SignUpDoctor extends javax.swing.JPanel {
             }
         });
 
-        contactTextField.setForeground(new java.awt.Color(204, 204, 204));
-        contactTextField.addActionListener(new java.awt.event.ActionListener() {
+        contactTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contactTextFieldActionPerformed(evt);
+                contactTxtFieldActionPerformed(evt);
             }
         });
 
@@ -127,7 +129,6 @@ public class SignUpDoctor extends javax.swing.JPanel {
         licenseLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         licenseLbl.setText("License No.");
 
-        licenseTxtField.setForeground(new java.awt.Color(204, 204, 204));
         licenseTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 licenseTxtFieldActionPerformed(evt);
@@ -169,7 +170,7 @@ public class SignUpDoctor extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(contactLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(contactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(contactTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(0, 0, Short.MAX_VALUE)
                                     .addComponent(registerLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,7 +207,7 @@ public class SignUpDoctor extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(contactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contactTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contactLbl))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -242,8 +243,6 @@ public class SignUpDoctor extends javax.swing.JPanel {
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane);
         jSplitPane.setBottomComponent(goToPublic);
-//        PrimaryJFrame goToJframe = new PrimaryJFrame(jSplitPane);
-//        jSplitPane.setBottomComponent(goToJframe);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -251,10 +250,12 @@ public class SignUpDoctor extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = nameTxtField.getText();
         String email = emailTxtField.getText();
-        String licenseNo = licenseTxtField.getText();
-        String contact = contactTextField.getText();
+        int licenseNo = Integer.parseInt(licenseTxtField.getText());
+        String contact = contactTxtField.getText();
         String address = addressTxtField.getText();
         String password = String.valueOf(passwordTxtField.getPassword());
+        
+        System.out.println(licenseNo+" Is It Integer?"+ isItInteger(contactTxtField.getText()));
         
         if(nameTxtField.getText().equals("") || isItInteger(nameTxtField.getText())) {
             JOptionPane.showMessageDialog(this, "Doctor Name is empty / invalid!");
@@ -262,10 +263,10 @@ public class SignUpDoctor extends javax.swing.JPanel {
         else if(emailTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
             JOptionPane.showMessageDialog(this, "Email ID is empty / invalid!");
         }
-        else if(licenseTxtField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
+        else if(licenseTxtField.getText().equals("") || !isItInteger(licenseTxtField.getText())) {
             JOptionPane.showMessageDialog(this, "License number is empty / invalid!");
         }
-        else if(contactTextField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
+        else if(contactTxtField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Contact Number is empty / invalid!");
         }
         else if(addressTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
@@ -275,43 +276,48 @@ public class SignUpDoctor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Password is empty / invalid!");
         }
         else {
-        //        Generating Random 6 digit number as activation code
-//        Random rnd = new Random();
-//        int activationCode = rnd.nextInt(999999);
-//        String body = ACTIVATION_BODY + Integer.toString(activationCode);
-//        System.out.print("activationCode:"+ activationCode +"-------"+ body);
-//        try
-//        {
-//            Connection connection= DBConnection.dbconnector();
-//            Statement stm = connection.createStatement();
-//            String checkPatient = "select email from patientdetails where email='"+email+"';";
-//
-//            ResultSet rst= stm.executeQuery(checkPatient);
-//            if(rst.next()){
-//                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
-//            } else {
-//                System.out.println("in if");
-//                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
-//                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-//                stm.executeUpdate(insertPatientDetails);
-//                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-//            }
-//
-//        } catch(SQLException e){
-//            System.out.println(e.getMessage());
-//        }
-        nameTxtField.setText("");
-        emailTxtField.setText("");
-        licenseTxtField.setText("");
-        contactTextField.setText("");
-        addressTxtField.setText("");
-        passwordTxtField.setText("");
+            Random rnd = new Random();
+            int activationCode = rnd.nextInt(999999);
+            String body = ACTIVATION_BODY + Integer.toString(activationCode);
+            System.out.print("activationCode:"+ activationCode +"-------"+ body);
+
+            Doctor doc = new Doctor();
+            doc.setDocEmail(email);
+            doc.setDocName(name);
+            doc.setDocContact(contact);
+            doc.setDocAddress(address);
+            doc.setDocLicense(licenseNo);
+            doc.setDocPassword(password);
+            
+            DoctorDAOImpl DocDao = new DoctorDAOImpl();
+            boolean present = DocDao.checkDoctorAlreadyPresent(email);
+
+            if(present){
+                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
+            } else {
+
+//                Need todo validation 6digit integer
+                String userCode;
+                userCode= JOptionPane.showInputDialog("Enter activation code");
+
+                if (userCode.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Please enter activation code");
+                }
+                else {
+                    System.out.println("in if of add");
+                    Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
+                    DocDao.add(doc);
+                    JOptionPane.showMessageDialog(this, "You have successfully signed up!");
+                    LoginDoctor goToLogin=new LoginDoctor(jSplitPane,storeName,comm);
+                    jSplitPane.setBottomComponent(goToLogin);
+                }
+            }
         }
     }//GEN-LAST:event_signupBtnActionPerformed
 
-    private void contactTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTextFieldActionPerformed
+    private void contactTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTxtFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_contactTextFieldActionPerformed
+    }//GEN-LAST:event_contactTxtFieldActionPerformed
 
     private void passwordTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtFieldActionPerformed
         // TODO add your handling code here:
@@ -327,7 +333,7 @@ public class SignUpDoctor extends javax.swing.JPanel {
     private javax.swing.JTextField addressTxtField;
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel contactLbl;
-    private javax.swing.JTextField contactTextField;
+    private javax.swing.JTextField contactTxtField;
     private javax.swing.JLabel emailLbl;
     private javax.swing.JTextField emailTxtField;
     private javax.swing.JLabel jLabel1;

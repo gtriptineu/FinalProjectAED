@@ -216,8 +216,8 @@ public class PrimaryJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_publicBtnActionPerformed
 
     private void doctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorBtnActionPerformed
-        LoginDoctor goToLogin = new LoginDoctor(jSplitPane1);
-        jSplitPane1.setBottomComponent(goToLogin);
+        DoctorStore goToStore = new DoctorStore(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToStore);
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorBtnActionPerformed
 

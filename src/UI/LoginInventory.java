@@ -148,8 +148,8 @@ public class LoginInventory extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane1);
-        jSplitPane1.setBottomComponent(goToSignUp);
+//        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane1);
+//        jSplitPane1.setBottomComponent(goToSignUp);
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpBtnActionPerformed
 

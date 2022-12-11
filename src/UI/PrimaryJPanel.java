@@ -137,7 +137,7 @@ public class PrimaryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_pharmaBtnActionPerformed
 
     private void doctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorBtnActionPerformed
-        LoginDoctor goToLogin = new LoginDoctor(jSplitPane1);
+        LoginDoctor goToLogin = new LoginDoctor(jSplitPane1,null,null);
         jSplitPane1.setBottomComponent(goToLogin);
         // TODO add your handling code here:
     }//GEN-LAST:event_doctorBtnActionPerformed
