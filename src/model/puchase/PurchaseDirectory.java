@@ -25,5 +25,11 @@ public class PurchaseDirectory {
         this.purchaseDir = purchaseDir;
     }
     
+    public Purchase addNewPurchase(){
+        Purchase newMedicine = new Purchase();
+        purchaseDir.add(newMedicine);
+        return newMedicine;
+    }
+    
     
 }
