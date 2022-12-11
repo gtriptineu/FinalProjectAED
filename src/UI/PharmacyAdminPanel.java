@@ -523,7 +523,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         }
         else {
-               System.out.println("age---"+age);
+             
         
         Pharmacist p = new Pharmacist();
         p.setEmail(email);
