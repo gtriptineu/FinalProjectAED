@@ -408,7 +408,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 102, Short.MAX_VALUE))
+                .addGap(0, 97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +507,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
         String contact = contactTextField1.getText();
         String address = addressTxtfield.getText();
            if (name.isEmpty() || email.isEmpty() || age.isEmpty() || status.isEmpty() ||
-                   !community.equals("select community") || storeName.isEmpty() || storeId.isEmpty() || password.isEmpty() ||
+                   community.equals("select community") || storeName.isEmpty() || storeId.isEmpty() || password.isEmpty() ||
                    contact.isEmpty() || address.isEmpty()){
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         }
@@ -688,7 +688,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void addressTxtfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addressTxtfieldKeyReleased
         // TODO add your handling code here:
-        String namePattern="^[a-zA-Z]{0,30}$";
+        String namePattern="^[a-zA-Z]+(?:[\\s.]+[a-zA-Z]+)*$";
         Pattern pat=Pattern.compile(namePattern);
         Matcher match=pat.matcher(addressTxtfield.getText());
         if (!match.matches()) {

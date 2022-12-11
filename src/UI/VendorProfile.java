@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JSplitPane;
+import model.vendor.Vendor;
+
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.Timer;
@@ -19,16 +21,22 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.store.Store;
 
+
 /**
  *
  * @author nikethanann
  */
 public class VendorProfile extends javax.swing.JPanel {
 
-
-    public VendorProfile(JSplitPane jSplitPane1) {
+Vendor ven;
+    /**
+     * Creates new form VendorProfile
+     */
+    public VendorProfile(JSplitPane jSplitPane1,Vendor ven) {
         initComponents();
         this.jSplitPane1 = jSplitPane1;
+        this.ven=ven;
+
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -36,6 +44,7 @@ public class VendorProfile extends javax.swing.JPanel {
         
         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
         model.setRowCount(0);
+
 
             Object[] row = new Object[5];
             row[0]= "Advil";

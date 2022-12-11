@@ -14,5 +14,6 @@ public interface StoreDAO {
     public StoreDirectory getMultipleStore(ArrayList<String> storeIdList);
     public void add(Store s);
     public String getStoreId(String storeName, String comm);
+    public String getStoreName(String storeId);
     
 }

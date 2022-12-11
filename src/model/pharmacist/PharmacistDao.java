@@ -10,6 +10,7 @@ package model.pharmacist;
  * @author nikethanann
  */
 public interface PharmacistDao {
+    
     public void add(Pharmacist p);
     public void delete(Pharmacist p);
 //    boolean checkPharmacistAlreadyPresent(String id);

@@ -4,15 +4,8 @@
  */
 package UI;
 
-import SQLConnection.DBConnection;
-import com.mysql.jdbc.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
-import model.Patient.Patient;
-import model.Patient.PatientDAOImp;
 import model.pharmacist.Pharmacist;
 import model.pharmacist.PharmacistDAOImp;
 
@@ -151,7 +144,7 @@ JSplitPane splitPane;
         if (username.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
-            PharmacistDAOImp pharmaDao = new PharmacistDAOImp();
+        PharmacistDAOImp pharmaDao = new PharmacistDAOImp();
         Pharmacist pharma = pharmaDao.getPharmacist(username, password);
         
         
@@ -173,8 +166,8 @@ JSplitPane splitPane;
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        //        PublicScreens goToPublic = new PublicScreens(jSplitPane);
-        //        jSplitPane.setBottomComponent(goToPublic);
+                PrimaryJPanel homePage = new PrimaryJPanel(splitPane);
+        splitPane.setBottomComponent(homePage);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 

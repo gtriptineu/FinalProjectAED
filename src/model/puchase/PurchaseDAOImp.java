@@ -6,6 +6,7 @@ package model.puchase;
 
 import SQLConnection.DBConnection;
 import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -35,7 +36,49 @@ public class PurchaseDAOImp implements PurchaseDAO{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
             String insertNgoDetails = "select * from patientpurchasehistory where patientEmail='"+email+"';";
-            stm.executeUpdate(insertNgoDetails);
+            
+            ResultSet rst= stm.executeQuery(insertNgoDetails);
+            if(rst.isBeforeFirst()){
+               while(rst.next()){
+                   Purchase one = p.addNewPurchase();
+                   one.setPatientEmail(rst.getString("patientEmail"));
+                   one.setMedicinId(rst.getString("medicineId"));
+                   one.setStoreId(rst.getString("storeId"));
+                   one.setQuantity(Integer.parseInt(rst.getString("quantity")));
+                   one.setStatus(rst.getString("status"));
+                   one.setUpdateTime(rst.getString("timestamp"));
+                   one.setTotalPrice(Float.parseFloat(rst.getString("totalPrice")));
+               }
+            }
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return p;
+    }
+
+    @Override
+    public PurchaseDirectory salesReport() {
+        PurchaseDirectory p = new PurchaseDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String insertNgoDetails = "SELECT *, sum(quantity) as totalQuantity, sum(totalPrice) as sumPrice FROM patientpurchasehistory GROUP BY medicineId;";
+            
+            ResultSet rst= stm.executeQuery(insertNgoDetails);
+            if(rst.isBeforeFirst()){
+               while(rst.next()){
+                   Purchase one = p.addNewPurchase();
+                   one.setPatientEmail(rst.getString("patientEmail"));
+                   one.setMedicinId(rst.getString("medicineId"));
+                   one.setStoreId(rst.getString("storeId"));
+                   one.setQuantity(Integer.parseInt(rst.getString("totalQuantity")));
+                   one.setStatus(rst.getString("status"));
+                   one.setUpdateTime(rst.getString("timestamp"));
+                   one.setTotalPrice(Float.parseFloat(rst.getString("sumPrice")));
+               }
+            }
             
         } catch(SQLException e){
             System.out.println(e.getMessage());

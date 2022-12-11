@@ -214,5 +214,29 @@ public class InventoryDAOImp implements InventoryDAO{
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public Inventory getByMedicineID(String medicineId) {
+        Inventory i = new Inventory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String medicineSearch = "select *from inventory where medicineId='"+medicineId+"';";
+            ResultSet rst= stm.executeQuery(medicineSearch);
+            if(rst.next()){
+                    i.setMedicineID(rst.getString("medicineId"));
+                    i.setMedicineName(rst.getString("name"));
+                    i.setQuantity(Integer.parseInt(rst.getString("quantity")));
+                    i.setDosage(rst.getString("dosage"));
+                    i.setStoreID(rst.getString("storeId"));
+                    i.setComm(rst.getString("community"));
+                    i.setPrice(Float.parseFloat(rst.getString("price")));
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println("inv in medicine" + i);
+        return i;
+    }
     
 }

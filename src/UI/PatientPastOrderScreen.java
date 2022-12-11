@@ -9,9 +9,10 @@ import javax.swing.table.DefaultTableModel;
 import model.Patient.Patient;
 import model.inventory.Inventory;
 import model.inventory.InventoryDAOImp;
-import model.inventory.InventoryDirectory;
+import model.puchase.Purchase;
+import model.puchase.PurchaseDAOImp;
+import model.puchase.PurchaseDirectory;
 import model.store.StoreDAOImp;
-
 /**
  *
  * @author rodri
@@ -131,25 +132,29 @@ String medicineSearched;
 
     
     public void populateTable(){
-        // DefaultTableModel model = (DefaultTableModel) pastOrderTable.getModel();
-        // model.setRowCount(0);
-//        StoreDAOImp sDao = new StoreDAOImp();
-//        String storeId = sDao.getStoreId(storeName, community);
-//        this.storeIdPurchased = storeId;
-//        InventoryDirectory invDir = new InventoryDirectory();
-//        InventoryDAOImp invDao = new InventoryDAOImp();
-//        invDir = invDao.getByMedicineStoreId(medicineName, storeId);
+         DefaultTableModel model = (DefaultTableModel) pastOrderTable.getModel();
+         model.setRowCount(0);
+         PurchaseDAOImp pdao = new PurchaseDAOImp();
+         PurchaseDirectory pDir = new PurchaseDirectory();
+         pDir = pdao.pastOrder(patient.getEmail());
 
-        // for(Inventory inv: invDir.getInventoryDirectory()){
-        //     Object[] row = new Object[4];
-        //      row[0]=;
-        //      row[1]=inv;
-        //      row[2]=inv.getDosage();
-        //      row[3]=inv.getPrice();
+         for(Purchase p: pDir.getPurchaseDir()){
+             InventoryDAOImp iDao = new InventoryDAOImp();
+             Inventory i = iDao.getByMedicineID(p.getMedicinId());
              
-        //      model.addRow(row);
-        //     count++;
-        // }
+             StoreDAOImp sDao = new StoreDAOImp();
+             String storeName = sDao.getStoreName(p.getStoreId());
+             
+             
+             Object[] row = new Object[5];
+              row[0]=i.getMedicineName();
+              row[1]=p.getQuantity();
+              row[2]= storeName;
+              row[3]=p.getStatus();
+              row[4] = p.getUpdateTime();
+             
+              model.addRow(row);
+         }
     }
     
 
