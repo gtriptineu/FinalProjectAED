@@ -471,7 +471,7 @@ public class SignupPanel extends javax.swing.JPanel {
 
     private void contactTextFieldKeyReleased1(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTextFieldKeyReleased1
         // TODO add your handling code here:
-        String namePattern="^[0-9]{9,9}$";
+        String namePattern="^[0-9]{10}$";
         Pattern pat=Pattern.compile(namePattern);
         Matcher match=pat.matcher(contactTextField.getText());
         if (!match.matches()) {
