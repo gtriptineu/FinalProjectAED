@@ -41,7 +41,7 @@ public class VendorProfile extends javax.swing.JPanel {
             row[0]= "Advil";
             row[1]= 12345;
             row[2]=3;
-            row[3]="Order received";
+            row[3]="Order Received";
             row[4]=UpdateTime;
             model.addRow(row);
             
@@ -54,10 +54,39 @@ public class VendorProfile extends javax.swing.JPanel {
             
             a = true;
             timer.start();
+            timer.setRepeats(false);
+//            timer1.start();
     }
     
     boolean a = true;
     Timer timer = new Timer(10000,new ActionListener() {
+        
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            
+            DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+
+            String actualOrderRecd = "Order Received";
+            String orderRecd = ordersTable.getModel().getValueAt(0, 3).toString();
+            System.out.println(ordersTable.getModel().getValueAt(0, 3).toString() + " Value   "+ orderRecd.equals(actualOrderRecd));
+            if(orderRecd.equals(actualOrderRecd))
+            {
+                System.out.println("Printing it as order shipped");
+                ordersTable.getModel().setValueAt("Order Shipped",0, 3);
+            }
+            timer.setDelay(500);
+            System.out.println(ordersTable.getModel().getValueAt(0, 3).toString() + " Value");
+            String actualOrderShip = "Order Shipped";
+            String orderShip = ordersTable.getModel().getValueAt(0, 3).toString();
+            if(orderShip.equals(actualOrderShip))
+            {
+                System.out.println("Printing it as order delivered");
+                ordersTable.getModel().setValueAt("Delivery Successful",0, 3);
+            }
+            System.out.println(ordersTable.getModel().getValueAt(0, 3).toString() + " Value");
+        }
+    });
+        Timer timer1 = new Timer(20000,new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae){
         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
@@ -65,7 +94,7 @@ public class VendorProfile extends javax.swing.JPanel {
         ordersTable.getModel().getValueAt(0, 3).toString();
         System.out.println(ordersTable.getModel().getValueAt(0, 3).toString() + " Value");
 
-        ordersTable.getModel().setValueAt("Order shipped",0, 3);
+        ordersTable.getModel().setValueAt("Delivery successful",0, 3);
         System.out.println(ordersTable.getModel().getValueAt(0, 3).toString() + " Value");
         }
     });
