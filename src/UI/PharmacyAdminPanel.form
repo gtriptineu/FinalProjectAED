@@ -214,7 +214,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="836" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="102" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

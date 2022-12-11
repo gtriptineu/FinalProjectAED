@@ -5,19 +5,21 @@
 package UI;
 
 import javax.swing.JSplitPane;
+import model.vendor.Vendor;
 
 /**
  *
  * @author nikethanann
  */
 public class VendorProfile extends javax.swing.JPanel {
-
+Vendor ven;
     /**
      * Creates new form VendorProfile
      */
-    public VendorProfile(JSplitPane jSplitPane1) {
+    public VendorProfile(JSplitPane jSplitPane1,Vendor ven) {
         initComponents();
         this.jSplitPane1 = jSplitPane1;
+        this.ven=ven;
     }
 
     /**
