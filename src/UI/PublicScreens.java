@@ -39,6 +39,7 @@ public class PublicScreens extends javax.swing.JPanel {
 
     JSplitPane splitPane;
     StoreDirectory allStores;
+    String medicineNameSearched;
     
     public PublicScreens(JSplitPane splitPane) {
         this.splitPane = splitPane;
@@ -165,9 +166,9 @@ public class PublicScreens extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(76, 76, 76)
                 .addComponent(searchTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commSearchLbl)
                     .addComponent(commDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,6 +236,7 @@ public class PublicScreens extends javax.swing.JPanel {
                 invDir = invDao.getByMedicine(medicineName);
             }
 
+            this.medicineNameSearched = medicineName;
             ArrayList<String> allStoreId = new ArrayList<>();
             StoreDAOImp sDao = new StoreDAOImp();
             if(invDir.getSize()>0){
@@ -286,12 +288,12 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         
         if(result == 0) //Login
         {
-            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm);
+            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm, medicineNameSearched);
             splitPane.setBottomComponent(goToLogin);
         }
         else // Sign up
         {
-            SignupPanel goToSignup=new SignupPanel(splitPane, storeName, comm);
+            SignupPanel goToSignup=new SignupPanel(splitPane, storeName, comm,medicineNameSearched);
             splitPane.setBottomComponent(goToSignup);
         }
         // TODO add your handling code here:

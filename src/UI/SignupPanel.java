@@ -4,29 +4,13 @@
  */
 package UI;
 
-
-import javax.swing.JOptionPane;
-
-
-
 import SMTPEmail.Email;
-import com.mysql.jdbc.Connection;
-import java.sql.Statement;
-import SQLConnection.DBConnection;
 import static constants.EmailConnection.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
-
-import com.mysql.jdbc.Connection;
-import static constants.DBConnection.*;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import model.Patient.Patient;
 import model.Patient.PatientDAOImp;
 /**
@@ -37,11 +21,14 @@ public class SignupPanel extends javax.swing.JPanel {
    JSplitPane jSplitPane;
     String storeName;
     String comm;
-    public SignupPanel(JSplitPane jSplitPane, String storeName, String comm) {
+    String medicineSearched;
+    
+    public SignupPanel(JSplitPane jSplitPane, String storeName, String comm, String medicineName) {
         initComponents();
         this.jSplitPane = jSplitPane;
         this.storeName = storeName;
-        this.comm = comm;       
+        this.comm = comm;
+        this.medicineSearched = medicineName;
     }
 
     /**
@@ -380,7 +367,7 @@ public class SignupPanel extends javax.swing.JPanel {
                     Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
                     pDao.add(p);
                     JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginPanel goToLogin=new LoginPanel(jSplitPane,storeName,comm);
+                    LoginPanel goToLogin=new LoginPanel(jSplitPane,storeName,comm, medicineSearched);
                     jSplitPane.setBottomComponent(goToLogin);
                 }
             }   
