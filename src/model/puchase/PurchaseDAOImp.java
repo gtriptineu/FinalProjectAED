@@ -57,5 +57,34 @@ public class PurchaseDAOImp implements PurchaseDAO{
         
         return p;
     }
+
+    @Override
+    public PurchaseDirectory salesReport() {
+        PurchaseDirectory p = new PurchaseDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String insertNgoDetails = "SELECT *, sum(quantity) as totalQuantity, sum(totalPrice) as sumPrice FROM patientpurchasehistory GROUP BY medicineId;";
+            
+            ResultSet rst= stm.executeQuery(insertNgoDetails);
+            if(rst.isBeforeFirst()){
+               while(rst.next()){
+                   Purchase one = p.addNewPurchase();
+                   one.setPatientEmail(rst.getString("patientEmail"));
+                   one.setMedicinId(rst.getString("medicineId"));
+                   one.setStoreId(rst.getString("storeId"));
+                   one.setQuantity(Integer.parseInt(rst.getString("totalQuantity")));
+                   one.setStatus(rst.getString("status"));
+                   one.setUpdateTime(rst.getString("timestamp"));
+                   one.setTotalPrice(Float.parseFloat(rst.getString("sumPrice")));
+               }
+            }
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return p;
+    }
     
 }
