@@ -5,8 +5,14 @@
 package UI;
 
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
 import model.Patient.Patient;
-
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.puchase.Purchase;
+import model.puchase.PurchaseDAOImp;
+import model.puchase.PurchaseDirectory;
+import model.store.StoreDAOImp;
 /**
  *
  * @author rodri
@@ -16,15 +22,18 @@ JSplitPane splitPane;
 String storeName;
 String comm;
 Patient patient;
+String medicineSearched;
     /**
      * Creates new form PatientPastOrderScreen
      */
-    public PatientPastOrderScreen(JSplitPane splitPane, String storeName, String comm, Patient patient) {
+    public PatientPastOrderScreen(JSplitPane splitPane, String storeName, String comm, Patient patient, String medicineName) {
          this.splitPane = splitPane;
         this.storeName = storeName;
         this.comm = comm;
         this.patient = patient;
+        this.medicineSearched = medicineName;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -40,7 +49,7 @@ Patient patient;
         patientIDLbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pastOrderTable = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
@@ -50,12 +59,13 @@ Patient patient;
         loginTitle.setText("PAST ORDER HISTORY");
 
         patientIDLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
-        patientIDLbl.setText("Patient ID:");
+        patientIDLbl.setText("Patient name:");
 
         jLabel2.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         jLabel2.setText("jLabel2");
+        jLabel2.setText(this.patient.getName());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        pastOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -66,7 +76,7 @@ Patient patient;
                 "MedicineName", "Qty", "StoreName", "Status", "createdOn"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(pastOrderTable);
 
         backBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         backBtn.setText("BACK");
@@ -116,17 +126,44 @@ Patient patient;
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        PatientProfile allAdminPanel=new PatientProfile(splitPane,storeName,comm,patient);
+        PatientProfile allAdminPanel=new PatientProfile(splitPane,storeName,comm,patient, medicineSearched);
         splitPane.setBottomComponent(allAdminPanel);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    
+    public void populateTable(){
+         DefaultTableModel model = (DefaultTableModel) pastOrderTable.getModel();
+         model.setRowCount(0);
+         PurchaseDAOImp pdao = new PurchaseDAOImp();
+         PurchaseDirectory pDir = new PurchaseDirectory();
+         pDir = pdao.pastOrder(patient.getEmail());
+
+         for(Purchase p: pDir.getPurchaseDir()){
+             InventoryDAOImp iDao = new InventoryDAOImp();
+             Inventory i = iDao.getByMedicineID(p.getMedicinId());
+             
+             StoreDAOImp sDao = new StoreDAOImp();
+             String storeName = sDao.getStoreName(p.getStoreId());
+             
+             
+             Object[] row = new Object[5];
+              row[0]=i.getMedicineName();
+              row[1]=p.getQuantity();
+              row[2]= storeName;
+              row[3]=p.getStatus();
+              row[4] = p.getUpdateTime();
+             
+              model.addRow(row);
+         }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel loginTitle;
+    private javax.swing.JTable pastOrderTable;
     private javax.swing.JLabel patientIDLbl;
     // End of variables declaration//GEN-END:variables
 }

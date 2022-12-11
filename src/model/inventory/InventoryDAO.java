@@ -13,7 +13,10 @@ public interface InventoryDAO {
     public InventoryDirectory getAll();
     public void delete(Inventory inv);
     public InventoryDirectory getByMedicine(String medicineName);
+    public Inventory getByMedicineID(String medicineId);
     public InventoryDirectory getByMedicineCommunity(String medicineName, String community);
     public InventoryDirectory getByMedicineDosage(String medicineName, String dosage);
     public InventoryDirectory getByMedicineCommunityDosage(String medicineName, String community, String dosage);
+    public InventoryDirectory getByMedicineStoreId(String medicinename, String storeId);
+    public void updateQuantity(String medicineId, int quantity);
 }

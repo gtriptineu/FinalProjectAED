@@ -9,6 +9,8 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +63,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         backBtn = new javax.swing.JButton();
         ngoIdLabel = new javax.swing.JLabel();
         ngoIdTextField = new javax.swing.JTextField();
+        cityErrorLbl = new javax.swing.JLabel();
+        ngoIdErrorLbl = new javax.swing.JLabel();
+        ngoErrorLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -82,8 +87,25 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         medicineLbl1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl1.setText("Community:");
 
+        cityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityTextFieldActionPerformed(evt);
+            }
+        });
+        cityTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cityTextFieldKeyReleased(evt);
+            }
+        });
+
         medicineLbl2.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl2.setText("NGO Name:");
+
+        nameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameTextFieldKeyReleased(evt);
+            }
+        });
 
         medicineLbl3.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl3.setText("Functionality");
@@ -136,6 +158,12 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         ngoIdLabel.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         ngoIdLabel.setText("NGO ID:");
 
+        ngoIdTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ngoIdTextFieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,33 +180,35 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                             .addComponent(medicineLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(medicineLbl2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(medicineLbl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ngoIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(ngoIdTextField)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(communityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cityTextField)
-                                .addComponent(nameTextField)
-                                .addComponent(functionalityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(ngoIdLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(storeNameLbl)
-                                .addGap(120, 120, 120))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(ngoIdTextField)
+                                    .addComponent(communityDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cityTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(functionalityDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cityErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(ngoIdErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                                            .addComponent(ngoErrorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(storeNameLbl)
+                                        .addGap(120, 120, 120))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(23, 23, 23)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(664, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,34 +226,37 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(medicineLbl)
-                            .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(medicineLbl2)
-                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(medicineLbl3)
-                            .addComponent(functionalityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ngoIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ngoIdLabel))
-                        .addGap(16, 16, 16))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(medicineLbl2)
+                                .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ngoErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(medicineLbl3)
+                                    .addComponent(functionalityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ngoIdLabel)
+                                    .addComponent(ngoIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ngoIdErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(storeNameLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(494, Short.MAX_VALUE)
                     .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(54, 54, 54)))
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -246,12 +279,16 @@ public class NgoAdminPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
         String community = communityDropdown.getSelectedItem().toString();
         String city = cityTextField.getText();
         String name = nameTextField.getText();
         String functionality = functionalityDropdown.getSelectedItem().toString();
         String id = ngoIdTextField.getText();
+       if (community.isEmpty() || city.isEmpty() || name.isEmpty() || functionality.isEmpty() || id.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please Enter all fields");
+        } else  {
+           
+           
         Ngo ngo = new Ngo();
         ngo.setCommunity(community);
         ngo.setCity(city);
@@ -269,6 +306,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         ngoIdTextField.setText("");
         
         populateTable();
+           
+       } 
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -277,6 +317,52 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         AllAdmins allAdmin = new AllAdmins(splitPane);
         splitPane.setBottomComponent(allAdmin);
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void cityTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cityTextFieldKeyReleased
+        // TODO add your handling code here:
+        String namePattern="^[a-zA-Z]{0,30}$";
+        Pattern pat=Pattern.compile(namePattern);
+        Matcher match=pat.matcher(cityTextField.getText());
+        if (!match.matches()) {
+            cityErrorLbl.setText("Naming is incorrect");
+        }
+        else {
+            
+            cityErrorLbl.setText(null);
+        }
+    }//GEN-LAST:event_cityTextFieldKeyReleased
+
+    private void cityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cityTextFieldActionPerformed
+
+    private void nameTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTextFieldKeyReleased
+        // TODO add your handling code here:
+        String namePattern="^[a-zA-Z]{0,30}$";
+        Pattern pat=Pattern.compile(namePattern);
+        Matcher match=pat.matcher(nameTextField.getText());
+        if (!match.matches()) {
+            ngoErrorLbl.setText("Naming is incorrect");
+        }
+        else {
+            
+            ngoErrorLbl.setText(null);
+        }
+    }//GEN-LAST:event_nameTextFieldKeyReleased
+
+    private void ngoIdTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ngoIdTextFieldKeyReleased
+        // TODO add your handling code here:
+        String namePattern="^[a-zA-Z]{0,30}$";
+        Pattern pat=Pattern.compile(namePattern);
+        Matcher match=pat.matcher(nameTextField.getText());
+        if (!match.matches()) {
+            ngoIdTextField.setText("Naming is incorrect");
+        }
+        else {
+            
+            ngoIdTextField.setText(null);
+        }
+    }//GEN-LAST:event_ngoIdTextFieldKeyReleased
 
     private void populateTable() {
         System.out.println("in populate Table");
@@ -303,6 +389,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton backBtn;
+    private javax.swing.JLabel cityErrorLbl;
     private javax.swing.JTextField cityTextField;
     private javax.swing.JComboBox<String> communityDropdown;
     private javax.swing.JButton deleteButton;
@@ -315,6 +402,8 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel medicineLbl2;
     private javax.swing.JLabel medicineLbl3;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel ngoErrorLbl;
+    private javax.swing.JLabel ngoIdErrorLbl;
     private javax.swing.JLabel ngoIdLabel;
     private javax.swing.JTextField ngoIdTextField;
     private javax.swing.JTable ngoTbl;

@@ -50,5 +50,39 @@ public class StoreDAOImp implements StoreDAO{
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public String getStoreId(String storeName, String comm) {
+        String storeId = null;
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String storeSearch = "select * from storedetails where storeName='"+storeName+"'and community='"+comm+"';";
+            ResultSet rs= stm.executeQuery(storeSearch);
+            if(rs.next()){
+                storeId = rs.getString("storeId");
+            }
+         } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return storeId;
+    }
+
+    @Override
+    public String getStoreName(String storeId) {
+        String storeName = null;
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String storeSearch = "select * from storedetails where storeId='"+storeId+"';";
+            ResultSet rs= stm.executeQuery(storeSearch);
+            if(rs.next()){
+                storeId = rs.getString("storeName");
+            }
+         } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return storeId;
+    }
     
 }
