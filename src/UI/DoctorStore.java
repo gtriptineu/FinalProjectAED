@@ -7,6 +7,7 @@ package UI;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,6 +18,12 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.inventory.InventoryDirectory;
+import model.store.Store;
+import model.store.StoreDAOImp;
+import model.store.StoreDirectory;
 
 /**
  *
@@ -25,25 +32,12 @@ import javax.swing.table.TableCellRenderer;
 public class DoctorStore extends javax.swing.JPanel {
 
     JSplitPane splitPane;
+    StoreDirectory allStores;
     public DoctorStore(JSplitPane splitPane) {
         initComponents();
         this.splitPane = splitPane;
+        allStores = new StoreDirectory();
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
-        
-        int sno = 1;
-        String storeName = "CVS";
-        String comm = "Brighton";
-        String viewStore = "View Store";
-        addRows(splitPane,sno,storeName,comm,viewStore);
-        setVisible(true);
-    }
-    public void addRows(JSplitPane splitPane, int sno, String storeName, String comm, String viewStore){
-        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
-        model.setDataVector(new Object[][] { { sno, storeName, comm, viewStore },{ "2", "7/11", "Allston", "View Store" }}, new Object[] { "S.no","Store Name", "Community", "View Store" });
-        medicinesTable.getColumn("View Store").setCellRenderer(new DoctorStore.ButtonRenderer());
-        medicinesTable.getColumn("View Store").setCellEditor(new DoctorStore.ButtonEditor(new JCheckBox()));
-        System.out.println("Added Rows to table");
-        setVisible(true);
     }
 
     /**
@@ -63,6 +57,7 @@ public class DoctorStore extends javax.swing.JPanel {
         searchBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
+        viewBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -99,17 +94,17 @@ public class DoctorStore extends javax.swing.JPanel {
         medicinesTable.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "S.no", "Store Name", "Community", "View Store"
+                "Store Name", "Community"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -117,6 +112,14 @@ public class DoctorStore extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(medicinesTable);
+
+        viewBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        viewBtn.setText("VIEW");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -140,6 +143,10 @@ public class DoctorStore extends javax.swing.JPanel {
                                 .addComponent(commDropDown, javax.swing.GroupLayout.Alignment.LEADING, 0, 162, Short.MAX_VALUE))
                             .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(253, 253, 253))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +165,9 @@ public class DoctorStore extends javax.swing.JPanel {
                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(viewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,11 +181,85 @@ public class DoctorStore extends javax.swing.JPanel {
     }//GEN-LAST:event_commDropDownActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-        if(medicineTxtField.getText().equals("") || isItInteger(medicineTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Medicine Name Field is empty / invalid!");
+
+        if(medicineTxtField.getText().equals("")|| isItInteger(medicineTxtField.getText()))
+        {
+            JOptionPane.showMessageDialog(this, "Enter a medicine name!");
+            return;
+        }
+        else 
+        {
+            allStores = new StoreDirectory();
+            String communityText = commDropDown.getSelectedItem().toString();
+            String medicineName = medicineTxtField.getText();
+
+            InventoryDAOImp invDao = new InventoryDAOImp();
+            InventoryDirectory invDir = new InventoryDirectory();
+
+            if (!communityText.equals("Select Community") && !medicineName.isEmpty()){
+                invDir = invDao.getByMedicineCommunity(medicineName, communityText);
+            } else{
+                invDir = invDao.getByMedicine(medicineName);
+            }
+
+            ArrayList<String> allStoreId = new ArrayList<>();
+            StoreDAOImp sDao = new StoreDAOImp();
+            if(invDir.getSize()>0){
+                for(Inventory i : invDir.getInventoryDirectory()){
+                    allStoreId.add(i.getStoreID());
+                }
+                System.out.println("All store id--"+ allStoreId);
+                allStores = sDao.getMultipleStore(allStoreId);
+                DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
+                model.setRowCount(0);
+                for(Store s: allStores.getStoreDictionary()){
+                    System.out.println("--Store--"+ s.getStoreId()+"--"+s.getStoreName()+"--"+s.getCommunity());
+                    String storeName = s.getStoreName();
+                    String comm = s.getCommunity();
+
+                    Object[] row = new Object[2];
+                    row[0]= storeName;
+                    row[1]= comm;
+                    model.addRow(row);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Medicine not found.\nTry for a different medicine name.");
+                medicineTxtField.setText("");
+                commDropDown.setSelectedItem(0);
+            }
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+        
+        int selectedRowIndex = medicinesTable.getSelectedRow();
+        if(selectedRowIndex<0)
+        {
+            JOptionPane.showMessageDialog(this, "Please select a row to view.");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
+        String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 0).toString();
+        String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
+        String[] buttons = { "Login", "Sign Up"};
+        int result =0;
+        result = JOptionPane.showOptionDialog(null, "Oops! Login / Sign up, please", "Login / Sign Up",
+JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
+        
+        if(result == 0) //Login
+        {
+            LoginDoctor goToLogin=new LoginDoctor(splitPane, storeName, comm);
+            splitPane.setBottomComponent(goToLogin);
+        }
+        else // Sign up
+        {
+            SignUpDoctor goToSignup=new SignUpDoctor(splitPane, storeName, comm);
+            splitPane.setBottomComponent(goToSignup);
+        }
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_viewBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -188,89 +271,9 @@ public class DoctorStore extends javax.swing.JPanel {
     private javax.swing.JTable medicinesTable;
     private javax.swing.JButton searchBtn;
     private javax.swing.JLabel searchTitle;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
-    class ButtonRenderer extends JButton implements TableCellRenderer {
 
-      public ButtonRenderer() {
-        setOpaque(true);
-      }
-
-      public Component getTableCellRendererComponent(JTable medicinesTable, Object value,
-          boolean isSelected, boolean hasFocus, int row, int column) {
-        if (isSelected) {
-          setForeground(medicinesTable.getSelectionForeground());
-          setBackground(medicinesTable.getSelectionBackground());
-        } else {
-          setForeground(medicinesTable.getForeground());
-          setBackground(UIManager.getColor("Button.background"));
-        }
-        setText((value == null) ? "" : value.toString());
-        return this;
-      }
-    }
-    
-        class ButtonEditor extends DefaultCellEditor {
-      protected JButton button;
-
-      private String label;
-
-      private boolean isPushed;
-
-      public ButtonEditor(JCheckBox checkBox) {
-        super(checkBox);
-        button = new JButton();
-        button.setOpaque(true);
-        button.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            fireEditingStopped();
-          }
-        });
-      }
-
-      public Component getTableCellEditorComponent(JTable table, Object value,
-          boolean isSelected, int row, int column) {
-        if (isSelected) {
-          button.setForeground(table.getSelectionForeground());
-          button.setBackground(table.getSelectionBackground());
-        } else {
-          button.setForeground(table.getForeground());
-          button.setBackground(table.getBackground());
-        }
-        label = (value == null) ? "" : value.toString();
-        button.setText(label);
-        isPushed = true;
-        return button;
-      }
-
-      public Object getCellEditorValue() {
-          int result = 0 ;
-        if (isPushed) {
-        String[] buttons = { "Login", "Sign Up"};
-        result = JOptionPane.showOptionDialog(null, "Oops! Login / Sign up, please", "Login / Sign Up",
-JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
-        }
-        if(result == 0) //Login
-        {
-            int selectedRowIndex = medicinesTable.getSelectedRow();
-            String storeName = medicinesTable.getModel().getValueAt(selectedRowIndex, 1).toString();
-            String comm = medicinesTable.getModel().getValueAt(selectedRowIndex, 2).toString();
-//            LoginPanel goToLogin=new LoginPanel(splitPane, storeName, comm,null);
-//            splitPane.setBottomComponent(goToLogin);    
-        }
-        else // Sign up
-        {
-            SignupPanel goToSignup=new SignupPanel(splitPane);
-            splitPane.setBottomComponent(goToSignup);
-            
-        }
-        isPushed = false;
-        return new String(label);
-      }
-
-      protected void fireEditingStopped() {
-        super.fireEditingStopped();
-      }
-    }
     private static boolean isItInteger(String s) {
     try { 
         Integer.parseInt(s); 
