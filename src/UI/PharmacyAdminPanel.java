@@ -585,7 +585,7 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
     private void emailTxtFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtFieldKeyReleased
         // TODO add your handling code here:
 
-        String namePattern="^[a-zA-Z]{3,30}[@][a-zA-Z]{0,9}[.][a-zA-Z]{0,3}$";
+        String namePattern="^[a-zA-Z]{3,30}[@][a-zA-Z]{0,9}[.][a-zA-Z]{3}$";
         Pattern pat=Pattern.compile(namePattern);
         Matcher match=pat.matcher(emailTxtField.getText());
         if (!match.matches()) {

@@ -434,7 +434,7 @@ public class SignupPanel extends javax.swing.JPanel {
         Pattern pat=Pattern.compile(namePattern);
         Matcher match=pat.matcher(ageTxtField.getText());
         if (!match.matches()) {
-             ageLbl.setText("Age is incorrect!!Age should be int");
+             ageLbl.setText("Age should be int");
         }
         else {
              ageLbl.setText(null);
@@ -443,7 +443,7 @@ public class SignupPanel extends javax.swing.JPanel {
 
     private void contactTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTextFieldKeyReleased
         // TODO add your handling code here:
-        String namePattern="^[0-9]{9,9}$";
+        String namePattern="^[0-9]{9}$";
         Pattern pat=Pattern.compile(namePattern);
         Matcher match=pat.matcher(contactTextField.getText());
         if (!match.matches()) {
