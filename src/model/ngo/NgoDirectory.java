@@ -7,6 +7,7 @@ package model.ngo;
 import java.util.ArrayList;
 import model.inventory.Inventory;
 
+
 /**
  *
  * @author Lenovo
@@ -34,5 +35,9 @@ public class NgoDirectory {
     
     public void viewInventory(Ngo n){
         System.out.print(n.getId()+" ---- "+n.getName()+" --- "+ n.getFunctionality());       
+    }
+    
+    public int getSize(){
+        return ngoDirectory.size();
     }
 }
