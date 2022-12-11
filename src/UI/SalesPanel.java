@@ -14,6 +14,13 @@ import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.puchase.Purchase;
+import model.puchase.PurchaseDAOImp;
+import model.puchase.PurchaseDirectory;
+import model.store.StoreDAOImp;
 
 
 /**
@@ -28,6 +35,7 @@ JSplitPane splitPane;
     public SalesPanel(JSplitPane splitPane) {
         this.splitPane = splitPane;
         initComponents();
+        populateTable();
     }
 
     /**
@@ -56,11 +64,10 @@ JSplitPane splitPane;
 
         salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"sam", "10", "100"},
-                {"Drake", "30", "100"}
+
             },
             new String [] {
-                "vendorName", "QtySold", "Price"
+                "Medicine Name", "Store Name", "QtySold", "Price"
             }
         ));
         jScrollPane1.setViewportView(salesTable);
@@ -123,8 +130,9 @@ JSplitPane splitPane;
        try {
        PdfWriter.getInstance(doc,new FileOutputStream(path+"phramacysales.pdf"));
        doc.open();
-       PdfPTable tbl=new PdfPTable(3);
-       tbl.addCell("VendorName");
+       PdfPTable tbl=new PdfPTable(4);
+       tbl.addCell("Medicine Name");
+       tbl.addCell("Store Name");
        tbl.addCell("QtySold");
        tbl.addCell("Price");
          
@@ -133,10 +141,12 @@ JSplitPane splitPane;
              System.out.println("data"+salesTable.getRowCount());
              System.out.println("data1"+salesTable.getValueAt(i, 0).toString());
              String name=salesTable.getValueAt(i, 0).toString();
-             String soldQty=salesTable.getValueAt(i, 1).toString();
-             String amount=salesTable.getValueAt(i, 2).toString();
+             String storeName = salesTable.getValueAt(i, 1).toString();
+             String soldQty=salesTable.getValueAt(i, 2).toString();
+             String amount=salesTable.getValueAt(i, 3).toString();
              
              tbl.addCell(name);
+             tbl.addCell(storeName);
              tbl.addCell(soldQty);
              tbl.addCell(amount);
              
@@ -159,6 +169,31 @@ JSplitPane splitPane;
         // TODO add your handling code here:
     }//GEN-LAST:event_pdfBtnActionPerformed
 
+    
+    public void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) salesTable.getModel();
+         model.setRowCount(0);
+         PurchaseDAOImp pdao = new PurchaseDAOImp();
+         PurchaseDirectory pDir = new PurchaseDirectory();
+         pDir = pdao.salesReport();
+
+         for(Purchase p: pDir.getPurchaseDir()){
+             InventoryDAOImp iDao = new InventoryDAOImp();
+             Inventory i = iDao.getByMedicineID(p.getMedicinId());
+
+             StoreDAOImp sDao = new StoreDAOImp();
+             String storeName = sDao.getStoreName(p.getStoreId());
+             
+             
+             Object[] row = new Object[4];
+              row[0]=i.getMedicineName();
+              row[1]= storeName;
+              row[2]=p.getQuantity();
+              row[3] = p.getTotalPrice();
+             
+              model.addRow(row);
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
