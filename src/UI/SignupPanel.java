@@ -34,14 +34,14 @@ import model.Patient.PatientDAOImp;
  * @author rodri
  */
 public class SignupPanel extends javax.swing.JPanel {
-    JSplitPane splitPane;
-
-    /**
-     * Creates new form SignupPanel
-     */
-    public SignupPanel(JSplitPane splitPane) {
-        this.splitPane = splitPane;
+   JSplitPane jSplitPane;
+    String storeName;
+    String comm;
+    public SignupPanel(JSplitPane jSplitPane, String storeName, String comm) {
         initComponents();
+        this.jSplitPane = jSplitPane;
+        this.storeName = storeName;
+        this.comm = comm;       
     }
 
     /**
@@ -339,7 +339,6 @@ public class SignupPanel extends javax.swing.JPanel {
         PatientDAOImp pDao = new PatientDAOImp();
         boolean present = pDao.checkPatientAlreadyPresent(email);
 
-            
             if(present){
                 JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
             } else {
@@ -349,7 +348,6 @@ public class SignupPanel extends javax.swing.JPanel {
                 userCode= JOptionPane.showInputDialog("Enter activation code");
 
                 if (userCode.isBlank()) {
-
                     JOptionPane.showMessageDialog(null, "Please enter activation code");
                 }
                 else {
@@ -357,12 +355,10 @@ public class SignupPanel extends javax.swing.JPanel {
                     Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
                     pDao.add(p);
                     JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginPanel goToLogin=new LoginPanel(splitPane,null,null);
-                    splitPane.setBottomComponent(goToLogin);
+                    LoginPanel goToLogin=new LoginPanel(jSplitPane,storeName,comm);
+                    jSplitPane.setBottomComponent(goToLogin);
                 }
-
-            }
-            
+            }   
         }
         
         nameTxtField.setText("");

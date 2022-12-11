@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import model.doctor.Doctor;
+import model.doctor.DoctorDAOImpl;
 
 /**
  *
@@ -19,9 +21,13 @@ import javax.swing.JOptionPane;
 public class LoginDoctor extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public LoginDoctor(JSplitPane jSplitPane) {
+    String storeName;
+    String comm;
+    public LoginDoctor(JSplitPane jSplitPane, String storeName, String comm) {
         initComponents();
         this.jSplitPane = jSplitPane;
+        this.storeName = storeName;
+        this.comm = comm;
     }
 
     /**
@@ -146,7 +152,7 @@ public class LoginDoctor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpBtnActionPerformed
-        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane);
+        SignUpDoctor goToSignUp = new SignUpDoctor(jSplitPane,storeName,comm);
         jSplitPane.setBottomComponent(goToSignUp);
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpBtnActionPerformed
@@ -160,33 +166,22 @@ public class LoginDoctor extends javax.swing.JPanel {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
 
-        DoctorStore goToStore = new DoctorStore(jSplitPane);
-        jSplitPane.setBottomComponent(goToStore);
-//        String email = userNameTxtField.getText();
-//        String password = String.valueOf(passwordTxtField.getPassword());
-//
-//        try
-//        {
-//            System.out.println("In try");
-//            Connection connection= DBConnection.dbconnector();
-//            Statement stm = connection.createStatement();
-//            String loginPatient = "select email,password,name from patientdetails where email='"+email+"'and password='"+password+"';";
-//
-//            ResultSet rst= stm.executeQuery(loginPatient);
-//            if (rst.next()){
-//                String patientName = rst.getString("Name");
-//                JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ patientName+ ".");
-//                PatientProfile goToPatient = new PatientProfile(jSplitPane);
-//                jSplitPane.setBottomComponent(goToPatient);
-//                System.out.println("Going to patient profile");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Login Failed");
-//                userNameTxtField.setText("");
-//                passwordTxtField.setText("");
-//            }
-//        } catch(SQLException e){
-//            System.out.println(e.getMessage());
-//        }
+        String email = userNameTxtField.getText();
+        String password = String.valueOf(passwordTxtField.getPassword());
+        DoctorDAOImpl DocDao = new DoctorDAOImpl();
+        Doctor doc = DocDao.getDoctor(email, password);
+        
+            if (!doc.getDocEmail().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Login Sucess");
+                DoctorStore goToStore = new DoctorStore(jSplitPane);
+                jSplitPane.setBottomComponent(goToStore);
+                System.out.println("Going to doctor store");
+            } else {
+                JOptionPane.showMessageDialog(this, "Login Failed");
+                userNameTxtField.setText("");
+                passwordTxtField.setText("");
+            }
+        
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void userNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtFieldActionPerformed

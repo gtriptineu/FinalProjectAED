@@ -140,7 +140,6 @@ public class LoginPanel extends javax.swing.JPanel {
         PatientDAOImp pDao = new PatientDAOImp();
         Patient p = pDao.getPatient(email, password);
         
-        
             if (!p.getName().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Login Sucess. Welcome "+ p.getName()+ ".");
                 PatientProfile goToPatient = new PatientProfile(jSplitPane, storeName, comm, p);

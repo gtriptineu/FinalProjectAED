@@ -46,7 +46,7 @@ public class InventoryDAOImp implements InventoryDAO{
                     i.setDosage(rst.getString("dosage"));
                     i.setStoreID(rst.getString("storeId"));
                     i.setComm(rst.getString("community"));
-                    i.setPrice(Float.parseFloat(rst.getString("price")));
+//                    i.setPrice(Float.parseFloat(rst.getString("price")));
                 }
             }
         } catch(SQLException e){

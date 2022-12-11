@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import model.doctor.Doctor;
+import model.doctor.DoctorDAOImpl;
 /**
  *
  * @author nikethanann
@@ -20,9 +22,13 @@ import javax.swing.JSplitPane;
 public class SignUpDoctor extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public SignUpDoctor(JSplitPane jSplitPane) {
+    String storeName;
+    String comm;
+    public SignUpDoctor(JSplitPane jSplitPane, String storeName, String comm) {
         initComponents();
         this.jSplitPane = jSplitPane;
+        this.storeName = storeName;
+        this.comm = comm;
     }
 
     /**
@@ -242,8 +248,6 @@ public class SignUpDoctor extends javax.swing.JPanel {
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         PublicScreens goToPublic = new PublicScreens(jSplitPane);
         jSplitPane.setBottomComponent(goToPublic);
-//        PrimaryJFrame goToJframe = new PrimaryJFrame(jSplitPane);
-//        jSplitPane.setBottomComponent(goToJframe);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -256,57 +260,64 @@ public class SignUpDoctor extends javax.swing.JPanel {
         String address = addressTxtField.getText();
         String password = String.valueOf(passwordTxtField.getPassword());
         
-        if(nameTxtField.getText().equals("") || isItInteger(nameTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Doctor Name is empty / invalid!");
-        }
-        else if(emailTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Email ID is empty / invalid!");
-        }
-        else if(licenseTxtField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "License number is empty / invalid!");
-        }
-        else if(contactTextField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Contact Number is empty / invalid!");
-        }
-        else if(addressTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
-            JOptionPane.showMessageDialog(this, "Address is empty / invalid!");
-        }
-        else if(password.equals("")) {
-            JOptionPane.showMessageDialog(this, "Password is empty / invalid!");
-        }
-        else {
-        //        Generating Random 6 digit number as activation code
-//        Random rnd = new Random();
-//        int activationCode = rnd.nextInt(999999);
-//        String body = ACTIVATION_BODY + Integer.toString(activationCode);
-//        System.out.print("activationCode:"+ activationCode +"-------"+ body);
-//        try
-//        {
-//            Connection connection= DBConnection.dbconnector();
-//            Statement stm = connection.createStatement();
-//            String checkPatient = "select email from patientdetails where email='"+email+"';";
+        System.out.println(licenseNo+" Is It Integer?");
+        
+//        if(nameTxtField.getText().equals("") || isItInteger(nameTxtField.getText())) {
+//            JOptionPane.showMessageDialog(this, "Doctor Name is empty / invalid!");
+//        }
+//        else if(emailTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
+//            JOptionPane.showMessageDialog(this, "Email ID is empty / invalid!");
+//        }
+//        else if(licenseTxtField.getText().equals("") || !isItInteger(licenseTxtField.getText())) {
+//            JOptionPane.showMessageDialog(this, "License number is empty / invalid!");
+//        }
+//        else if(contactTextField.getText().equals("") || !isItInteger(emailTxtField.getText())) {
+//            JOptionPane.showMessageDialog(this, "Contact Number is empty / invalid!");
+//        }
+//        else if(addressTxtField.getText().equals("") || isItInteger(emailTxtField.getText())) {
+//            JOptionPane.showMessageDialog(this, "Address is empty / invalid!");
+//        }
+//        else if(password.equals("")) {
+//            JOptionPane.showMessageDialog(this, "Password is empty / invalid!");
+//        }
+//        else {
+//            Random rnd = new Random();
+//            int activationCode = rnd.nextInt(999999);
+//            String body = ACTIVATION_BODY + Integer.toString(activationCode);
+//            System.out.print("activationCode:"+ activationCode +"-------"+ body);
 //
-//            ResultSet rst= stm.executeQuery(checkPatient);
-//            if(rst.next()){
+//            Doctor doc = new Doctor();
+//            doc.setDocEmail(email);
+//            doc.setDocName(name);
+//            doc.setDocContact(Integer.parseInt(contact));
+//            doc.setDocAddress(address);
+//            doc.setDocLicense(String.valueOf(licenseNo));
+//            doc.setDocPassword(password);
+//            
+//            DoctorDAOImpl DocDao = new DoctorDAOImpl();
+//            boolean present = DocDao.checkDoctorAlreadyPresent(email);
+//
+//            if(present){
 //                JOptionPane.showMessageDialog(this, "This email Id already exists.\nPlease try loging in or with a different email id.");
 //            } else {
-//                System.out.println("in if");
-//                Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
-//                String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password) values('"+email+"','"+name+"','"+contact+"','"+address+"','"+password+"')";
-//                stm.executeUpdate(insertPatientDetails);
-//                JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-//            }
+
+                //Need todo validation 6digit integer
+//                String userCode;
+//                userCode= JOptionPane.showInputDialog("Enter activation code");
 //
-//        } catch(SQLException e){
-//            System.out.println(e.getMessage());
+//                if (userCode.isBlank()) {
+//                    JOptionPane.showMessageDialog(null, "Please enter activation code");
+//                }
+//                else {
+//                    System.out.println("in if of add");
+//                    Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
+//                    DocDao.add(doc);
+//                    JOptionPane.showMessageDialog(this, "You have successfully signed up!");
+//                    LoginDoctor goToLogin=new LoginDoctor(jSplitPane,null,null);
+//                    jSplitPane.setBottomComponent(goToLogin);
+//                }
+//            }
 //        }
-        nameTxtField.setText("");
-        emailTxtField.setText("");
-        licenseTxtField.setText("");
-        contactTextField.setText("");
-        addressTxtField.setText("");
-        passwordTxtField.setText("");
-        }
     }//GEN-LAST:event_signupBtnActionPerformed
 
     private void contactTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactTextFieldActionPerformed
