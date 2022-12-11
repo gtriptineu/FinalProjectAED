@@ -19,8 +19,8 @@ public class DBConnection {
         try
         {
             Class.forName(DB_CLASSNAME);
-           Connection con=(Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS );
-            //System.out("Connection Sucessfull");
+            Connection con=(Connection) DriverManager.getConnection(DB_URL, DB_USER, DB_PASS );
+            System.out.println("Connection Sucessfull"+DB_URL);
             return con;
             
         }

@@ -4,16 +4,23 @@
  */
 package UI;
 
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import model.pharmacist.Pharmacist;
+
 /**
  *
  * @author rodri
  */
 public class PurchaseMedicinePanel extends javax.swing.JPanel {
-
+JSplitPane splitPane;
+Pharmacist phar;
     /**
      * Creates new form PurchaseMedicinePanel
      */
-    public PurchaseMedicinePanel() {
+    public PurchaseMedicinePanel(JSplitPane splitPane, Pharmacist phar) {
+         this.splitPane = splitPane;
+         this.phar = phar;
         initComponents();
     }
 
@@ -33,13 +40,9 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
         quantitySpinner = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         btnSearchProduct = new javax.swing.JButton();
-        txtSalesPrice = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
         txtSearchKeyWord = new javax.swing.JTextField();
-        pharmaComboBox1 = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnRemoveOrderItem = new javax.swing.JButton();
@@ -113,20 +116,9 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(orderTable);
 
-        pharmaComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pharmaComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Vender");
-
-        jLabel6.setText("Sales Price");
-
         jLabel7.setText("Item in cart");
 
-        btnBack.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,20 +148,17 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(purchaseTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                        .addComponent(purchaseTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(pharmaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                    .addComponent(txtSearchKeyWord, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(74, 74, 74))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtSearchKeyWord)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSearchProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(97, 97, 97))
@@ -181,17 +170,13 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                                             .addComponent(btnRemoveOrderItem))
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(30, 30, 30)
                                             .addComponent(jLabel5)
                                             .addGap(2, 2, 2)
                                             .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(44, 44, 44)
                                             .addComponent(addtoCartButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGap(56, 56, 56)))
+                                    .addGap(70, 70, 70)))
                             .addComponent(jLabel7)))))
         );
         layout.setVerticalGroup(
@@ -199,21 +184,15 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(purchaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearchKeyWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchProduct)
-                    .addComponent(pharmaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearchProduct))
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addtoCartButton6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSalesPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6))
                     .addComponent(jLabel5)
                     .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -224,148 +203,37 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckOut)
                     .addComponent(btnRemoveOrderItem))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addtoCartButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtoCartButton6ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = drugTable.getSelectedRow();
-        Drug selectedDrug;
-
-        if(selectedRow<0){
-            JOptionPane.showMessageDialog(null, "Please select a row","warning",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else{
-            selectedDrug = (Drug) drugTable.getValueAt(selectedRow, 0);
-        }
-
-        int salesPrice =0;
-        try{
-            salesPrice = Integer.parseInt(txtSalesPrice.getText());
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "enter valid sales price","warning",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (salesPrice < selectedDrug.getDrugPrice()){
-            JOptionPane.showMessageDialog(null, "sales price should be greater than supplier price","warning",JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        int fetchQuantity = (Integer)quantitySpinner.getValue();//interger type cast coz getvalue sends a n object wch has to be casted to int
-        if(fetchQuantity <=0){
-            JOptionPane.showMessageDialog(null, "Please select atleast 1 quantity","warning",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else if(fetchQuantity <= selectedDrug.getDrugAvailibility()){
-            boolean alreadyPresent=false;
-            for(OrderItem orderItems : order.getOrderItemList()){
-                if (orderItems.getDrug()==selectedDrug){
-                    int oldAvailibility = selectedDrug.getDrugAvailibility();
-                    int newAvailibility = oldAvailibility - fetchQuantity;
-                    selectedDrug.setDrugAvailibility(newAvailibility);
-                    orderItems.setQuantity(fetchQuantity + orderItems.getQuantity());
-                    refreshOrderTable();
-                    populatePharmaTable();
-                    alreadyPresent=true;
-                    break; //wehn we get the order item v need not traverse the whole list
-                }
-            }
-            if(!alreadyPresent){
-                int oldAvailibility = selectedDrug.getDrugAvailibility();
-                int newAvailibility = oldAvailibility - fetchQuantity;
-                selectedDrug.setDrugAvailibility((newAvailibility));
-                order.addOrderItem(selectedDrug, fetchQuantity, salesPrice);
-                refreshOrderTable();
-                populatePharmaTable();
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Please quty shud b > aval","warning",JOptionPane.ERROR_MESSAGE);
-        }
+       
     }//GEN-LAST:event_addtoCartButton6ActionPerformed
 
     private void btnSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchProductActionPerformed
 
-        if(txtSearchKeyWord.getText().trim().length() >= 0){
-            try {
-                int  drugID = Integer.parseInt(txtSearchKeyWord.getText());
-                Drug drug = pharmacyDirectory.searchDrug(drugID);
-                if(drug!=null){
-                    ViewDrugDetailJPanel viewDrugDetail = new ViewDrugDetailJPanel(userProcessContainer, drug);
-                    userProcessContainer.add("viewDrugDetail",viewDrugDetail);
-                    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-                    layout.next(userProcessContainer);
-                }else{
-                    JOptionPane.showMessageDialog(null, "No such drug is present","Warning",JOptionPane.INFORMATION_MESSAGE);
-                }
-                errorInkeyword.setText("");
-            }
-            catch(NumberFormatException nfe){
-                errorInkeyword.setText("Enter a Drug ID .");
-            }
-
-        }
+      
     }//GEN-LAST:event_btnSearchProductActionPerformed
-
-    private void pharmaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pharmaComboBox1ActionPerformed
-        // TODO add your handling code here:
-        populatePharmaTable();
-        //to make sure products are displayed by default .
-
-    }//GEN-LAST:event_pharmaComboBox1ActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         //coz if we dont checkout and click back the availblty shud b updated.
-        if(order.getOrderItemList().size()>0){
-            for(OrderItem oi: order.getOrderItemList()){
-                Drug drug = oi.getDrug();
-                drug.setDrugAvailibility(oi.getQuantity()+drug.getDrugAvailibility());
-
-            }
-            order.getOrderItemList().removeAll(order.getOrderItemList());
-        }
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+       
+        PharmacistJPanel pharmacistPanel=new PharmacistJPanel(splitPane, phar);
+        splitPane.setBottomComponent(pharmacistPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRemoveOrderItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveOrderItemActionPerformed
-
-        int selectedRow = orderTable.getSelectedRow();
-
-        if(selectedRow<=0){
-            JOptionPane.showMessageDialog(null,"select a row","warning",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        OrderItem orderItem = (OrderItem) orderTable.getValueAt(selectedRow, 0);
-        int oldQty = orderItem.getDrug().getDrugAvailibility();
-        int newQty = oldQty + orderItem.getQuantity();
-        orderItem.getDrug().setDrugAvailibility(newQty);
-        order.removeOrderItem(orderItem);
-        populatePharmaTable();
-        JOptionPane.showMessageDialog(null,"order item is removed successfully","Order item deletion",JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnRemoveOrderItemActionPerformed
 
     private void btnCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckOutActionPerformed
         // TODO add your handling code here:
-        if(order.getOrderItemList().size()>=0){
-            MasterOrderCatalog masterOrderCatalog = store.getMasterOrderCatalog();
-            masterOrderCatalog.addOrder(order);
-            isCheckedOut=true;
-            order = new Order();//fr next order
-            refreshOrderTable();
-            populatePharmaTable();
-            JOptionPane.showMessageDialog(null, "Items are checked out!","Info",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No order items present in cart","warning",JOptionPane.ERROR_MESSAGE);
-        }
+   
 
     }//GEN-LAST:event_btnCheckOutActionPerformed
 
@@ -377,17 +245,13 @@ public class PurchaseMedicinePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRemoveOrderItem;
     private javax.swing.JButton btnSearchProduct;
     private javax.swing.JTable drugTable;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable orderTable;
-    private javax.swing.JComboBox pharmaComboBox1;
     private javax.swing.JLabel purchaseTitle;
     private javax.swing.JSpinner quantitySpinner;
-    private javax.swing.JTextField txtSalesPrice;
     private javax.swing.JTextField txtSearchKeyWord;
     // End of variables declaration//GEN-END:variables
 }
