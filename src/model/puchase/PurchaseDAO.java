@@ -10,5 +10,5 @@ package model.puchase;
  */
 public interface PurchaseDAO {
     public void add(String email, String medicineId, String storeId, int quantity, String status, String timestamp, float totalPrice);
-    
+    public PurchaseDirectory pastOrder(String email);
 }

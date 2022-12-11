@@ -20,12 +20,28 @@ public class PurchaseDAOImp implements PurchaseDAO{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String insertNgoDetails = "insert into patientpurchasehistory(email,medicineId,storeId,quantity,status, timestamp, totalPrice) values('"+email+"','"+medicineId+"','"+storeId+"','"+quantity+"','"+status+"','"+timestamp+"','"+totalPrice+"')";
+            String insertNgoDetails = "insert into patientpurchasehistory(patientEmail,medicineId,storeId,quantity,status, timestamp, totalPrice) values('"+email+"','"+medicineId+"','"+storeId+"','"+quantity+"','"+status+"','"+timestamp+"','"+totalPrice+"')";
             stm.executeUpdate(insertNgoDetails);
             
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public PurchaseDirectory pastOrder(String email) {
+        PurchaseDirectory p = new PurchaseDirectory();
+        try{
+            Connection connection= DBConnection.dbconnector();
+            Statement stm = connection.createStatement();
+            String insertNgoDetails = "select * from patientpurchasehistory where patientEmail='"+email+"';";
+            stm.executeUpdate(insertNgoDetails);
+            
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return p;
     }
     
 }

@@ -90,25 +90,32 @@ public class PatientProfile extends javax.swing.JPanel {
 
         patientIDLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         patientIDLbl.setText("Patient ID:");
+        add(patientIDLbl);
 
         patientIDDisplay.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         patientIDDisplay.setText("jLabel2");
+        add(patientIDDisplay);
 
         storeNameDisplay.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         storeNameDisplay.setText("jLabel2");
+        add(storeNameDisplay);
 
         storeNameLbl.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         storeNameLbl.setText("Store Name:");
+        add(storeNameLbl);
 
         commDisplay.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         commDisplay.setText("jLabel2");
+        add(commDisplay);
 
         commLbl.setFont(new java.awt.Font("PT Sans", 0, 18)); // NOI18N
         commLbl.setText("Community:");
+        add(commLbl);
 
         loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
         loginTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginTitle.setText("STORE DETAILS");
+        add(loginTitle);
 
         ordersBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         ordersBtn.setText("PAST ORDERS");
@@ -117,6 +124,7 @@ public class PatientProfile extends javax.swing.JPanel {
                 ordersBtnActionPerformed(evt);
             }
         });
+        add(ordersBtn);
 
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +147,8 @@ public class PatientProfile extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(medicinesTable);
 
+        add(jScrollPane1);
+
         checkoutBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         checkoutBtn.setText("CHECKOUT");
         checkoutBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -146,99 +156,12 @@ public class PatientProfile extends javax.swing.JPanel {
                 checkoutBtnActionPerformed(evt);
             }
         });
+        add(checkoutBtn);
 
         jLabel1.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         jLabel1.setText("Quantity:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loginTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(362, 362, 362)
-                .addComponent(checkoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(47, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(storeNameLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(storeNameDisplay)
-                                .addGap(31, 31, 31)
-                                .addComponent(commLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(commDisplay))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(patientIDLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(patientIDDisplay)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ordersBtn))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(loginTitle)))
-                .addGap(67, 67, 67))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(checkoutBtn))
-                .addGap(70, 70, 70))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(patientIDLbl)
-                            .addComponent(patientIDDisplay))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(storeNameLbl)
-                            .addComponent(storeNameDisplay)
-                            .addComponent(commLbl)
-                            .addComponent(commDisplay))
-                        .addGap(32, 32, 32)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(checkoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
+        add(jLabel1);
+        add(quantitySpinner);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed

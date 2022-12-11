@@ -31,6 +31,7 @@ public class PatientDAOImp implements PatientDao{
 
     @Override
     public boolean checkPatientAlreadyPresent(String id) {
+        System.out.println("in check patient");
         boolean present = false;
         try{
             Connection connection= DBConnection.dbconnector();
@@ -52,12 +53,13 @@ public class PatientDAOImp implements PatientDao{
 
     @Override
     public Patient getPatient(String emailId, String password) {
+        System.out.println("in get patient");
         Patient loggedInPatient = new Patient();
         try
         {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String loginPatient = "select email,password,name from patientdetails where email='"+emailId+"'and password='"+password+"';";
+            String loginPatient = "select * from patientdetails where email='"+emailId+"'and password='"+password+"';";
             ResultSet rst= stm.executeQuery(loginPatient);
             
             if(rst.next()){
