@@ -159,24 +159,27 @@ public class LoginVendor extends javax.swing.JPanel {
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-        String username = userNameTxtField.getText();
-        String password = String.valueOf(passwordTxtField.getPassword());
-        boolean loginSuccess = false;
-        AdminLogin admin = new AdminLogin();
-        admin.setUsername(username);
-        admin.setPassword(password);
-        admin.setAdminType("vendor");
-        AdminDAOImp adminDao = new AdminDAOImp();
-        loginSuccess = adminDao.loginAdmin(admin);
+        VendorProfile goToProfile = new VendorProfile(splitPane);
+        splitPane.setBottomComponent(goToProfile);
         
-        if(loginSuccess){
-            VendorProfile goToProfile = new VendorProfile(splitPane);
-            splitPane.setBottomComponent(goToProfile);
-        } else {
-            JOptionPane.showMessageDialog(this, "Login Failed.");
-            userNameTxtField.setText("");
-            passwordTxtField.setText("");
-        }
+//        String username = userNameTxtField.getText();
+//        String password = String.valueOf(passwordTxtField.getPassword());
+//        boolean loginSuccess = false;
+//        AdminLogin admin = new AdminLogin();
+//        admin.setUsername(username);
+//        admin.setPassword(password);
+//        admin.setAdminType("vendor");
+//        AdminDAOImp adminDao = new AdminDAOImp();
+//        loginSuccess = adminDao.loginAdmin(admin);
+//        
+//        if(loginSuccess){
+//            VendorProfile goToProfile = new VendorProfile(splitPane);
+//            splitPane.setBottomComponent(goToProfile);
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Login Failed.");
+//            userNameTxtField.setText("");
+//            passwordTxtField.setText("");
+//        }
     }//GEN-LAST:event_loginBtnActionPerformed
 
 

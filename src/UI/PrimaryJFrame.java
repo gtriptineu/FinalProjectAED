@@ -6,12 +6,15 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -21,11 +24,28 @@ public class PrimaryJFrame extends javax.swing.JFrame {
 
     ImageIcon image;
     JLabel label;
+    
+    boolean a = true;
+    Timer timer = new Timer(500,new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae){
+          if (a == true){
+            System.out.println("Hello");
+            a = false;
+          }
+          if (a == false){
+            System.out.println("ByeBye");
+            a = true;
+          }
+        }
+    });
+    
     public PrimaryJFrame() {
       initComponents();
       JFrame frame = new JFrame("Pharmacy Management System");
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       jPanel2.setSize(800,600);
+
     }
     public PrimaryJFrame(JSplitPane jSplitPane) {
       initComponents();
