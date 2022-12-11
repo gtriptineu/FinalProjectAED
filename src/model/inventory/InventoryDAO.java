@@ -16,4 +16,6 @@ public interface InventoryDAO {
     public InventoryDirectory getByMedicineCommunity(String medicineName, String community);
     public InventoryDirectory getByMedicineDosage(String medicineName, String dosage);
     public InventoryDirectory getByMedicineCommunityDosage(String medicineName, String community, String dosage);
+    public InventoryDirectory getByMedicineStoreId(String medicinename, String storeId);
+    public void updateQuantity(String medicineId, int quantity);
 }
