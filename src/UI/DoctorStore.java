@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.doctor.Doctor;
 import model.inventory.Inventory;
 import model.inventory.InventoryDAOImp;
 import model.inventory.InventoryDirectory;
@@ -21,8 +22,10 @@ import model.store.StoreDirectory;
  */
 public class DoctorStore extends javax.swing.JPanel {
 
+//    jSplitPane, storeName, comm, doc, medicineSearched
     JSplitPane splitPane;
     StoreDirectory allStores;
+    String medicineSearched;
     public DoctorStore(JSplitPane splitPane) {
         initComponents();
         this.splitPane = splitPane;
@@ -191,7 +194,7 @@ public class DoctorStore extends javax.swing.JPanel {
             } else{
                 invDir = invDao.getByMedicine(medicineName);
             }
-
+            this.medicineSearched = medicineName;
             ArrayList<String> allStoreId = new ArrayList<>();
             StoreDAOImp sDao = new StoreDAOImp();
             if(invDir.getSize()>0){
@@ -239,12 +242,12 @@ JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[1]);
         
         if(result == 0) //Login
         {
-            LoginDoctor goToLogin=new LoginDoctor(splitPane, storeName, comm);
+            LoginDoctor goToLogin=new LoginDoctor(splitPane, storeName, comm, medicineSearched);
             splitPane.setBottomComponent(goToLogin);
         }
         else // Sign up
         {
-            SignUpDoctor goToSignup=new SignUpDoctor(splitPane, storeName, comm);
+            SignUpDoctor goToSignup=new SignUpDoctor(splitPane, storeName, comm, medicineSearched);
             splitPane.setBottomComponent(goToSignup);
         }
         

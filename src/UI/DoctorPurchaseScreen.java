@@ -4,17 +4,46 @@
  */
 package UI;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.Patient.Patient;
+import model.doctor.Doctor;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.puchase.PurchaseDAOImp;
+
 /**
  *
  * @author rodri
  */
 public class DoctorPurchaseScreen extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DoctorPurchaseScreen
-     */
-    public DoctorPurchaseScreen() {
-        initComponents();
+    JSplitPane jSplitPane;
+    Doctor doctor;
+    Inventory inv;
+    int quantity;
+    String storeIdPurchased;
+    float totalPrice;
+    
+        public DoctorPurchaseScreen(JSplitPane jSplitPane, Doctor doctor, Inventory inv, int quantity, String storeIdPurchchased) {
+        initComponents();    
+        this.jSplitPane = jSplitPane;
+        this.doctor = doctor;
+        this.inv = inv;
+        this.quantity = quantity;
+        this.storeIdPurchased = storeIdPurchchased;
+        
+//        docNameDisplay.setText(this.doctor.getDocName());
+//        contactDisplay.setText(this.doctor.getDocContact());
+//        addressDisplay.setText(this.doctor.getDocAddress());
+        totalPrice = 0;
+        System.out.println("inventory Details in const"+ this.inv.getMedicineID()+ this.inv.getMedicineName());
+        populateTable(this.inv);
+        TotalTxtField.setText(String.valueOf(totalPrice));
+        
     }
 
     /**
@@ -36,11 +65,11 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
         TotalTxtField = new javax.swing.JTextField();
         customerLbl = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        docNameDisplay = new javax.swing.JLabel();
         contactNoLbl = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        contactDisplay = new javax.swing.JLabel();
         addressLbl = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        addressDisplay = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -92,17 +121,17 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
         nameLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         nameLbl.setText("Name:");
 
-        jLabel2.setText("jLabel2");
+        docNameDisplay.setText("jLabel2");
 
         contactNoLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         contactNoLbl.setText("Contact No:");
 
-        jLabel3.setText("jLabel3");
+        contactDisplay.setText("jLabel3");
 
         addressLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         addressLbl.setText("Address:");
 
-        jLabel4.setText("jLabel4");
+        addressDisplay.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,10 +157,10 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(contactDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGap(580, 580, 580))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(addressDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -148,7 +177,7 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(50, 50, 50)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(docNameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(addressLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,15 +204,15 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLbl)
-                    .addComponent(jLabel2))
+                    .addComponent(docNameDisplay))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contactNoLbl)
-                    .addComponent(jLabel3))
+                    .addComponent(contactDisplay))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLbl)
-                    .addComponent(jLabel4))
+                    .addComponent(addressDisplay))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(checkoutBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -196,22 +225,66 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutBtn1ActionPerformed
-        // TODO add your handling code here:
+        String email = doctor.getDocEmail();
+        String medicineId = inv.getMedicineID();
+        String storeId = storeIdPurchased;
+        int quantity = this.quantity;
+        String status = "Order placed";
+        float totalPrice = this.totalPrice;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();
+        String updateTime = dtf.format(now);
+        PurchaseDAOImp pDao = new PurchaseDAOImp();
+        pDao.add(email, medicineId, storeId, quantity, status,updateTime , totalPrice);
+        
+        InventoryDAOImp inv = new InventoryDAOImp();
+        inv.updateQuantity(medicineId, quantity);
+        
+        JOptionPane.showMessageDialog(this, "Thank you for placing an order.");
+        
+        DoctorStore docStore = new DoctorStore(jSplitPane);
+        jSplitPane.setBottomComponent(docStore); 
+        
+// TODO add your handling code here:
     }//GEN-LAST:event_checkoutBtn1ActionPerformed
-
+    
+    
+    public void populateTable(Inventory inv){
+        System.out.println("in populate Table"+inv.getMedicineID()+ "--"+inv+ inv.getDosage()+inv.getPrice());
+        
+        this.totalPrice = this.quantity*inv.getPrice();
+        System.out.println("in price in  Table"+ this.totalPrice);
+        DefaultTableModel model = (DefaultTableModel) purchaseMedTable.getModel();
+        System.out.println("in price in  Table -- 1");
+        model.setRowCount(0);
+        System.out.println("in price in  Table");
+      
+        int count=1;
+        System.out.println("in count Table"+count);
+//        Object[] row = new Object[6];
+//        row[0]=count;
+//        row[1]=inv;
+//        row[2]=inv.getDosage();
+//        row[3]= this.quantity;
+//        row[4]=inv.getPrice();
+//        row[5] = totalPrice;
+        model.addRow(new Object[]{inv, inv.getDosage(), quantity, inv.getPrice(), totalPrice});
+             
+//        model.addRow(row);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalLbl;
     private javax.swing.JLabel TotalLbl1;
     private javax.swing.JTextField TotalTxtField;
+    private javax.swing.JLabel addressDisplay;
     private javax.swing.JLabel addressLbl;
     private javax.swing.JButton checkoutBtn1;
+    private javax.swing.JLabel contactDisplay;
     private javax.swing.JLabel contactNoLbl;
     private javax.swing.JLabel customerLbl;
+    private javax.swing.JLabel docNameDisplay;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTable purchaseMedTable;
