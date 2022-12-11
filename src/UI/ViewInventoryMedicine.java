@@ -191,7 +191,7 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(this, "Please select a row to be deleted.");
         } else {
             DefaultTableModel table = (DefaultTableModel) inventoryTable.getModel();
-            Inventory inv = (Inventory)table.getValueAt(selectedRowIndex, 0);
+            Inventory inv = (Inventory)table.getValueAt(selectedRowIndex, 1);
             InventoryDAOImp invDao = new InventoryDAOImp();
             invDao.delete(inv);
             JOptionPane.showMessageDialog(this, "Medicine Id: "+ inv.getMedicineID()+ " is deleted.");
@@ -207,7 +207,7 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(this, "Please select a row to be updated.");
         } else {
            DefaultTableModel table = (DefaultTableModel) inventoryTable.getModel();
-           Inventory inv = (Inventory)table.getValueAt(selectedRowIndex, 0);
+           Inventory inv = (Inventory)table.getValueAt(selectedRowIndex, 1);
            InventoryDAOImp invDao = new InventoryDAOImp();
            invDao.delete(inv);
            AddInventoryMedicine goToAddInventory = new AddInventoryMedicine(jSplitPane, inv);
@@ -226,8 +226,8 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
          for(Inventory p: invDir.getInventoryDirectory())
          {
              Object[] row = new Object[7];
-             row[0]=p;
-             row[1]=p.getMedicineName();
+             row[0]=p.getMedicineID();
+             row[1]=p;
              row[2]=p.getQuantity();
              row[3]=p.getDosage();
              row[4]=p.getComm();
@@ -246,8 +246,8 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
          for(Inventory p: invDir.getInventoryDirectory())
          {
              Object[] row = new Object[7];
-             row[0]=p;
-             row[1]=p.getMedicineName();
+             row[0]=p.getMedicineID();
+             row[1]=p;
              row[2]=p.getQuantity();
              row[3]=p.getDosage();
              row[4]=p.getComm();
