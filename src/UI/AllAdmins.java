@@ -33,6 +33,7 @@ public class AllAdmins extends javax.swing.JPanel {
         inventoryBtn = new javax.swing.JButton();
         vendorBtn1 = new javax.swing.JButton();
         salesdoctorBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -84,6 +85,13 @@ public class AllAdmins extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("MAP");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +115,9 @@ public class AllAdmins extends javax.swing.JPanel {
                             .addComponent(inventoryBtn)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(396, 396, 396)
-                        .addComponent(backBtn)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(backBtn))))
                 .addContainerGap(467, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,7 +135,9 @@ public class AllAdmins extends javax.swing.JPanel {
                 .addComponent(ngoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,10 +179,17 @@ public class AllAdmins extends javax.swing.JPanel {
         jSplitPane1.setBottomComponent(goToLogin);
     }//GEN-LAST:event_salesdoctorBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       MapsPanel goToLogin = new MapsPanel(jSplitPane1);
+        jSplitPane1.setBottomComponent(goToLogin);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JButton inventoryBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton ngoAdmin;
     private javax.swing.JButton pharmacyBtn;
     private javax.swing.JButton salesdoctorBtn;

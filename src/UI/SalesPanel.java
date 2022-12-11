@@ -12,6 +12,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
 
@@ -142,7 +143,7 @@ JSplitPane splitPane;
          }
          
          doc.add(tbl);
-       
+         JOptionPane.showMessageDialog(this, "Sales report is generated" );
        }
        catch(FileNotFoundException ex) {
           System.out.println("File error");
