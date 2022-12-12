@@ -122,16 +122,19 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
         nameLbl.setText("Name:");
 
         docNameDisplay.setText("jLabel2");
+        docNameDisplay.setText(this.doctor.getDocName());
 
         contactNoLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         contactNoLbl.setText("Contact No:");
 
         contactDisplay.setText("jLabel3");
+        contactDisplay.setText(this.doctor.getDocContact());
 
         addressLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         addressLbl.setText("Address:");
 
         addressDisplay.setText("jLabel4");
+        addressDisplay.setText(this.doctor.getDocAddress());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

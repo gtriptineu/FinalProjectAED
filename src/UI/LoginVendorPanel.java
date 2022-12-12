@@ -151,9 +151,9 @@ JSplitPane jSplitPane;
             
             
             
-        VendorDAOImp vendorDao = new VendorDAOImp();
-        Vendor vendor = vendorDao.getVendor(username, password);
-        System.out.println("vendor::"+vendor.getName());
+            VendorDAOImp vendorDao = new VendorDAOImp();
+            Vendor vendor = vendorDao.getVendor(username, password);
+            System.out.println("vendor::"+vendor.getName());
         
             if (!vendor.getName().isEmpty()){
                 

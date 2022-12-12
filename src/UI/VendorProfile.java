@@ -19,7 +19,12 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.store.Store;
+import model.inventory.Inventory;
+import model.inventory.InventoryDAOImp;
+import model.puchase.Purchase;
+import model.puchase.PurchaseDAOImp;
+import model.puchase.PurchaseDirectory;
+import model.store.StoreDAOImp;
 
 
 /**
@@ -41,18 +46,20 @@ Vendor ven;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String UpdateTime = dtf.format(now);
+        System.out.println("in constructor");
+        populateTable();
         
-        DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
-        model.setRowCount(0);
-
-
-            Object[] row = new Object[5];
-            row[0]= "Advil";
-            row[1]= 12345;
-            row[2]=3;
-            row[3]="Order Received";
-            row[4]=UpdateTime;
-            model.addRow(row);
+//        DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+//        model.setRowCount(0);
+//
+//
+//            Object[] row = new Object[5];
+//            row[0]= "Advil";
+//            row[1]= 12345;
+//            row[2]=3;
+//            row[3]="Order Received";
+//            row[4]=UpdateTime;
+//            model.addRow(row);
             
             TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(ordersTable.getModel());
             ordersTable.setRowSorter(sorter);
@@ -106,10 +113,10 @@ Vendor ven;
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        ordersBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersTable = new javax.swing.JTable();
+        refreshBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -119,29 +126,15 @@ Vendor ven;
         jPanel1.setBackground(new java.awt.Color(160, 213, 229));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        ordersBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
-        ordersBtn.setText("ORDERS");
-        ordersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ordersBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addGap(0, 171, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(339, Short.MAX_VALUE))
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -156,7 +149,7 @@ Vendor ven;
                 {null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Store ID", "Quantity purchased", "Delivery Status", "Timestamp"
+                "Medicine Name", "Store ID", "Quantity purchased", "Delivery Status", "Timestamp"
             }
         ) {
             Class[] types = new Class [] {
@@ -169,21 +162,33 @@ Vendor ven;
         });
         jScrollPane1.setViewportView(ordersTable);
 
+        refreshBtn.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
+        refreshBtn.setText("REFRESH");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -200,18 +205,49 @@ Vendor ven;
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
-        
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ordersBtnActionPerformed
+        populateTable();
 
+    }//GEN-LAST:event_refreshBtnActionPerformed
+
+    public void populateTable(){
+        System.out.println("in populate Table");
+         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+         model.setRowCount(0);
+         System.out.println("after table def");
+         PurchaseDAOImp pdao = new PurchaseDAOImp();
+         PurchaseDirectory pDir = new PurchaseDirectory();
+         pDir = pdao.getAll();
+         System.out.println("after pDir");
+
+         for(Purchase p: pDir.getPurchaseDir()){
+             System.out.println("in for");
+             InventoryDAOImp iDao = new InventoryDAOImp();
+             Inventory i = iDao.getByMedicineID(p.getMedicinId());
+             System.out.println("after Inventory"+p.getStoreId());
+//             StoreDAOImp sDao = new StoreDAOImp();
+//             String storeName = sDao.getStoreName(p.getStoreId());
+//             System.out.println("after store");
+             
+             Object[] row = new Object[5];
+              row[0]=i.getMedicineName();
+              row[1] = p.getStoreId();
+//              row[2] = storeName;
+              row[2]=p.getQuantity();
+              row[3]=p.getStatus();
+              row[4] = p.getUpdateTime();
+             
+              model.addRow(row);
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JButton ordersBtn;
     private javax.swing.JTable ordersTable;
+    private javax.swing.JButton refreshBtn;
     // End of variables declaration//GEN-END:variables
 }
