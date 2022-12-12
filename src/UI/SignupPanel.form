@@ -50,7 +50,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="emailLbl" max="32767" attributes="0"/>
+                                  <Component id="emailLbl" pref="78" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                   <Component id="emailTxtField" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
@@ -61,18 +61,11 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="addressLbl" min="-2" pref="78" max="-2" attributes="0"/>
-                                              <Component id="passwordLbl" min="-2" pref="78" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="contactLbl" min="-2" pref="78" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="addressLbl" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="passwordLbl" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="contactLbl" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="contactTextField" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="addressTxtField" min="-2" pref="160" max="-2" attributes="0"/>
@@ -85,12 +78,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="userNameLbl" pref="139" max="32767" attributes="0"/>
-                              <Component id="userEmailLbl" max="32767" attributes="0"/>
-                              <Component id="userContactLbl" max="32767" attributes="0"/>
-                          </Group>
                           <Component id="ageLbl" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="addressErrorLbl" alignment="0" max="32767" attributes="0"/>
+                              <Component id="userNameLbl" alignment="0" pref="139" max="32767" attributes="0"/>
+                              <Component id="userEmailLbl" alignment="0" max="32767" attributes="0"/>
+                              <Component id="userContactLbl" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -151,9 +145,12 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addressTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="addressLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="addressErrorLbl" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="addressTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addressLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -251,6 +248,7 @@
     <Component class="javax.swing.JTextField" name="addressTxtField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addressTxtFieldActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="addressTxtFieldKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="passwordLbl">
@@ -334,6 +332,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="addressErrorLbl">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

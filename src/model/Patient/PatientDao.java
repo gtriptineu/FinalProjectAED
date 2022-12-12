@@ -12,4 +12,6 @@ public interface PatientDao {
     void add(Patient p);
     boolean checkPatientAlreadyPresent(String id);
     Patient getPatient(String emailId, String password);
+    int getTotalCount();
+    float getTotalProfit();
 }
