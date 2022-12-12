@@ -9,6 +9,8 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,5 +76,39 @@ public class PatientDAOImp implements PatientDao{
             System.out.println(e.getMessage());
         }
         return loggedInPatient;
+    }
+
+    @Override
+    public int getTotalCount() {
+        int total = 0;
+        try {
+        Connection connection= DBConnection.dbconnector();
+        Statement stm = connection.createStatement();
+        String query = "select count(*) as total from patientdetails;";
+        ResultSet rst= stm.executeQuery(query);
+        rst.next();
+        total = Integer.parseInt(rst.getString("total"));
+        System.out.print(total);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return total;
+    }
+
+    @Override
+    public float getTotalProfit() {
+        float total = 0;
+        try {
+        Connection connection= DBConnection.dbconnector();
+        Statement stm = connection.createStatement();
+        String query = "select sum(totalPrice) as totalPrice from patientpurchasehistory;";
+        ResultSet rst= stm.executeQuery(query);
+        rst.next();
+        total = Integer.parseInt(rst.getString("totalPrice"));
+        System.out.print(total);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return total;
     }
 }

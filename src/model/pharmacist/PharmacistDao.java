@@ -16,5 +16,4 @@ public interface PharmacistDao {
 //    boolean checkPharmacistAlreadyPresent(String id);
     public Pharmacist getPharmacist(String emailId, String password);
     public PharmacistDirectory getAll();
-    
 }

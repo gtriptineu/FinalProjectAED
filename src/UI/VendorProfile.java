@@ -63,7 +63,6 @@ Vendor ven;
             
             timer.start();
             timer.setRepeats(false);
-//            timer.setDelay(500);
     }
     boolean a = true;
     Timer timer = new Timer(10000,new ActionListener() {
