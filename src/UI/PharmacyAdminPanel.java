@@ -652,16 +652,16 @@ public class PharmacyAdminPanel extends javax.swing.JPanel {
 
     private void storeIdTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeIdTextKeyReleased
         // TODO add your handling code here:
-        String namePattern="^[a-zA-Z]{0,30}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(storeIdText.getText());
-        if (!match.matches()) {
-            storeIdErrorLbl.setText("Naming is incorrect");
-        }
-        else {
-
-            storeIdErrorLbl.setText(null);
-        }
+//        String namePattern="^[a-zA-Z]{0,30}$";
+//        Pattern pat=Pattern.compile(namePattern);
+//        Matcher match=pat.matcher(storeIdText.getText());
+//        if (!match.matches()) {
+//            storeIdErrorLbl.setText("Naming is incorrect");
+//        }
+//        else {
+//
+//            storeIdErrorLbl.setText(null);
+//        }
     }//GEN-LAST:event_storeIdTextKeyReleased
 
     private void storeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeTextActionPerformed
