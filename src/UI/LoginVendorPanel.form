@@ -116,7 +116,7 @@
           <Font name="PT Sans" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="VENDOR ADMIN LOGIN"/>
+        <Property name="text" type="java.lang.String" value="VENDOR LOGIN"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

@@ -63,7 +63,7 @@ JSplitPane jSplitPane;
 
         loginLbl.setFont(new java.awt.Font("PT Sans", 1, 18)); // NOI18N
         loginLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginLbl.setText("VENDOR ADMIN LOGIN");
+        loginLbl.setText("VENDOR LOGIN");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user.png"))); // NOI18N
@@ -134,7 +134,7 @@ JSplitPane jSplitPane;
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        AllAdmins goToAdmins = new AllAdmins(jSplitPane);
+        PublicScreens goToAdmins = new PublicScreens(jSplitPane);
         jSplitPane.setBottomComponent(goToAdmins);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
@@ -147,13 +147,14 @@ JSplitPane jSplitPane;
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
 
-            //need to add db interaction
+
             
             
             
             VendorDAOImp vendorDao = new VendorDAOImp();
             Vendor vendor = vendorDao.getVendor(username, password);
             System.out.println("vendor::"+vendor.getName());
+
         
             if (!vendor.getName().isEmpty()){
                 
