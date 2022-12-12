@@ -56,8 +56,8 @@ public class DoctorDAOImpl implements DoctorDAO{
         {
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String loginPatient = "select email,password,name from doctordetails where email='"+emailId+"'and password='"+password+"';";
-            ResultSet rst= stm.executeQuery(loginPatient);
+            String loginDoc = "select * from doctordetails where email='"+emailId+"'and password='"+password+"';";
+            ResultSet rst= stm.executeQuery(loginDoc);
             
             if(rst.next()){
                 loggedInDoctor.setDocEmail(rst.getString("email"));

@@ -53,7 +53,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         medicineLbl1 = new javax.swing.JLabel();
         cityTextField = new javax.swing.JTextField();
         medicineLbl2 = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
+        ngoidTextField = new javax.swing.JTextField();
         medicineLbl3 = new javax.swing.JLabel();
         functionalityDropdown = new javax.swing.JComboBox<>();
         deleteButton = new javax.swing.JButton();
@@ -62,10 +62,10 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         ngoTbl = new javax.swing.JTable();
         backBtn = new javax.swing.JButton();
         ngoIdLabel = new javax.swing.JLabel();
-        ngoIdTextField = new javax.swing.JTextField();
         cityErrorLbl = new javax.swing.JLabel();
         ngoIdErrorLbl = new javax.swing.JLabel();
         ngoErrorLbl = new javax.swing.JLabel();
+        nameTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(160, 213, 229));
 
@@ -101,9 +101,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         medicineLbl2.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         medicineLbl2.setText("NGO Name:");
 
-        nameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        ngoidTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                nameTextFieldKeyReleased(evt);
+                ngoidTextFieldKeyReleased(evt);
             }
         });
 
@@ -158,9 +158,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         ngoIdLabel.setFont(new java.awt.Font("PT Sans", 1, 14)); // NOI18N
         ngoIdLabel.setText("NGO ID:");
 
-        ngoIdTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        nameTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                ngoIdTextFieldKeyReleased(evt);
+                nameTextField1KeyReleased(evt);
             }
         });
 
@@ -187,11 +187,11 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(ngoIdTextField)
                                     .addComponent(communityDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cityTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(functionalityDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(ngoidTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(functionalityDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nameTextField1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -233,7 +233,7 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(medicineLbl2)
-                                .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(ngoErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -244,9 +244,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ngoIdLabel)
-                                    .addComponent(ngoIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(ngoidTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(ngoIdErrorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6))
+                        .addGap(4, 4, 4))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(storeNameLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -282,9 +282,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String community = communityDropdown.getSelectedItem().toString();
         String city = cityTextField.getText();
-        String name = nameTextField.getText();
+        String name = ngoidTextField.getText();
         String functionality = functionalityDropdown.getSelectedItem().toString();
-        String id = ngoIdTextField.getText();
+        String id = ngoidTextField.getText();
        if (community.isEmpty() || city.isEmpty() || name.isEmpty() || functionality.isEmpty() || id.isEmpty()){
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
@@ -302,9 +302,9 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Ngo Details have been added.");
         communityDropdown.setSelectedIndex(0);
         cityTextField.setText("");
-        nameTextField.setText("");
+        ngoidTextField.setText("");
         functionalityDropdown.setSelectedIndex(0);
-        ngoIdTextField.setText("");
+        ngoidTextField.setText("");
         
         populateTable();
            
@@ -337,11 +337,11 @@ public class NgoAdminPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cityTextFieldActionPerformed
 
-    private void nameTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTextFieldKeyReleased
+    private void ngoidTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ngoidTextFieldKeyReleased
         // TODO add your handling code here:
         String namePattern="^[a-zA-Z]{0,30}$";
         Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(nameTextField.getText());
+        Matcher match=pat.matcher(ngoidTextField.getText());
         if (!match.matches()) {
             ngoErrorLbl.setText("Naming is incorrect");
         }
@@ -349,21 +349,11 @@ public class NgoAdminPanel extends javax.swing.JPanel {
             
             ngoErrorLbl.setText(null);
         }
-    }//GEN-LAST:event_nameTextFieldKeyReleased
+    }//GEN-LAST:event_ngoidTextFieldKeyReleased
 
-    private void ngoIdTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ngoIdTextFieldKeyReleased
+    private void nameTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTextField1KeyReleased
         // TODO add your handling code here:
-        String namePattern="^[a-zA-Z]{0,30}$";
-        Pattern pat=Pattern.compile(namePattern);
-        Matcher match=pat.matcher(nameTextField.getText());
-        if (!match.matches()) {
-            ngoIdTextField.setText("Naming is incorrect");
-        }
-        else {
-            
-            ngoIdTextField.setText(null);
-        }
-    }//GEN-LAST:event_ngoIdTextFieldKeyReleased
+    }//GEN-LAST:event_nameTextField1KeyReleased
 
     private void populateTable() {
         System.out.println("in populate Table");
@@ -402,12 +392,12 @@ public class NgoAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel medicineLbl1;
     private javax.swing.JLabel medicineLbl2;
     private javax.swing.JLabel medicineLbl3;
-    private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField nameTextField1;
     private javax.swing.JLabel ngoErrorLbl;
     private javax.swing.JLabel ngoIdErrorLbl;
     private javax.swing.JLabel ngoIdLabel;
-    private javax.swing.JTextField ngoIdTextField;
     private javax.swing.JTable ngoTbl;
+    private javax.swing.JTextField ngoidTextField;
     private javax.swing.JLabel storeNameLbl;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,16 +28,17 @@ public class DoctorProfile extends javax.swing.JPanel {
     String storeIdPurchased;
     
     public DoctorProfile(JSplitPane jSplitPane, String storeName, String comm, Doctor doc, String medicineSearched) {
-        initComponents();
+        
         this.splitPane = jSplitPane;
         this.storeName = storeName;
         this.comm = comm;
         this.doc = doc;
         this.medicineSearched = medicineSearched;
-        
-        licenseDisplay.setText(String.valueOf(this.doc.getDocLicense()));
-        commDisplay.setText(comm);
-        storeDisplay.setText(storeName);
+        initComponents();
+        System.out.println(String.valueOf(this.doc.getDocLicense()));
+//        licenseDisplay.setText(String.valueOf(this.doc.getDocLicense()));
+//        commDisplay.setText(comm);
+//        storeDisplay.setText(storeName);
         populateTable(medicineSearched, this.storeName, this.comm);
     }
     

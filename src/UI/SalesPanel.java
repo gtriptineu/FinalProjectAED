@@ -123,7 +123,7 @@ JSplitPane splitPane;
            path=j.getSelectedFile().getPath();
            
        }
-       
+      
        //Document doc=new Document();
        
        Document doc=new Document();

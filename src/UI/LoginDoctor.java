@@ -173,8 +173,10 @@ public class LoginDoctor extends javax.swing.JPanel {
         Doctor doc = DocDao.getDoctor(email, password);
         
             if (!doc.getDocEmail().isEmpty()){
+                System.out.println(doc.getDocLicense());
                 JOptionPane.showMessageDialog(this, "Login Sucess");
                 DoctorProfile goToProfile = new DoctorProfile(jSplitPane, storeName, comm, doc, medicineSearched);
+              
                 jSplitPane.setBottomComponent(goToProfile);
                 System.out.println("Going to doctor store");
             } else {
