@@ -121,7 +121,7 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
                         .addComponent(medicineTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(updateBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -129,7 +129,7 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(51, 51, 51))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(searchTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +210,7 @@ public class ViewInventoryMedicine extends javax.swing.JPanel {
            Inventory inv = (Inventory)table.getValueAt(selectedRowIndex, 1);
            InventoryDAOImp invDao = new InventoryDAOImp();
            invDao.delete(inv);
-           AddInventoryMedicine goToAddInventory = new AddInventoryMedicine(jSplitPane, inv);
+           AddInventoryMedicine goToAddInventory = new AddInventoryMedicine(jSplitPane, inv, true);
            jSplitPane.setRightComponent(goToAddInventory);
         }
     }//GEN-LAST:event_updateBtnActionPerformed

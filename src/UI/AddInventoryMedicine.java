@@ -15,10 +15,16 @@ import model.inventory.InventoryDAOImp;
 public class AddInventoryMedicine extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public AddInventoryMedicine(JSplitPane jSplitPane, Inventory inv) {
-        initComponents();
+    Inventory inv;
+    boolean flag;
+    public AddInventoryMedicine(JSplitPane jSplitPane, Inventory invt, boolean flag) {
         this.jSplitPane = jSplitPane;
-        if(!inv.getMedicineID().isEmpty()){
+        this.inv = invt;
+        this.flag = flag;
+        initComponents();
+
+//        System.out.println("null test--"+inv.getMedicineID() != null);
+        if(this.flag){
             medicineIDTxtField.setText(inv.getMedicineID());
             medicineNameTxtField.setText(inv.getMedicineName());
             qtyTxtField.setText(Integer.toString(inv.getQuantity()));
