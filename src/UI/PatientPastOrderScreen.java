@@ -67,13 +67,13 @@ String medicineSearched;
 
         pastOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "MedicineName", "Qty", "StoreName", "Status", "createdOn"
+                "MedicineName", "Qty", "Status", "createdOn"
             }
         ));
         jScrollPane1.setViewportView(pastOrderTable);
@@ -146,12 +146,12 @@ String medicineSearched;
              String storeName = sDao.getStoreName(p.getStoreId());
              
              
-             Object[] row = new Object[5];
+             Object[] row = new Object[4];
               row[0]=i.getMedicineName();
               row[1]=p.getQuantity();
-              row[2]= storeName;
-              row[3]=p.getStatus();
-              row[4] = p.getUpdateTime();
+              //row[2]= storeName;
+              row[2]=p.getStatus();
+              row[3] = p.getUpdateTime();
              
               model.addRow(row);
          }

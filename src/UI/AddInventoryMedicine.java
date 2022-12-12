@@ -15,10 +15,16 @@ import model.inventory.InventoryDAOImp;
 public class AddInventoryMedicine extends javax.swing.JPanel {
 
     JSplitPane jSplitPane;
-    public AddInventoryMedicine(JSplitPane jSplitPane, Inventory inv) {
-        initComponents();
+    Inventory inv;
+    boolean flag;
+    public AddInventoryMedicine(JSplitPane jSplitPane, Inventory invt, boolean flag) {
         this.jSplitPane = jSplitPane;
-        if(!inv.getMedicineID().isEmpty()){
+        this.inv = invt;
+        this.flag = flag;
+        initComponents();
+
+//        System.out.println("null test--"+inv.getMedicineID() != null);
+        if(this.flag){
             medicineIDTxtField.setText(inv.getMedicineID());
             medicineNameTxtField.setText(inv.getMedicineName());
             qtyTxtField.setText(Integer.toString(inv.getQuantity()));
@@ -311,8 +317,17 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         String price = priceTxtField.getText();
         String community = commTxtField.getText();
         String storeId = storeIDTxtField.getText();
-        
-        Inventory i = new Inventory();
+         if (medicineId.isEmpty() || name.isEmpty() || quantity.isEmpty() 
+                 || dosage.isEmpty() || price.isEmpty() || community.isEmpty() || storeId.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please Enter all fields");
+        }
+         else if (!isItInteger(quantity) || !isItInteger(price))
+         {
+             JOptionPane.showMessageDialog(null,"Please Enter integer for quantity / price!");
+         }
+         else  {
+             
+              Inventory i = new Inventory();
         i.setMedicineID(medicineId);
         i.setMedicineName(name);
         i.setQuantity(Integer.parseInt(quantity));
@@ -332,6 +347,10 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
         priceTxtField.setText("");
         commTxtField.setText("");
         storeIDTxtField.setText("");
+             
+         }
+        
+       
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -368,4 +387,14 @@ public class AddInventoryMedicine extends javax.swing.JPanel {
     private javax.swing.JLabel storeIDLbl;
     private javax.swing.JTextField storeIDTxtField;
     // End of variables declaration//GEN-END:variables
+private static boolean isItInteger(String s) {
+    try { 
+        Integer.parseInt(s); 
+    } catch(NumberFormatException e) { 
+        return false; 
+    } catch(NullPointerException e) {
+        return false;
+        }
+    return true;
+    }
 }

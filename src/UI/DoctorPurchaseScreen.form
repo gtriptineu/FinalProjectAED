@@ -258,6 +258,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="docNameDisplay.setText(this.doctor.getDocName());&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="contactNoLbl">
       <Properties>
@@ -271,6 +274,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel3"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="contactDisplay.setText(this.doctor.getDocContact());&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="addressLbl">
       <Properties>
@@ -284,6 +290,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel4"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addressDisplay.setText(this.doctor.getDocAddress());&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

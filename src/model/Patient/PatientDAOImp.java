@@ -23,7 +23,7 @@ public class PatientDAOImp implements PatientDao{
         try{
             Connection connection= DBConnection.dbconnector();
             Statement stm = connection.createStatement();
-            String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password,age) values('"+p.getEmail()+"','"+p.getName()+"','"+p.getContactNo()+"','"+p.getAddress()+"','"+p.getPassword()+"')";
+            String insertPatientDetails = "insert into patientdetails(email,name,contact,address,password,age) values('"+p.getEmail()+"','"+p.getName()+"','"+p.getContactNo()+"','"+p.getAddress()+"','"+p.getPassword()+"','"+p.getAge()+"')";
             stm.executeUpdate(insertPatientDetails);
         } catch(SQLException e){
             System.out.println(e.getMessage());

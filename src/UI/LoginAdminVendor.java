@@ -145,7 +145,11 @@ public class LoginAdminVendor extends javax.swing.JPanel {
   
 String username = userNameTxtField.getText();
 String password = String.valueOf(passwordTxtField.getPassword());
-        boolean loginSuccess = false;
+
+if (username.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please Enter all fields");
+        } else  {
+    boolean loginSuccess = false;
         AdminLogin admin = new AdminLogin();
         admin.setUsername(username);
         admin.setPassword(password);
@@ -154,8 +158,6 @@ String password = String.valueOf(passwordTxtField.getPassword());
         loginSuccess = adminDao.loginAdmin(admin);
         
         if(loginSuccess){
-//            VendorProfile goToProfile = new VendorProfile(splitPane);
-//            splitPane.setBottomComponent(goToProfile);
 
         VendorAdminPanel goToVendorAdmin=new VendorAdminPanel(splitPane);
         splitPane.setBottomComponent(goToVendorAdmin);
@@ -164,26 +166,9 @@ String password = String.valueOf(passwordTxtField.getPassword());
             userNameTxtField.setText("");
             passwordTxtField.setText("");
         }
-         
-
-//        String username = userNameTxtField.getText();
-//        String password = String.valueOf(passwordTxtField.getPassword());
-//        boolean loginSuccess = false;
-//        AdminLogin admin = new AdminLogin();
-//        admin.setUsername(username);
-//        admin.setPassword(password);
-//        admin.setAdminType("vendor");
-//        AdminDAOImp adminDao = new AdminDAOImp();
-//        loginSuccess = adminDao.loginAdmin(admin);
-//        
-//        if(loginSuccess){
-//            VendorProfile goToProfile = new VendorProfile(splitPane);
-//            splitPane.setBottomComponent(goToProfile);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Login Failed.");
-//            userNameTxtField.setText("");
-//            passwordTxtField.setText("");
-//        }
+    
+}
+     
 
 
     }//GEN-LAST:event_loginBtnActionPerformed

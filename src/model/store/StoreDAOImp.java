@@ -77,12 +77,12 @@ public class StoreDAOImp implements StoreDAO{
             String storeSearch = "select * from storedetails where storeId='"+storeId+"';";
             ResultSet rs= stm.executeQuery(storeSearch);
             if(rs.next()){
-                storeId = rs.getString("storeName");
+                storeName = rs.getString("storeName");
             }
          } catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return storeId;
+        return storeName;
     }
     
 }

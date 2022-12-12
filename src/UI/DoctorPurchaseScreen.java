@@ -29,16 +29,14 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
     float totalPrice;
     
         public DoctorPurchaseScreen(JSplitPane jSplitPane, Doctor doctor, Inventory inv, int quantity, String storeIdPurchchased) {
-        initComponents();    
+            
         this.jSplitPane = jSplitPane;
         this.doctor = doctor;
         this.inv = inv;
         this.quantity = quantity;
         this.storeIdPurchased = storeIdPurchchased;
         
-//        docNameDisplay.setText(this.doctor.getDocName());
-//        contactDisplay.setText(this.doctor.getDocContact());
-//        addressDisplay.setText(this.doctor.getDocAddress());
+         initComponents();
         totalPrice = 0;
         System.out.println("inventory Details in const"+ this.inv.getMedicineID()+ this.inv.getMedicineName());
         populateTable(this.inv);
@@ -122,16 +120,19 @@ public class DoctorPurchaseScreen extends javax.swing.JPanel {
         nameLbl.setText("Name:");
 
         docNameDisplay.setText("jLabel2");
+        docNameDisplay.setText(this.doctor.getDocName());
 
         contactNoLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         contactNoLbl.setText("Contact No:");
 
         contactDisplay.setText("jLabel3");
+        contactDisplay.setText(this.doctor.getDocContact());
 
         addressLbl.setFont(new java.awt.Font("PT Sans", 0, 14)); // NOI18N
         addressLbl.setText("Address:");
 
         addressDisplay.setText("jLabel4");
+        addressDisplay.setText(this.doctor.getDocAddress());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
