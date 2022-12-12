@@ -6,6 +6,7 @@ package UI;
 
 import java.awt.CardLayout;
 import javax.swing.JSplitPane;
+import model.Patient.PatientDAOImp;
 import model.pharmacist.Pharmacist;
 
 /**
@@ -15,6 +16,8 @@ import model.pharmacist.Pharmacist;
 public class PharmacistJPanel extends javax.swing.JPanel {
 JSplitPane splitPane;
 Pharmacist phar;
+int total = 0;
+float profit = 0;
     /**
      * Creates new form PharmacistJPanel
      */
@@ -22,6 +25,13 @@ Pharmacist phar;
         this.splitPane = splitPane;
         this.phar = phar;
         initComponents();
+        
+        PatientDAOImp patientDao = new PatientDAOImp();
+        total = patientDao.getTotalCount();
+        profit = patientDao.getTotalProfit();
+        System.out.println(total+ " "+profit);
+        totalCustomersDisplay.setText(String.valueOf(total));
+        totalIncomeDisplay.setText(String.valueOf(profit));
     }
 
     /**
@@ -41,9 +51,9 @@ Pharmacist phar;
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        totalIncomeDisplay = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        totalCustomersDisplay = new javax.swing.JLabel();
         loginTitle = new javax.swing.JLabel();
 
         jSplitPane1.setBackground(new java.awt.Color(160, 213, 229));
@@ -114,14 +124,16 @@ Pharmacist phar;
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/income (1).png"))); // NOI18N
         jLabel3.setText("Total Income");
 
-        jLabel7.setText("jLabel6");
+        totalIncomeDisplay.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
+        totalIncomeDisplay.setText("jLabel6");
 
         jLabel5.setBackground(new java.awt.Color(255, 102, 255));
         jLabel5.setForeground(new java.awt.Color(255, 0, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/groomsmen.png"))); // NOI18N
         jLabel5.setText("Total Customers");
 
-        jLabel6.setText("jLabel6");
+        totalCustomersDisplay.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
+        totalCustomersDisplay.setText("jLabel6");
 
         loginTitle.setFont(new java.awt.Font("PT Sans", 1, 24)); // NOI18N
         loginTitle.setText("DASHBOARD");
@@ -131,34 +143,33 @@ Pharmacist phar;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(229, Short.MAX_VALUE)
+                .addContainerGap(220, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(loginTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(78, 78, 78))
+                            .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalCustomersDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(totalIncomeDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(124, 124, 124))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(loginTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalIncomeDisplay))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalCustomersDisplay))
                 .addContainerGap(117, Short.MAX_VALUE))
         );
 
@@ -211,11 +222,11 @@ Pharmacist phar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel loginTitle;
+    private javax.swing.JLabel totalCustomersDisplay;
+    private javax.swing.JLabel totalIncomeDisplay;
     // End of variables declaration//GEN-END:variables
 }

@@ -160,7 +160,9 @@ public class PatientPurchaseScreens extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
                     .addComponent(TotalLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(customerLbl)
                         .addComponent(TotalTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -263,8 +265,6 @@ public class PatientPurchaseScreens extends javax.swing.JPanel {
         model.addRow(new Object[]{inv, inv.getDosage(), quantity, inv.getPrice(), totalPrice});
              
 //        model.addRow(row);
-
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,11 +24,13 @@ public class SignUpDoctor extends javax.swing.JPanel {
     JSplitPane jSplitPane;
     String storeName;
     String comm;
-    public SignUpDoctor(JSplitPane jSplitPane, String storeName, String comm) {
+    String medicineSearched;
+    public SignUpDoctor(JSplitPane jSplitPane, String storeName, String comm, String medicineSearched) {
         initComponents();
         this.jSplitPane = jSplitPane;
         this.storeName = storeName;
         this.comm = comm;
+        this.medicineSearched = medicineSearched;
     }
 
     /**
@@ -334,7 +336,7 @@ public class SignUpDoctor extends javax.swing.JPanel {
                     Email.sendEmail(email, ACTIVATION_SUBJECTLINE, body );
                     DocDao.add(doc);
                     JOptionPane.showMessageDialog(this, "You have successfully signed up!");
-                    LoginDoctor goToLogin=new LoginDoctor(jSplitPane,storeName,comm);
+                    LoginDoctor goToLogin=new LoginDoctor(jSplitPane,storeName,comm, medicineSearched);
                     jSplitPane.setBottomComponent(goToLogin);
                 }
             }

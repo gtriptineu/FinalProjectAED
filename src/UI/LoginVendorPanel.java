@@ -147,8 +147,14 @@ JSplitPane jSplitPane;
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
 
-        VendorDAOImp vendorDao = new VendorDAOImp();
-        Vendor vendor = vendorDao.getVendor(username, password);
+
+            
+            
+            
+            VendorDAOImp vendorDao = new VendorDAOImp();
+            Vendor vendor = vendorDao.getVendor(username, password);
+            System.out.println("vendor::"+vendor.getName());
+
         
             if (!vendor.getName().isEmpty()){
                 

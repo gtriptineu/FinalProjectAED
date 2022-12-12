@@ -153,7 +153,7 @@ public class LoginPanel extends javax.swing.JPanel {
          if (email.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(null,"Please Enter all fields");
         } else  {
-             PatientDAOImp pDao = new PatientDAOImp();
+        PatientDAOImp pDao = new PatientDAOImp();
         Patient p = pDao.getPatient(email, password);
         
             if (!p.getName().isEmpty()){
@@ -171,6 +171,7 @@ public class LoginPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_loginBtnActionPerformed
 
+
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
 //        AllAdmins goToAdmins = new AllAdmins(splitPane);
 //        splitPane.setBottomComponent(goToAdmins);
@@ -179,6 +180,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
     
     
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
