@@ -134,7 +134,7 @@ JSplitPane jSplitPane;
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        PublicScreens goToAdmins = new PublicScreens(jSplitPane);
+        PrimaryJPanel goToAdmins = new PrimaryJPanel(jSplitPane);
         jSplitPane.setBottomComponent(goToAdmins);
         // TODO add your handling code here:
     }//GEN-LAST:event_backBtnActionPerformed
